@@ -1,5 +1,5 @@
 const Crews = () => {
-  return <div></div>;
+  return <div>CREW</div>;
 };
 
 export default Crews;
