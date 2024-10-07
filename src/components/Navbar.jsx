@@ -41,7 +41,7 @@ const Navbar = () => {
           <div className='flex items-center gap-2 cursor-pointer group relative '>
             <img className='w-8 rounded-full' src={user_1} alt='user' />
             <img className='w-2.5' src={dropIcon} alt='drop down' />
-            <div className='absolute top-0 right-0 pt-14 text-base font-medium text-light z-20 hidden group-hover:block transition-all'>
+            <div className='absolute top-0 right-0 pt-14 text-base font-medium text-light z-20 opacity-0 transform -translate-y-4 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0'>
               <div className='min-w-48 bg-slate-800 rounded flex flex-col gap-4 p-4'>
                 <p
                   onClick={() => navigate('/user-profile')}
