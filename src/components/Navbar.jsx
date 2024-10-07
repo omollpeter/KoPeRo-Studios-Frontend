@@ -20,19 +20,27 @@ const Navbar = () => {
       />
       <ul className='hidden md:flex items-start gap-10 font-bold text-base text-light flex-grow justify-center'>
         <NavLink to='/'>
-          <li className='py-1'>Home</li>
+          <li className='py-1 hover:text-blue transition-all duration-300'>
+            Home
+          </li>
           <hr className='border-none outline-none h-0.5 bg-blue w-3/5 m-auto hidden' />
         </NavLink>
         <NavLink to='/crew'>
-          <li className='py-1'>Crew</li>
+          <li className='py-1 hover:text-blue transition-all duration-300'>
+            Crew
+          </li>
           <hr className='border-none outline-none h-0.5 bg-blue w-3/5 m-auto hidden' />
         </NavLink>
         <NavLink to='/about'>
-          <li className='py-1'>About</li>
+          <li className='py-1 hover:text-blue transition-all duration-300'>
+            About
+          </li>
           <hr className='border-none outline-none h-0.5 bg-blue w-3/5 m-auto hidden' />
         </NavLink>
         <NavLink to='/contact'>
-          <li className='py-1'>Contact</li>
+          <li className='py-1 hover:text-blue transition-all duration-300'>
+            Contact
+          </li>
           <hr className='border-none outline-none h-0.5 bg-blue w-3/5 m-auto hidden' />
         </NavLink>
       </ul>
