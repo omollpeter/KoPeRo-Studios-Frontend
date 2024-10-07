@@ -7,7 +7,7 @@ import dropIcon from '../assets/dropdown_icon.svg';
 const Navbar = () => {
   const navigate = useNavigate();
 
-  const [dropDown, setDropDown] = useState(false);
+  // const [dropDown, setDropDown] = useState(false);
   const [token, setToken] = useState(true);
 
   return (
