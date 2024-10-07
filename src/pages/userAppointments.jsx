@@ -1,5 +1,5 @@
-const userAppointments = () => {
+const UserAppointments = () => {
   return <div></div>;
 };
 
-export default userAppointments;
+export default UserAppointments;
