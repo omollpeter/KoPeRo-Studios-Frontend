@@ -3,7 +3,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/free-mode';
 import { FreeMode, Pagination } from 'swiper/modules';
-// import { RxArrowTopRight } from 'react-icons/rx';
+import { FaArrowRightLong } from 'react-icons/fa6';
 import { servicesData } from '../constants/constants';
 
 const Services = () => {
@@ -53,8 +53,13 @@ const Services = () => {
             </SwiperSlide>
           ))}
         </Swiper>
+        <div className='flex justify-center items-center gap-3 cursor-pointer'>
+          <a className='text-blue md:hover:underline decoration-solid decoration-blue transition-all'>
+            Explore More
+          </a>
+          {<FaArrowRightLong className='text-blue hover:text-pink' />}
+        </div>
       </div>
-      <div></div>
     </div>
   );
 };
