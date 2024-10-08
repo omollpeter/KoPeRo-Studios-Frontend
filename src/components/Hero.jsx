@@ -1,6 +1,9 @@
+import { useNavigate } from 'react-router-dom';
 import camera_1 from '../assets/camera_1.svg';
 
 const Hero = () => {
+  const navigate = useNavigate();
+
   return (
     <div className='flex flex-col md:flex-row flex-wrap px-6 md:px-10 lg:px-20'>
       <div className='md:w-1/2 flex flex-col items-start justify-center gap-6 py-10 m-auto md:py-[4vw]'>
@@ -18,13 +21,13 @@ const Hero = () => {
         <div className='flex gap-5 justify-center'>
           <a
             className='bg-blue px-8 py-3 rounded-md text-sm m-auto md:m-0 hover:scale-105 transition-all duration-300'
-            href=''
+            href='#services'
           >
             Book Session
           </a>
           <a
+            onClick={() => navigate('/about')}
             className='border-2 border-blue rounded-md px-8 text-sm py-3 m-auto md:m-0 hover:bg-blue hover:text-light transition-all duration-300'
-            href=''
           >
             About Us
           </a>

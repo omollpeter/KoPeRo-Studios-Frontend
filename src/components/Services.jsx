@@ -44,6 +44,7 @@ const Services = () => {
           }}
           modules={[FreeMode, Pagination, Navigation]}
           className='max-w-[90%] lg:max-w-[80%] py-8'
+          id='services'
         >
           {servicesData.map((item) => (
             <SwiperSlide key={item.title}>
