@@ -9,13 +9,16 @@ import {
   IoArrowForwardCircleOutline,
   IoArrowBackCircleOutline,
 } from 'react-icons/io5';
+import { useNavigate } from 'react-router-dom';
 
 const Services = () => {
+  const navigate = useNavigate();
+
   return (
     <div>
       <div className=' flex items-center justify-center flex-col h-[600px] md:h-[800px] gap-7'>
         <div className='flex flex-col gap-3 justify-center items-center'>
-          <h1 className='relative font-bold before:absolute before:rounded-md before:-bottom-[0.1px] before:left-0 before:w-full before:h-[13px] before:bg-blue before:-z-20 text-white text-4xl'>
+          <h1 className='relative font-bold before:absolute before:rounded-md before:-bottom-[0.1px] before:left-0 before:w-full before:h-[13px] before:bg-blue before:-z-20 hover:before:bg-pink transition duration-300 text-white text-4xl'>
             What We Offer
           </h1>
           <p className='font-medium'>We Are The Best In Town</p>
@@ -44,7 +47,10 @@ const Services = () => {
         >
           {servicesData.map((item) => (
             <SwiperSlide key={item.title}>
-              <div className='flex flex-col gap-6 mb-5 group relative shadow-lg shadow-blue hover:shadow-md text-light rounded-xl px-6 py-8 h-[250px] w-[150px] lg:h-[400px] lg:w-[300px] overflow-hidden cursor-pointer'>
+              <div
+                onClick={() => navigate('/crew')}
+                className='flex flex-col gap-6 mb-5 group relative shadow-lg shadow-blue hover:shadow-md text-light rounded-xl px-6 py-8 h-[250px] w-[150px] lg:h-[400px] lg:w-[300px] overflow-hidden cursor-pointer'
+              >
                 <div
                   className='absolute inset-0 bg-cover bg-center group-hover:shadow-lg group-hover:shadow-blue/30 group-hover:rotate-1 group-hover:scale-105 transition-all duration-300 ease-in-out hover:skew-x-2 hover:skew-y-1'
                   style={{ backgroundImage: `url(${item.backgroundImage})` }}
@@ -72,7 +78,10 @@ const Services = () => {
           </div>
         </Swiper>
 
-        <div className='flex justify-center items-center gap-3 cursor-pointer'>
+        <div
+          className='flex justify-center items-center gap-3 cursor-pointer'
+          onClick={() => navigate('/services')}
+        >
           <a className='text-blue md:hover:underline decoration-solid decoration-blue transition-all'>
             Explore More
           </a>
