@@ -2,9 +2,13 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/free-mode';
-import { FreeMode, Pagination } from 'swiper/modules';
+import { FreeMode, Pagination, Navigation } from 'swiper/modules';
 import { FaArrowRightLong } from 'react-icons/fa6';
 import { servicesData } from '../constants/constants';
+import {
+  IoArrowForwardCircleOutline,
+  IoArrowBackCircleOutline,
+} from 'react-icons/io5';
 
 const Services = () => {
   return (
@@ -26,15 +30,19 @@ const Services = () => {
             },
           }}
           freeMode={true}
-          pagination={{
-            clickable: true,
+          // pagination={{
+          //   clickable: true,
+          // }}
+          navigation={{
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
           }}
-          modules={[FreeMode, Pagination]}
+          modules={[FreeMode, Pagination, Navigation]}
           className='max-w-[90%] lg:max-w-[80%] py-8'
         >
           {servicesData.map((item) => (
             <SwiperSlide key={item.title}>
-              <div className='flex flex-col gap-6 mb-20 group relative shadow-lg shadow-blue hover:shadow-md text-light rounded-xl px-6 py-8 h-[250px] w-[150px] lg:h-[400px] lg:w-[300px] overflow-hidden cursor-pointer'>
+              <div className='flex flex-col gap-6 mb-5 group relative shadow-lg shadow-blue hover:shadow-md text-light rounded-xl px-6 py-8 h-[250px] w-[150px] lg:h-[400px] lg:w-[300px] overflow-hidden cursor-pointer'>
                 <div
                   className='absolute inset-0 bg-cover bg-center group-hover:shadow-lg group-hover:shadow-blue/30 group-hover:rotate-1 group-hover:scale-105 transition-all duration-300 ease-in-out hover:skew-x-2 hover:skew-y-1'
                   style={{ backgroundImage: `url(${item.backgroundImage})` }}
@@ -52,7 +60,16 @@ const Services = () => {
               </div>
             </SwiperSlide>
           ))}
+          <div className='flex gap-4 justify-center'>
+            <button className='swiper-button-prev'>
+              <IoArrowBackCircleOutline className='text-white hover:text-pink w-[35px] h-[35px]' />
+            </button>
+            <button className='swiper-button-next'>
+              <IoArrowForwardCircleOutline className='text-white hover:text-pink w-[35px] h-[35px]' />
+            </button>
+          </div>
         </Swiper>
+
         <div className='flex justify-center items-center gap-3 cursor-pointer'>
           <a className='text-blue md:hover:underline decoration-solid decoration-blue transition-all'>
             Explore More
