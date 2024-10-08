@@ -15,7 +15,9 @@ const Services = () => {
     <div>
       <div className=' flex items-center justify-center flex-col h-[600px] md:h-[800px] gap-7'>
         <div className='flex flex-col gap-3 justify-center items-center'>
-          <h1 className='font-bold text-white text-4xl'>What We Offer</h1>
+          <h1 className='relative font-bold before:absolute before:rounded-md before:-bottom-[0.1px] before:left-0 before:w-full before:h-[13px] before:bg-blue before:-z-20 text-white text-4xl'>
+            What We Offer
+          </h1>
           <p className='font-medium'>We Are The Best In Town</p>
         </div>
         <Swiper
