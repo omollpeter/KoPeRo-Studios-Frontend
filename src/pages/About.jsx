@@ -11,7 +11,7 @@ const About = () => {
 
   return (
     <div>
-      <div className='flex flex-col justify-center items-center md:flex-col lg:flex-row'>
+      <div className='flex flex-col justify-center items-center md:flex-col lg:flex-row lg:mb-8'>
         <div className='md:w-full lg:w-1/2 flex flex-col items-start justify-center gap-6 py-10 m-auto md:py-[4vw]'>
           <h1 className='relative text-light font-bold text-3xl lg:text-4xl text-shadow-sm before:absolute before:rounded-md before:-bottom-[0.1px] before:left-0 before:w-full before:h-[13px] before:bg-blue before:-z-10  hover:before:bg-pink'>
             About KoPeRo
@@ -100,7 +100,26 @@ const About = () => {
           />
         </div>
       </div>
-      <div></div>
+      <div>
+        <div>
+          <h1>Our Offices</h1>
+        </div>
+        <div>
+          <div>
+            <p>Opens</p>
+            <p>Mondays - Saturdays</p>
+            <p>7.00 am - 7.00 pm</p>
+          </div>
+          <div>
+            <p>Closes</p>
+            <p>Sundays</p>
+          </div>
+          <div>
+            <p>Location</p>
+            <p>Tom Mboya Street, Nairobi</p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
