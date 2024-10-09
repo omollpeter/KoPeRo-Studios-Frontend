@@ -100,23 +100,33 @@ const About = () => {
           />
         </div>
       </div>
-      <div>
-        <div>
-          <h1>Our Offices</h1>
+      <div className='flex flex-col lg:flex-row justify-center items-center gap-[10px] mb-10 px-20'>
+        <div className=''>
+          <h1 className='text:3xl lg:text-4xl font-bold py-5'>Our Offices</h1>
+          <iframe
+            src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.81707950275!2d36.822514874437985!3d-1.2836287356220994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f1129d3e9e4a7%3A0xd7a2234ccaf4740e!2sTom%20Mboya%20St%2C%20Nairobi!5e0!3m2!1sen!2ske!4v1728472153114!5m2!1sen!2ske'
+            width='600'
+            height='400'
+            style={{ border: 0 }}
+            allowfullscreen=''
+            loading='lazy'
+            referrerPolicy='no-referrer-when-downgrade'
+            className='rounded-lg'
+          ></iframe>
         </div>
-        <div>
-          <div>
-            <p>Opens</p>
-            <p>Mondays - Saturdays</p>
-            <p>7.00 am - 7.00 pm</p>
+        <div className='flex flex-col gap-6 m-auto'>
+          <div className=''>
+            <p className='text-slate-400 text-lg'>Opens</p>
+            <p className='text-light text-lg'>Mondays - Saturdays</p>
+            <p className='text-light text-md'>7.00 am - 7.00 pm</p>
           </div>
           <div>
-            <p>Closes</p>
-            <p>Sundays</p>
+            <p className='text-slate-400 text-lg'>Closes</p>
+            <p className='text-light text-lg'>Sundays</p>
           </div>
           <div>
-            <p>Location</p>
-            <p>Tom Mboya Street, Nairobi</p>
+            <p className='text-slate-400 text-lg'>Location</p>
+            <p className='text-light text-lg'>Tom Mboya Street, Nairobi</p>
           </div>
         </div>
       </div>
