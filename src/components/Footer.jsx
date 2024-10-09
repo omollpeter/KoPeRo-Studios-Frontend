@@ -7,11 +7,12 @@ import {
 } from 'react-icons/fa6';
 import { IoLogoWhatsapp } from 'react-icons/io';
 import { FaPhoneAlt, FaFacebookF } from 'react-icons/fa';
+import { BiSolidMessageSquareDetail } from 'react-icons/bi';
 
 const Footer = () => {
   return (
     <div>
-      <div className='flex flex-col md:flex-row md:justify-between items-center md:items-start gap-10 md:gap-20 my-6 py-10'>
+      <div className='flex flex-col lg:flex-row md:justify-between items-center md:items-start gap-10 md:gap-20 my-6 py-10'>
         <img
           src={logo}
           alt='logo'
@@ -95,8 +96,19 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div></div>
-      <div></div>
+      <div className='border-t border-slate-400 py-6 relative'>
+        <div className='flex items-start justify-centergap-2 text-pink-500 cursor-pointer ml-4 absolute -top-3 right-0 bg-dark'>
+          <p className='text:md md:text-lg hover:text-blue  hover:underline'>
+            Have a question?
+          </p>
+        </div>
+        <BiSolidMessageSquareDetail className='text-pink text-5xl -top-[60px] lg:-top-6 absolute -right-3 lg:-right-14 transtion:transform duration-300 hover:text-blue hover:-translate-y-1 ' />
+        <div className='container mx-auto flex justify-center items-center'>
+          <p className='text-slate-400 text-sm md:text-base'>
+            KoPeRo Studios ©2024. All Rights Reserved.
+          </p>
+        </div>
+      </div>
     </div>
   );
 };
