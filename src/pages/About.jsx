@@ -1,6 +1,14 @@
+import { useState } from 'react';
 import studio from '../assets/studio.jpg';
+import { LuPlus, LuMinus } from 'react-icons/lu';
 
 const About = () => {
+  const [isMessageOpen, setIsMessageOpen] = useState(false);
+  const [isVisionOpen, setIsVisionOpen] = useState(false);
+
+  const toggleMessage = () => setIsMessageOpen(!isMessageOpen);
+  const toggleVision = () => setIsVisionOpen(!isVisionOpen);
+
   return (
     <div>
       <div className='flex flex-col justify-center items-center md:flex-col lg:flex-row'>
@@ -18,23 +26,68 @@ const About = () => {
             of professionalism and artistry to every project, ensuring memorable
             and impactful visuals for all our clients.
           </p>
-          <div>
-            <h2 className='text-light font-bold text-2xl'>Message:</h2>
-            <p className='text-slate-400  py-3 border-b-4 border-b-slate-800'>
-              We’re excited to work with you and capture moments that will last
-              a lifetime. Our team is dedicated to delivering high-quality
-              photos and videos that reflect your unique vision
-            </p>
+          <div className='border-b-4 border-b-slate-800 py-4'>
+            <div className='flex justify-between items-center w-full'>
+              <h2
+                className='text-light font-bold text-2xl cursor-pointer hover:text-blue'
+                onClick={toggleMessage}
+              >
+                Message:
+              </h2>
+              <div className='ml-4'>
+                {isMessageOpen ? (
+                  <LuMinus
+                    className='cursor-pointer text-xl hover:text-blue'
+                    onClick={toggleMessage}
+                  />
+                ) : (
+                  <LuPlus
+                    className='cursor-pointer text-xl hover:text-blue'
+                    onClick={toggleMessage}
+                  />
+                )}
+              </div>
+            </div>
+
+            {isMessageOpen && (
+              <p className='text-slate-400  py-3 '>
+                We’re excited to work with you and capture moments that will
+                last a lifetime. Our team is dedicated to delivering
+                high-quality photos and videos that reflect your unique vision.
+              </p>
+            )}
           </div>
           <div>
-            <h2 className='text-light font-bold text-2xl'>Vision:</h2>
-            <p className='text-slate-400 py-3'>
-              To be the leading creative hub for photography and videography,
-              where every moment is artfully captured and every story is
-              uniquely told. Our vision is to inspire and connect through
-              impactful visuals, offering an unparalleled experience in
-              creativity and professionalism for all our clients.
-            </p>
+            <div className='flex justify-between items-center w-full transition-all duration-300'>
+              <h2
+                className='text-light font-bold text-2xl cursor-pointer hover:text-blue'
+                onClick={toggleVision}
+              >
+                Vision:
+              </h2>
+              <div className='ml-4'>
+                {isVisionOpen ? (
+                  <LuMinus
+                    className='cursor-pointer text-xl hover:text-blue'
+                    onClick={toggleVision}
+                  />
+                ) : (
+                  <LuPlus
+                    className='cursor-pointer text-xl hover:text-blue'
+                    onClick={toggleVision}
+                  />
+                )}
+              </div>
+            </div>
+            {isVisionOpen && (
+              <p className='text-slate-400 py-3'>
+                To be the leading creative hub for photography and videography,
+                where every moment is artfully captured and every story is
+                uniquely told. Our vision is to inspire and connect through
+                impactful visuals, offering an unparalleled experience in
+                creativity and professionalism for all our clients.
+              </p>
+            )}
           </div>
         </div>
         <div className='relative group '>
