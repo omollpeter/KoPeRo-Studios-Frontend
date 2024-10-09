@@ -82,7 +82,8 @@ const Footer = () => {
           <div className='py-12 flex flex-col gap-2'>
             <div>
               <input
-                type='text'
+                type='email'
+                placeholder='Email'
                 className='rounded-sm h-8 w-[280px] text-dark p-2'
               />
               <input

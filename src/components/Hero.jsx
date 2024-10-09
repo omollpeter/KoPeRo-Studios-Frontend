@@ -35,7 +35,7 @@ const Hero = () => {
       </div>
       <div className='md:w-1/2 relative'>
         <img
-          className='w-full md:absolute bottom-0 h-auto rounded-lg hover:-translate-y-1 duration-300'
+          className='w-full md:absolute bottom-0 h-auto rounded-lg transition-transform duration-500 hover:scale-105'
           src={camera_1}
           alt=''
         />
