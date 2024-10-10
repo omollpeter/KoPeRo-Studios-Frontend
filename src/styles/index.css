@@ -5,3 +5,9 @@
 .active hr {
   @apply block;
 }
+
+@layer utilities {
+  .paused {
+    animation-play-state: paused;
+  }
+}

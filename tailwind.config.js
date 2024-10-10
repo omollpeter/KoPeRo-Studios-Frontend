@@ -19,6 +19,15 @@ export default {
         DEFAULT: '0 2px 4px #020617',
         lg: '0 8px 16px #020617',
       },
+      animation: {
+        'loop-scroll': 'loop-scroll 50s linear infinite',
+      },
+      keyframes: {
+        'loop-scroll': {
+          from: { transform: 'translateX(0)' },
+          to: { transform: 'translateX(-100%)' },
+        },
+      },
     },
   },
   plugins: [

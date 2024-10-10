@@ -3,6 +3,14 @@ import { ServicesPageData } from '../constants/constants';
 import { FaHandshakeSimple } from 'react-icons/fa6';
 import { IoIosArrowForward } from 'react-icons/io';
 import photographer_1 from '../assets/photographer_1.jpg';
+import partner_1 from '../assets/partner_1.png';
+import partner_2 from '../assets/partner_2.png';
+import partner_3 from '../assets/partner_3.png';
+import partner_4 from '../assets/partner_4.png';
+import partner_5 from '../assets/partner_5.png';
+import partner_6 from '../assets/partner_6.png';
+import partner_7 from '../assets/partner_7.png';
+import partner_8 from '../assets/partner_8.png';
 
 const Services = () => {
   // State to store the selected service data
@@ -34,9 +42,9 @@ const Services = () => {
 
   return (
     <div>
-      <div className='flex flex-col justify-center items-center gap-[70px]'>
-        <div className='bg-blue flex flex-col justify-center items-center py-[50px] w-full rounded-lg'>
-          <FaHandshakeSimple className='text-light text-5xl -rotate-45' />
+      <div className='flex flex-col justify-center items-center gap-[70px] mb-[120px]'>
+        <div className='bg-blue flex flex-col justify-center items-center py-[50px] w-full rounded-lg hover:bg-pink transition-all duration-300'>
+          <FaHandshakeSimple className='text-light text-5xl -rotate-45 hover:-rotate-0 transition-all duration-300' />
           <h1 className='text-light text-4xl font-bold'>Our Services</h1>
         </div>
         <div className='flex flex-col md:flex-row gap-[40px] justify-center w-full'>
@@ -51,7 +59,7 @@ const Services = () => {
                   onClick={(e) => handleClick(service.Category, e)}
                   className={`${
                     isActive === service.Category ? 'text-blue' : 'text-light'
-                  }`}
+                  } hover:text-blue transition-all duration-300`}
                 >
                   {service.Category}
                 </a>
@@ -87,6 +95,113 @@ const Services = () => {
                 Book Session
               </button>
             </div>
+          </div>
+        </div>
+      </div>
+      <div className='flex flex-col justify-center gap-8 mb-[140px]'>
+        <div className='flex justify-center items-center text-lg lg:text-2xl font-extrabold'>
+          <h1>We have worked with 20+ organizations</h1>
+        </div>
+        <div className='flex overflow-hidden space-x-16 group'>
+          <div className='flex space-x-16 animate-loop-scroll h-[70px] group-hover:paused'>
+            <img
+              loading='lazy'
+              src={partner_1}
+              alt='partner_1'
+              className='max-w-none'
+            />
+            <img
+              loading='lazy'
+              src={partner_2}
+              alt='partner_2'
+              className='max-w-none'
+            />
+            <img
+              loading='lazy'
+              src={partner_3}
+              alt='partner_3'
+              className='max-w-none'
+            />
+            <img
+              loading='lazy'
+              src={partner_4}
+              alt='partner_4'
+              className='max-w-none'
+            />
+            <img
+              loading='lazy'
+              src={partner_5}
+              alt='partner_5'
+              className='max-w-none'
+            />
+            <img
+              loading='lazy'
+              src={partner_6}
+              alt='partner_6'
+              className='max-w-none'
+            />
+            <img
+              loading='lazy'
+              src={partner_7}
+              alt='partner_7'
+              className='max-w-none'
+            />
+            <img
+              loading='lazy'
+              src={partner_8}
+              alt='partner_8'
+              className='max-w-none'
+            />
+          </div>
+          <div className='flex space-x-16 animate-loop-scroll h-[70px] group-hover:paused aria-hidden:"true"'>
+            <img
+              loading='lazy'
+              src={partner_1}
+              alt='partner_1'
+              className='max-w-none'
+            />
+            <img
+              loading='lazy'
+              src={partner_2}
+              alt='partner_2'
+              className='max-w-none'
+            />
+            <img
+              loading='lazy'
+              src={partner_3}
+              alt='partner_3'
+              className='max-w-none'
+            />
+            <img
+              loading='lazy'
+              src={partner_4}
+              alt='partner_4'
+              className='max-w-none'
+            />
+            <img
+              loading='lazy'
+              src={partner_5}
+              alt='partner_5'
+              className='max-w-none'
+            />
+            <img
+              loading='lazy'
+              src={partner_6}
+              alt='partner_6'
+              className='max-w-none'
+            />
+            <img
+              loading='lazy'
+              src={partner_7}
+              alt='partner_7'
+              className='max-w-none'
+            />
+            <img
+              loading='lazy'
+              src={partner_8}
+              alt='partner_8'
+              className='max-w-none'
+            />
           </div>
         </div>
       </div>
