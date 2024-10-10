@@ -24,20 +24,3 @@ svg {
   max-width: 100%;
   user-select: none;
 }
-
-button {
-  display: inline-block;
-  padding: 0;
-  border: none;
-  background: none;
-  cursor: pointer;
-  color: inherit;
-}
-
-a {
-  color: #2563eb;
-}
-
-strong {
-  color: #db2778;
-}

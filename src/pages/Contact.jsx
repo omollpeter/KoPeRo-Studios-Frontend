@@ -11,7 +11,7 @@ const Contact = () => {
           Contact Us
         </h1>
       </div>
-      <div className='flex flex-col md:flex-row justify-center items-center gap-[200px]'>
+      <div className='flex flex-col md:flex-row justify-center items-center gap-12 lg:gap-[200px]'>
         <div className='flex flex-col justify-center items-center gap-6'>
           <div className='flex flex-row gap-4 justify-center items-center'>
             <FaLocationDot className='text-slate-400 text-5xl hover:text-blue' />
@@ -56,7 +56,7 @@ const Contact = () => {
             </div>
           </div>
         </div>
-        <div className='flex flex-col justify-center items-center gap-4 bg-blue rounded-md py-[40px] px-[60px] '>
+        <div className='flex flex-col justify-center items-center gap-4 bg-blue rounded-md py-[40px] px-[30px] lg:px-[60px] '>
           <p className='text-lg'>Let us hear from you</p>
           <div>
             <form
