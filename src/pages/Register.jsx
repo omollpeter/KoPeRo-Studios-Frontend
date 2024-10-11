@@ -9,7 +9,7 @@ const Register = () => {
 
   return (
     <div className='flex items-center justify-center p-10 '>
-      <div className='bg-blue bg-opacity-10 rounded-[20px] px-5 flex flex-col justify-center items-center'>
+      <div className='bg-blue bg-opacity-10 rounded-[20px] pb-10 px-5 flex flex-col justify-center items-center'>
         <div className='flex flex-col justify-center items-center gap-[20px] my-[10px]'>
           <img
             src={logo}
@@ -17,7 +17,7 @@ const Register = () => {
             className='w-[130px] cursor-pointer hover:scale-105 transition-all duration-300'
             onClick={() => navigate('/')}
           />
-          <h1 className='text-4xl font-semibold'>Create Account</h1>
+          <h1 className='text-4xl font-extrabold'>Create Account</h1>
         </div>
         <div className='p-6'>
           <form action='' className='flex flex-col gap-4'>
@@ -25,28 +25,28 @@ const Register = () => {
               <input
                 type='text'
                 placeholder='First Name'
-                className='p-2 rounded-md bg-slate-300 text-dark'
+                className='p-2 rounded-md bg-slate-50 text-dark'
               />
               <input
                 type='text'
                 placeholder='Second Name'
-                className='p-2 rounded-md bg-slate-300 text-dark'
+                className='p-2 rounded-md bg-slate-50 text-dark'
               />
             </div>
             <input
               type='text'
               placeholder='Email'
-              className='p-2 rounded-md bg-slate-300 text-dark'
+              className='p-2 rounded-md bg-slate-50 text-dark'
             />
             <input
               type='text'
               placeholder='Password'
-              className='p-2 rounded-md bg-slate-300 text-dark'
+              className='p-2 rounded-md bg-slate-50 text-dark'
             />
             <input
               type='text'
               placeholder='Confirm Password'
-              className='p-2 rounded-md bg-slate-300 text-dark'
+              className='p-2 rounded-md bg-slate-50 text-dark'
             />
           </form>
         </div>
