@@ -18,42 +18,51 @@ const Login = () => {
             onClick={() => navigate('/')}
           />
 
-          <h1 className='text-4xl font-extrabold'>Log In</h1>
+          <h1 className='text-4xl font-extrabold '>Log In</h1>
 
           <div className='flex flex-row space-x-3'>
-            <div className='flex flex-row space-x-2 justify-center items-center border rounded-lg w-[130px] h-12 p-3'>
+            <div className='flex flex-row space-x-2 justify-center items-center border border-slate-400 rounded-lg w-[130px] max-[768px]:w-[100px] h-12 p-3 hover:border-blue'>
               <FcGoogle className='cursor-pointer text-3xl hover:border-blue' />
-              <span className='text-lg'>Google</span>
+              <span className='text-lg hover:text-blue hidden md:block'>
+                Google
+              </span>
             </div>
-            <div className='flex flex-row space-x-2 justify-center items-center border rounded-lg w-[130px] h-12 p-3'>
+            <div className='flex flex-row space-x-2 justify-center items-center border border-slate-400 rounded-lg w-[130px] max-[768px]:w-[100px  h-12 p-3 hover:border-blue'>
               <FaLinkedin className=' text-linkedin text-3xl cursor-pointer hover:border-blue' />
-              <span className='text-lg'>LinkedIn</span>
+              <span className='text-lg hover:text-blue hidden md:block'>
+                LinkedIn
+              </span>
             </div>
-            <div className='flex flex-row space-x-2 justify-center items-center border rounded-lg w-[130px] h-12 p-3'>
+            <div className='flex flex-row space-x-2 justify-center items-center border border-slate-400 rounded-lg w-[130px] max-[768px]:w-[100px  h-12 p-3 hover:border-blue'>
               <FaXTwitter className='cursor-pointer text-3xl hover:border-blue' />
-              <span className='text-lg'>{`Twitter(X)`}</span>
+              <span className='text-lg hover:text-blue hidden md:block'>{`Twitter(X)`}</span>
             </div>
           </div>
-          <p className=' grid grid-cols-3 items-center gap-x-[1.6rem] before:h-[2px] before:bg-light before:block after:h-[2px] after:bg-light after:block mt-4'>
-            Or Login Using
-          </p>
+          <div className='ml-4 flex items-center justify-center gap-x-[1.9rem] w-full'>
+            <span className='h-[2px] w-[70px] md:w-full bg-light block'></span>
+            <p className='text-center md:w-full'>Or Login Using</p>
+            <span className='h-[2px] w-[80px] md:w-full bg-light block'></span>
+          </div>
         </div>
         <div className='p-6 w-full'>
-          <form action='' className='flex flex-col gap-4 w-[100%]'>
+          <form
+            action=''
+            className='flex flex-col justify-center items-center gap-4 w-[100%]'
+          >
             <input
               type='text'
               placeholder='Email'
-              className='p-2 rounded-md bg-slate-50 text-dark w-[100%]'
+              className='p-2 rounded-md bg-slate-50 text-dark w-[300px] md:w-full'
             />
             <input
               type='text'
               placeholder='Password'
-              className='p-2 rounded-md bg-slate-50 text-dark w-[100%]'
+              className='p-2 rounded-md bg-slate-50 text-dark w-[300px] md:w-full'
             />
           </form>
         </div>
         <div className='flex flex-col gap-4 justify-center items-center'>
-          <button className='bg-blue p-3 w-[140px] rounded-md transition-all duration-300 hover:scale-105'>
+          <button className='bg-blue p-3 w-[140px] max-[768px]:w-[120px] rounded-md transition-all duration-300 hover:scale-105'>
             Sign In
           </button>
 
