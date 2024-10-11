@@ -18,15 +18,25 @@ const Login = () => {
             onClick={() => navigate('/')}
           />
 
-          <h1 className='text-4xl font-extrabold'>Sign In</h1>
-          <p className=' grid grid-cols-3 items-center gap-x-[1.6rem] before:h-[2px] before:bg-light before:block after:h-[2px] after:bg-light after:block'>
-            Or continue with
-          </p>
+          <h1 className='text-4xl font-extrabold'>Log In</h1>
+
           <div className='flex flex-row space-x-3'>
-            <FcGoogle className='border rounded-lg w-[120px] h-10 p-1 cursor-pointer hover:border-blue' />
-            <FaLinkedin className='border text-linkedin rounded-lg w-[120px] h-10 p-1 cursor-pointer hover:border-blue' />
-            <FaXTwitter className='border rounded-lg w-[120px] h-10 p-1 cursor-pointer hover:border-blue' />
+            <div className='flex flex-row space-x-2 justify-center items-center border rounded-lg w-[130px] h-12 p-3'>
+              <FcGoogle className='cursor-pointer text-3xl hover:border-blue' />
+              <span className='text-lg'>Google</span>
+            </div>
+            <div className='flex flex-row space-x-2 justify-center items-center border rounded-lg w-[130px] h-12 p-3'>
+              <FaLinkedin className=' text-linkedin text-3xl cursor-pointer hover:border-blue' />
+              <span className='text-lg'>LinkedIn</span>
+            </div>
+            <div className='flex flex-row space-x-2 justify-center items-center border rounded-lg w-[130px] h-12 p-3'>
+              <FaXTwitter className='cursor-pointer text-3xl hover:border-blue' />
+              <span className='text-lg'>{`Twitter(X)`}</span>
+            </div>
           </div>
+          <p className=' grid grid-cols-3 items-center gap-x-[1.6rem] before:h-[2px] before:bg-light before:block after:h-[2px] after:bg-light after:block mt-4'>
+            Or Login Using
+          </p>
         </div>
         <div className='p-6 w-full'>
           <form action='' className='flex flex-col gap-4 w-[100%]'>
