@@ -50,7 +50,7 @@ const Services = () => {
             <SwiperSlide key={item.title}>
               <div
                 onClick={() => navigate('/crew')}
-                className='flex flex-col gap-6 mb-5 group relative shadow-lg shadow-blue hover:shadow-md text-light rounded-xl px-6 py-8 h-[250px] w-[150px] lg:h-[400px] lg:w-[300px] overflow-hidden cursor-pointer'
+                className='flex flex-col gap-6 mb-5 group relative shadow-lg shadow-blue hover:shadow-md text-light rounded-xl px-6 py-8 h-[350px] w-[150px] lg:h-[400px] lg:w-[300px] overflow-hidden cursor-pointer'
               >
                 <div
                   className='absolute inset-0 bg-cover bg-center group-hover:shadow-lg group-hover:shadow-blue/30 group-hover:rotate-1 group-hover:scale-105 transition-all duration-300 ease-in-out hover:skew-x-2 hover:skew-y-1'
@@ -59,10 +59,10 @@ const Services = () => {
                 <div className='absolute inset-0 bg-blue opacity-10 group-hover:opacity-40 group-hover:shadow-lg group-hover:shadow-blue/30 group-hover:rotate-1 group-hover:scale-105 transition-all duration-300 ease-in-out hover:skew-x-2 hover:skew-y-1' />
                 <div className='relative flex flex-col gap-3'>
                   <item.icon className='text-white group-hover:text-pink w-[32px] h-[32px]' />
-                  <h1 className='text-xl lg:text-3xl font-bold text-shadow'>
+                  <h1 className='text-xl lg:text-2xl font-bold text-shadow'>
                     {item.title}
                   </h1>
-                  <p className='hidden md:block lg:block lg:text-[18px] font-medium text-shadow'>
+                  <p className='hidden lg:block lg:text-[18px] font-medium text-shadow'>
                     {item.content}
                   </p>
                 </div>

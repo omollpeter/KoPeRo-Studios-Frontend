@@ -59,7 +59,7 @@ const Register = () => {
           </button>
           <div className='ml-4 flex items-center justify-center gap-x-[1.9rem] w-full'>
             <span className='h-[2px] w-[80px] md:w-full bg-light block'></span>
-            <p className='text-center'>continue with</p>
+            <p className='text-center w-full'>continue with</p>
             <span className='h-[2px] w-[80px] md:w-full bg-light block'></span>
           </div>
           <div className='flex flex-row space-x-3'>
