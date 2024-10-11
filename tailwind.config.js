@@ -13,6 +13,7 @@ export default {
         slate800: '#334460',
         blue: '#2563eb',
         pink: '#db2778',
+        linkedin: '#0077B5',
       },
       textShadow: {
         sm: '0 1px 2px #020617',
