@@ -4,7 +4,7 @@ import Crew from './pages/Crew';
 import Login from './pages/Login';
 import About from './pages/About';
 import Contact from './pages/Contact';
-import UserProfile from './pages/userProfile';
+import UserProfile from './pages/UserProfile';
 import UserAppointments from './pages/userAppointments';
 import Booking from './pages/Booking';
 import Services from './pages/Service';
