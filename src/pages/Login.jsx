@@ -3,9 +3,35 @@ import logo from '../assets/logo_light.png';
 import { useNavigate } from 'react-router-dom';
 import { FaLinkedin } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
+import { useContext, useState } from 'react';
+import { AuthContext } from '../context/AuthContext';
 
 const Login = () => {
+  const [inputs, setInputValue] = useState({
+    username: '',
+    password: '',
+  });
+
+  const [err, setErr] = useState(null);
+
   const navigate = useNavigate();
+
+  const { login } = useContext(AuthContext);
+
+  const handleChange = (e) => {
+    setInputValue((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      await login(inputs);
+      navigate('/');
+    } catch (err) {
+      setErr('Invalid Username or Password', err);
+    }
+  };
 
   return (
     <div className='flex items-center justify-center h-[100vh]'>
@@ -50,22 +76,31 @@ const Login = () => {
             className='flex flex-col justify-center items-center gap-4 w-[100%]'
           >
             <input
+              required
               type='text'
-              placeholder='Email'
+              placeholder='Username'
+              name='username'
+              onChange={handleChange}
               className='p-2 rounded-md bg-slate-50 text-dark w-[300px] md:w-full'
             />
             <input
-              type='text'
+              required
+              type='password'
               placeholder='Password'
+              name='password'
+              onChange={handleChange}
               className='p-2 rounded-md bg-slate-50 text-dark w-[300px] md:w-full'
             />
           </form>
         </div>
         <div className='flex flex-col gap-4 justify-center items-center'>
-          <button className='bg-blue p-3 w-[140px] max-[768px]:w-[120px] rounded-md transition-all duration-300 hover:scale-105'>
+          <button
+            onClick={handleSubmit}
+            className='bg-blue p-3 w-[140px] max-[768px]:w-[120px] rounded-md transition-all duration-300 hover:scale-105'
+          >
             Sign In
           </button>
-
+          {err && <p className='text-red-500'>{err}</p>}
           <p
             className='text-lg cursor-pointer'
             onClick={() => navigate('/login')}
