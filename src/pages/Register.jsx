@@ -1,11 +1,40 @@
+import axios from 'axios';
 import { FcGoogle } from 'react-icons/fc';
 import { FaLinkedin } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
 import logo from '../assets/logo_light.png';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 const Register = () => {
+  const [inputs, setInputs] = useState({
+    first_name: '',
+    last_name: '',
+    username: '',
+    phone: '',
+    email: '',
+    password1: '',
+    password2: '',
+  });
+
+  const [err, setError] = useState(null);
+
   const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      await axios.post('/auth/register', inputs);
+      navigate('/login');
+    } catch (err) {
+      setError('User Already Exists', err);
+    }
+  };
 
   return (
     <div className='flex items-center justify-center p-10'>
@@ -26,37 +55,62 @@ const Register = () => {
           >
             <div className='flex flex-row gap-x-10 gap-y-4'>
               <input
+                required
                 type='text'
+                name='first_name'
                 placeholder='First Name'
+                onChange={handleChange}
                 className='p-2 rounded-md bg-slate-50 text-dark max-[768px]:w-[130px]'
               />
               <input
+                required
                 type='text'
-                placeholder='Second Name'
+                placeholder='Last Name'
+                name='last_name'
+                onChange={handleChange}
                 className='p-2 rounded-md bg-slate-50 text-dark max-[768px]:w-[130px]'
               />
             </div>
             <input
-              type='text'
+              required
+              type='email'
               placeholder='Email'
+              name='email'
+              onChange={handleChange}
               className='p-2 rounded-md bg-slate-50 text-dark w-[300px] md:w-full'
             />
             <input
+              required
               type='text'
-              placeholder='Password'
+              placeholder='Phone Number'
+              name='phone'
+              onChange={handleChange}
               className='p-2 rounded-md bg-slate-50 text-dark w-[300px] md:w-full'
             />
             <input
+              required
+              type='password'
+              placeholder='Password'
+              name='password_1'
+              className='p-2 rounded-md bg-slate-50 text-dark w-[300px] md:w-full'
+            />
+            <input
+              required
               type='text'
               placeholder='Confirm Password'
+              name='password_2'
               className='p-2 rounded-md bg-slate-50 text-dark w-[300px] md:w-full'
             />
           </form>
         </div>
         <div className='flex flex-col gap-4 justify-center items-center'>
-          <button className='bg-blue p-3 w-[140px] max-[768px]:w-[120px] rounded-md transition-all duration-300 hover:scale-105'>
+          <button
+            onClick={handleSubmit}
+            className='bg-blue p-3 w-[140px] max-[768px]:w-[120px] rounded-md transition-all duration-300 hover:scale-105'
+          >
             Sign Up
           </button>
+          {err && <p className='text-red-500'>{err}</p>}
           <div className='ml-4 flex items-center justify-center gap-x-[1.9rem] w-full'>
             <span className='h-[2px] w-[80px] md:w-full bg-light block'></span>
             <p className='text-center w-full'>continue with</p>
