@@ -5,6 +5,7 @@ import { FaXTwitter } from 'react-icons/fa6';
 import logo from '../assets/logo_light.png';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { IoMdEye, IoMdEyeOff } from 'react-icons/io';
 
 const Register = () => {
   const [inputs, setInputs] = useState({
@@ -73,6 +74,14 @@ const Register = () => {
             </div>
             <input
               required
+              type='text'
+              placeholder='Username'
+              name='Username'
+              onChange={handleChange}
+              className='p-2 rounded-md bg-slate-50 text-dark w-[300px] md:w-full'
+            />
+            <input
+              required
               type='email'
               placeholder='Email'
               name='email'
@@ -87,16 +96,19 @@ const Register = () => {
               onChange={handleChange}
               className='p-2 rounded-md bg-slate-50 text-dark w-[300px] md:w-full'
             />
+            <div className='flex justify-between items-center bg-slate-50 rounded-md w-[300px] md:w-full py-2 px-[20px] '>
+              <input
+                required
+                type='password'
+                placeholder='Password'
+                name='password_1'
+                className='text-dark border-none outline-0 w-full'
+              />
+              <IoMdEye className='text-dark text-2xl cursor-pointer' />
+            </div>
             <input
               required
               type='password'
-              placeholder='Password'
-              name='password_1'
-              className='p-2 rounded-md bg-slate-50 text-dark w-[300px] md:w-full'
-            />
-            <input
-              required
-              type='text'
               placeholder='Confirm Password'
               name='password_2'
               className='p-2 rounded-md bg-slate-50 text-dark w-[300px] md:w-full'

@@ -9,12 +9,12 @@ export const AuthContextProvider = ({ children }) => {
   );
 
   const login = async (inputs) => {
-    const res = await axios.post(`/v1/auth/login/`, inputs);
+    const res = await axios.post(`https://mady.tech/v1/auth/login/`, inputs);
     setCurrentUser(res.data);
   };
 
   const logout = async (inputs) => {
-    await axios.post(`/auth/logout`);
+    await axios.post(`https://mady.tech/api/v1/auth/logout/`);
     setCurrentUser(null);
   };
 
