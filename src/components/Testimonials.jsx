@@ -62,10 +62,10 @@ const Testimonials = () => {
           </SwiperSlide>
         ))}
         <div className='flex gap-4 justify-center'>
-          <button className='swiper-button-next'>
+          <button className='swiper-button-prev'>
             <MdOutlineArrowBackIos className='text-white hover:text-pink w-[35px] h-[35px]' />
           </button>
-          <button className='swiper-button-prev'>
+          <button className='swiper-button-next'>
             <MdOutlineArrowForwardIos className='text-white hover:text-pink w-[35px] h-[35px]' />
           </button>
         </div>
