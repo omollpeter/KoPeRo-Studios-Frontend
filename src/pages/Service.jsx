@@ -29,7 +29,6 @@ const Services = () => {
     const fetchData = async () => {
       try {
         const res = await axios.get(`https://mady.tech/api/v1/services/`);
-        console.log(res);
         setServices(res.data.results);
       } catch (err) {
         console.log(err);

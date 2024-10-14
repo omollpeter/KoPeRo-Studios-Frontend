@@ -3,6 +3,7 @@ import logo from '../assets/logo_light.png';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import user_1 from '../assets/user_1.jpg';
+import menu_icon from '../assets/menu_icon.svg';
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -86,6 +87,7 @@ const Navbar = () => {
             Get started
           </button>
         )}
+        <img src={menu_icon} alt='menu_icon' />
       </div>
     </div>
   );
