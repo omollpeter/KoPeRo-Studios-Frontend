@@ -34,7 +34,7 @@ const TopCrew = () => {
       </div>
       <div className='flex items-center justify-center'>
         <button
-          onClick={() => navigate('/crews')}
+          onClick={() => navigate('/crew')}
           className='bg-blue text-sm font-semibold sm:text-base text-light px-8 py-3 rounded-md mt-6 hover:scale-105 transition-all'
         >
           View all
