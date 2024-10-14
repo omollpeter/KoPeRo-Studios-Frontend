@@ -13,7 +13,7 @@ export const AuthContextProvider = ({ children }) => {
       `https://mady.tech/api/v1/auth/login/`,
       inputs
     );
-    setCurrentUser(res.data);
+    setCurrentUser(res.data.user);
   };
 
   const logout = async (inputs) => {
