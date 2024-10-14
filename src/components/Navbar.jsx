@@ -3,12 +3,13 @@ import logo from '../assets/logo_light.png';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import user_1 from '../assets/user_1.jpg';
-import menu_icon from '../assets/menu_icon.svg';
+import { HiMenuAlt3 } from 'react-icons/hi';
+import { CgClose } from 'react-icons/cg';
 
 const Navbar = () => {
   const navigate = useNavigate();
 
-  // const [dropDown, setDropDown] = useState(false);
+  const [dropDown, setDropDown] = useState(false);
   const [token, setToken] = useState(true);
   const { currentUser, logout } = useContext(AuthContext);
 
@@ -87,7 +88,61 @@ const Navbar = () => {
             Get started
           </button>
         )}
-        <img src={menu_icon} alt='menu_icon' />
+        <HiMenuAlt3
+          onClick={() => setDropDown(true)}
+          className='w-6 md:hidden text-light text-3xl'
+        />
+        {/* {Mobile navigation} */}
+        <div
+          className={`${
+            dropDown ? 'fixed w-full' : 'h-0 w-0'
+          }  md:hidden right-0 top-0 bottom-0 z-20 overflow-hidden bg-dark transition-all`}
+        >
+          <div className='flex items-center justify-between px-5 py-6'>
+            <img src={logo} alt='logo' className='w-40' />
+            <CgClose
+              onClick={() => setDropDown(false)}
+              className='text-3xl text-light'
+            />
+          </div>
+          <ul className='flex flex-col items-center gap-2 mt-5 px-5 text-lg font-medium'>
+            <NavLink
+              className='px-4 py-2 rounded inline-block'
+              onClick={() => setDropDown(false)}
+              to='/'
+            >
+              Home
+            </NavLink>
+            <NavLink
+              className='px-4 py-2 rounded inline-block'
+              onClick={() => setDropDown(false)}
+              to='/crew'
+            >
+              Our Crew
+            </NavLink>
+            <NavLink
+              className='px-4 py-2 rounded inline-block'
+              onClick={() => setDropDown(false)}
+              to='/services'
+            >
+              Our Services
+            </NavLink>
+            <NavLink
+              className='px-4 py-2 rounded inline-block'
+              onClick={() => setDropDown(false)}
+              to='/about'
+            >
+              About us
+            </NavLink>
+            <NavLink
+              className='px-4 py-2 rounded inline-block'
+              onClick={() => setDropDown(false)}
+              to='/contact'
+            >
+              Contact
+            </NavLink>
+          </ul>
+        </div>
       </div>
     </div>
   );

@@ -5,7 +5,7 @@ const Hero = () => {
   const navigate = useNavigate();
 
   return (
-    <div className='flex flex-col md:flex-row flex-wrap px-6 md:px-10 lg:px-20'>
+    <div className='flex flex-col md:flex-row flex-wrap px-6 md:px-10 lg:px-20 mb-10'>
       <div className='md:w-1/2 flex flex-col items-start justify-center gap-6 py-10 m-auto md:py-[4vw]'>
         <p className='text-4xl md:text-5xl lg:text-6xl text-light font-extrabold leading-tight md:leading-tight lg:leading-tight'>
           <i>
