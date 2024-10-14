@@ -20,14 +20,14 @@ const Hero = () => {
         </p>
         <div className='flex gap-5 justify-center'>
           <a
-            className='bg-blue px-8 py-3 rounded-md text-sm m-auto md:m-0 hover:scale-105 transition-all duration-300'
+            className='bg-blue px-5 md:px-8  py-3 rounded-md text-sm m-auto md:m-0 hover:scale-105 transition-all duration-300'
             href='#services'
           >
             Book Session
           </a>
           <a
             onClick={() => navigate('/about')}
-            className='border-2 border-blue rounded-md px-8 text-sm py-3 m-auto md:m-0 hover:bg-blue hover:text-light transition-all duration-300'
+            className='border-2 border-blue rounded-md px-5 md:px-8 text-sm py-3 m-auto md:m-0 hover:bg-blue hover:text-light transition-all duration-300'
           >
             About Us
           </a>
