@@ -30,7 +30,7 @@ const Register = () => {
     e.preventDefault();
 
     try {
-      await axios.post('/auth/register', inputs);
+      await axios.post('https://mady.tech/api/v1/auth/register/', inputs);
       navigate('/login');
     } catch (err) {
       setError('User Already Exists', err);
