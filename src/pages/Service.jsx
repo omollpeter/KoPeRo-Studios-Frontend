@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 import { ServicesPageData } from '../constants/constants';
 import { FaHandshakeSimple } from 'react-icons/fa6';
 import { IoIosArrowForward } from 'react-icons/io';
@@ -14,30 +15,42 @@ import partner_8 from '../assets/partner_8.png';
 
 const Services = () => {
   // State to store the selected service data
+  const [services, setServices] = useState([]);
   const [selectedService, setSelectedService] = useState({
     Title: 'Welcome to Kopero Studios',
+    Tag: 'Welcome to Kopero Studios',
     Description:
       'We specialize in delivering high-quality photography and videography services for all your needs. Select a service category to explore our tailored offerings, from candid street photography to elegant weddings and corporate events.',
     image: photographer_1,
+    price: '',
   });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(`https://mady.tech/api/v1/services/`);
+        console.log(res);
+        setServices(res.data.results);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchData();
+  }, []);
 
   const [isActive, setIsActive] = useState(false);
 
-  const handleClick = (categoryName, e) => {
+  const handleClick = (service, e) => {
     e.preventDefault();
 
-    const service = ServicesPageData.find(
-      (service) => service.Category === categoryName
-    );
-
-    if (service) {
-      setSelectedService({
-        Title: service.Title,
-        Description: service.Description,
-        image: service.image,
-      });
-      setIsActive(categoryName);
-    }
+    setSelectedService({
+      Title: service.name,
+      Tag: service.tag,
+      Description: service.description,
+      image: service.image,
+      price: service.rate_per_hour,
+    });
+    setIsActive(service.title);
   };
 
   return (
@@ -49,23 +62,23 @@ const Services = () => {
         </div>
         <div className='flex flex-col md:flex-row gap-[40px] justify-center w-full'>
           <div className='flex flex-col gap-3'>
-            {ServicesPageData.map((service) => (
+            {services.map((service) => (
               <div
                 className='flex justify-start items-center gap-3 w-[200px] text-lg text-light hover:text-blue'
-                key={service.Category}
+                key={service.id}
               >
                 <a
                   href='#cat'
-                  onClick={(e) => handleClick(service.Category, e)}
+                  onClick={(e) => handleClick(service, e)}
                   className={`${
-                    isActive === service.Category ? 'text-blue' : 'text-light'
+                    isActive === service.name ? 'text-blue' : 'text-light'
                   } hover:text-blue transition-all duration-300`}
                 >
-                  {service.Category}
+                  {service.name}
                 </a>
                 <IoIosArrowForward
                   className={`${
-                    isActive === service.Category ? 'text-blue' : 'text-light'
+                    isActive === service.name ? 'text-blue' : 'text-light'
                   }`}
                 />
               </div>
@@ -75,22 +88,25 @@ const Services = () => {
             <img
               src={selectedService.image}
               className='absolute inset-0 w-full h-full object-cover rounded-lg  group-hover:rotate-1 hover:scale-105 transition-all duration-300 ease-in-out hover:skew-x-2 hover:skew-y-1'
-              alt={selectedService.Title}
+              alt={selectedService.Tag}
             />
             <div className='absolute inset-0 bg-blue opacity-40 rounded-lg group-hover:opacity-70 group-hover:shadow-lg group-hover:shadow-blue/30 group-hover:rotate-1 group-hover:scale-105 transition-all duration-300 ease-in-out hover:skew-x-2 hover:skew-y-1'></div>
             <div className='relative flex flex-col gap-7 p-10'>
               <h1 className='text-3xl font-bold z-10 text-shadow' id='cat'>
-                {selectedService.Title}
+                {selectedService.Tag}
               </h1>
               <div className='w-full h-full text-white top-[150px] left-[20px] z-10'>
                 {selectedService.Description.split('.  ').map(
                   (paragraph, index) => (
-                    <p key={index} className='mb-8 text-xl text-shadow'>
+                    <p key={index} className='mb-3 text-xl text-shadow'>
                       {paragraph}.
                     </p>
                   )
                 )}
               </div>
+              <span className='text-light text-shadow'>
+                Rate Per Hour: Ksh.{selectedService.price}
+              </span>
               <button className='bg-blue text-white py-2 px-4 rounded w-[150px] group-hover:bg-slate-800'>
                 Book Session
               </button>
