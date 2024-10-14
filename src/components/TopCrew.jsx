@@ -1,7 +1,12 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { crewData } from '../constants/Crews_constants';
+import StarRating from './StarRating';
+import { FaStar } from 'react-icons/fa';
 
 const TopCrew = () => {
+  const navigate = useNavigate();
+
   return (
     <div className='flex flex-col gap-5 mb-10'>
       <div className='flex flex-col gap-3 justify-center items-center'>
@@ -10,7 +15,7 @@ const TopCrew = () => {
         </h1>
         <p className='font-medium'>Have a glance at our Best</p>
       </div>
-      <div className='grid md:grid-cols-6 sm:grid-cols-2 gap-1 justify-center items-center cursor-pointer '>
+      <div className='grid md:grid-cols-6 sm:grid-cols-2 gap-2 justify-center items-center cursor-pointer '>
         {crewData.map((crew) => (
           <div
             key={crew.image}
@@ -23,6 +28,7 @@ const TopCrew = () => {
             />
             <h3 className='text-light mt-4'>{crew.name.toUpperCase()}</h3>
             <p className='text-slate-400 text-sm'>{crew.cat}</p>
+            <StarRating rating={crew.stars} />
           </div>
         ))}
       </div>
