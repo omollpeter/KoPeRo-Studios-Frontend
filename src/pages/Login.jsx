@@ -55,20 +55,20 @@ const Login = () => {
           <h1 className='text-4xl font-extrabold '>Log In</h1>
 
           <div className='flex flex-row space-x-3'>
-            <div className='flex flex-row space-x-2 justify-center items-center border border-slate-400 rounded-lg w-[130px] max-[768px]:w-[100px] h-12 p-3 hover:border-blue'>
-              <FcGoogle className='cursor-pointer text-3xl hover:border-blue' />
+            <div className='flex flex-row space-x-2 justify-center items-center border border-slate-400  rounded-lg w-[130px]  max-[768px]:w-[100px] h-12 p-3 hover:border-blue cursor-pointer'>
+              <FcGoogle className='cursor-pointer text-3xl ' />
               <span className='text-lg hover:text-blue hidden md:block'>
                 Google
               </span>
             </div>
-            <div className='flex flex-row space-x-2 justify-center items-center border border-slate-400 rounded-lg w-[130px] max-[768px]:w-[100px  h-12 p-3 hover:border-blue'>
-              <FaLinkedin className=' text-linkedin text-3xl cursor-pointer hover:border-blue' />
+            <div className='flex flex-row space-x-2 justify-center items-center border border-slate-400  rounded-lg w-[130px] max-[768px]:w-[100px]  h-12 p-3 hover:border-blue cursor-pointer'>
+              <FaLinkedin className=' text-linkedin text-3xl cursor-pointer' />
               <span className='text-lg hover:text-blue hidden md:block'>
                 LinkedIn
               </span>
             </div>
-            <div className='flex flex-row space-x-2 justify-center items-center border border-slate-400 rounded-lg w-[130px] max-[768px]:w-[100px  h-12 p-3 hover:border-blue'>
-              <FaXTwitter className='cursor-pointer text-3xl hover:border-blue' />
+            <div className='flex flex-row space-x-2 justify-center items-center border border-slate-400  rounded-lg w-[130px] max-[768px]:w-[100px]  h-12 p-3 hover:border-blue cursor-pointer'>
+              <FaXTwitter className='cursor-pointer text-3xl' />
               <span className='text-lg hover:text-blue hidden md:block'>{`Twitter(X)`}</span>
             </div>
           </div>

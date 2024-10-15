@@ -5,6 +5,7 @@ import { FaXTwitter } from 'react-icons/fa6';
 import logo from '../assets/logo_light.png';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import profile from '../assets/profileImage.png';
 import { IoMdEye, IoMdEyeOff } from 'react-icons/io';
 
 const Register = () => {
@@ -13,6 +14,7 @@ const Register = () => {
     last_name: '',
     username: '',
     phone: '',
+    role: 'regular',
     email: '',
     password1: '',
     password2: '',
@@ -38,12 +40,17 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(inputs);
 
     try {
       await axios.post('https://mady.tech/api/v1/auth/register/', inputs);
       navigate('/login');
     } catch (err) {
-      setError(err);
+      if (err.response) {
+        console.log('Error:', err.response.data);
+      } else {
+        console.log('Error:', err.message);
+      }
     }
   };
 
@@ -157,10 +164,10 @@ const Register = () => {
           >
             Sign Up
           </button>
-          {err && <p className='text-red-500'>{err}</p>}
+          {err && <p className='text-red-500'>{err.message}</p>}
           <div className='ml-4 flex items-center justify-center gap-x-[1.9rem] w-full'>
-            <span className='h-[2px] w-[80px] md:w-full bg-light block'></span>
-            <p className='text-center w-full'>continue with</p>
+            <span className='h-[2px] w-[70px] md:w-full bg-light block'></span>
+            <p className='text-center md:w-full'>Continue with</p>
             <span className='h-[2px] w-[80px] md:w-full bg-light block'></span>
           </div>
           <div className='flex flex-row space-x-3'>
