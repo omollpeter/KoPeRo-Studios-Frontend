@@ -12,8 +12,11 @@ import partner_5 from '../assets/partner_5.png';
 import partner_6 from '../assets/partner_6.png';
 import partner_7 from '../assets/partner_7.png';
 import partner_8 from '../assets/partner_8.png';
+import { useNavigate } from 'react-router-dom';
 
 const Services = () => {
+  const navigate = useNavigate();
+
   // State to store the selected service data
   const [services, setServices] = useState([]);
   const [selectedService, setSelectedService] = useState({
@@ -103,10 +106,18 @@ const Services = () => {
                   )
                 )}
               </div>
-              <span className='text-light text-shadow'>
-                Rate Per Hour: Ksh.{selectedService.price}
-              </span>
-              <button className='bg-blue text-white py-2 px-4 rounded w-[150px] group-hover:bg-slate-800'>
+              {selectedService.price && (
+                <span className='text-light text-shadow'>
+                  Rate Per Hour: Ksh.{selectedService.price}
+                </span>
+              )}
+              <button
+                className='bg-blue text-white py-2 px-4 rounded w-[150px] group-hover:bg-slate-800'
+                onClick={() => {
+                  navigate('/crew');
+                  scrollTo(0, 0);
+                }}
+              >
                 Book Session
               </button>
             </div>

@@ -20,8 +20,8 @@ const Hero = () => {
         </p>
         <div className='flex gap-5 justify-center'>
           <a
+            onClick={() => navigate('/crew')}
             className='bg-blue px-5 md:px-8  py-3 rounded-md text-sm m-auto md:m-0 hover:scale-105 transition-all duration-300'
-            href='#services'
           >
             Book Session
           </a>

@@ -16,8 +16,9 @@ const TopCrew = () => {
         <p className='font-medium'>Have a glance at our Best</p>
       </div>
       <div className='grid md:grid-cols-6 sm:grid-cols-2 gap-2 justify-center items-center cursor-pointer '>
-        {crewData.map((crew) => (
+        {crewData.slice(0, 6).map((crew) => (
           <div
+            onClick={() => navigate(`/booking/${crew.id}`)}
             key={crew.image}
             className='flex flex-col justify-center items-center hover:-translate-y-5 transition-all duration-300'
           >
@@ -34,7 +35,10 @@ const TopCrew = () => {
       </div>
       <div className='flex items-center justify-center'>
         <button
-          onClick={() => navigate('/crew')}
+          onClick={() => {
+            navigate('/crew');
+            scrollTo(0, 0);
+          }}
           className='bg-blue text-sm font-semibold sm:text-base text-light px-8 py-3 rounded-md mt-6 hover:scale-105 transition-all'
         >
           View all

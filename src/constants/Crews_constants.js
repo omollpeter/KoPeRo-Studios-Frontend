@@ -8,18 +8,21 @@ import crew_6 from '../assets/crew_6.jpg';
 export const crewData = [
   {
     image: crew_1,
+    id: 'crew1',
     name: 'Ethan Cole',
     cat: 'Photographer',
     stars: 5,
   },
   {
     image: crew_2,
+    id: 'crew2',
     name: 'Olivia Brooks',
     cat: 'Videographer',
     stars: 5,
   },
   {
     image: crew_6,
+    id: 'crew6',
     name: 'Michael Travis',
     cat: 'Photographer',
     stars: 5,
@@ -27,12 +30,14 @@ export const crewData = [
 
   {
     image: crew_5,
+    id: 'crew5',
     name: 'Grace Foster',
     cat: 'Photographer',
     stars: 5,
   },
   {
     image: crew_4,
+    id: 'crew4',
     name: 'Samuel Hayes',
     cat: 'Photographer',
     stars: 4,
@@ -40,6 +45,7 @@ export const crewData = [
 
   {
     image: crew_3,
+    id: 'crew3',
     name: 'Marcus Reed',
     cat: 'Videographer',
     stars: 4,

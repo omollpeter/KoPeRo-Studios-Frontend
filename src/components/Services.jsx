@@ -81,7 +81,10 @@ const Services = () => {
 
         <div
           className='flex justify-center items-center gap-3 cursor-pointer'
-          onClick={() => navigate('/services')}
+          onClick={() => {
+            navigate('/services');
+            scrollTo(0, 0);
+          }}
         >
           <a className='text-blue md:hover:underline decoration-solid decoration-blue transition-all'>
             Explore More
