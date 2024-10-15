@@ -19,6 +19,16 @@ const Register = () => {
   });
 
   const [err, setError] = useState(null);
+  const [password1Visible, setPassword1Visible] = useState(false);
+  const [password2Visible, setPassword2Visible] = useState(false);
+
+  const togglePassword1 = () => {
+    setPassword1Visible(!password1Visible);
+  };
+
+  const togglePassword2 = () => {
+    setPassword2Visible(!password2Visible);
+  };
 
   const navigate = useNavigate();
 
@@ -96,23 +106,46 @@ const Register = () => {
               onChange={handleChange}
               className='p-2 rounded-md bg-slate-50 text-dark w-[300px] md:w-full'
             />
-            <div className='flex justify-between items-center bg-slate-50 rounded-md w-[300px] md:w-full py-2 px-[20px] '>
+            <div className='flex justify-between items-center bg-slate-50 rounded-md w-[300px] md:w-full py-2 px-[10px] '>
               <input
                 required
-                type='password'
+                type={password1Visible ? 'text' : 'password'}
                 placeholder='Password'
                 name='password_1'
                 className='text-dark border-none outline-0 w-full'
               />
-              <IoMdEye className='text-dark text-2xl cursor-pointer' />
+              {password1Visible ? (
+                <IoMdEyeOff
+                  className='text-dark text-2xl cursor-pointer'
+                  onClick={() => togglePassword1()}
+                />
+              ) : (
+                <IoMdEye
+                  className='text-blue text-2xl cursor-pointer'
+                  onClick={() => togglePassword1()}
+                />
+              )}
             </div>
-            <input
-              required
-              type='password'
-              placeholder='Confirm Password'
-              name='password_2'
-              className='p-2 rounded-md bg-slate-50 text-dark w-[300px] md:w-full'
-            />
+            <div className='flex justify-between items-center bg-slate-50 rounded-md w-[300px] md:w-full py-2 px-[10px] '>
+              <input
+                required
+                type={password2Visible ? 'text' : 'password'}
+                placeholder='Confirm Password'
+                name='password_2'
+                className='text-dark border-none outline-0 w-full'
+              />
+              {password2Visible ? (
+                <IoMdEyeOff
+                  className='text-dark text-2xl cursor-pointer'
+                  onClick={() => togglePassword2()}
+                />
+              ) : (
+                <IoMdEye
+                  className='text-blue text-2xl cursor-pointer'
+                  onClick={() => togglePassword2()}
+                />
+              )}
+            </div>
           </form>
         </div>
         <div className='flex flex-col gap-4 justify-center items-center'>

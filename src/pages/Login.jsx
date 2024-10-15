@@ -5,6 +5,7 @@ import { FaLinkedin } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
 import { useContext, useState } from 'react';
 import { AuthContext } from '../context/AuthContext';
+import { IoMdEye, IoMdEyeOff } from 'react-icons/io';
 
 const Login = () => {
   const [inputs, setInputValue] = useState({
@@ -12,11 +13,17 @@ const Login = () => {
     password: '',
   });
 
+  const [passwordVisible, setPasswordVisible] = useState(false);
+
   const [err, setErr] = useState(null);
 
   const navigate = useNavigate();
 
   const { login } = useContext(AuthContext);
+
+  const togglePassword = () => {
+    setPasswordVisible(!passwordVisible);
+  };
 
   const handleChange = (e) => {
     setInputValue((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -83,14 +90,26 @@ const Login = () => {
               onChange={handleChange}
               className='p-2 rounded-md bg-slate-50 text-dark w-[300px] md:w-full'
             />
-            <input
-              required
-              type='password'
-              placeholder='Password'
-              name='password'
-              onChange={handleChange}
-              className='p-2 rounded-md bg-slate-50 text-dark w-[300px] md:w-full'
-            />
+            <div className='flex justify-between items-center bg-slate-50 rounded-md w-[300px] md:w-full py-2 px-[10px] '>
+              <input
+                required
+                type={passwordVisible ? 'text' : 'password'}
+                placeholder='Password'
+                name='password'
+                className='text-dark border-none outline-0 w-full'
+              />
+              {passwordVisible ? (
+                <IoMdEyeOff
+                  className='text-dark text-2xl cursor-pointer'
+                  onClick={() => togglePassword()}
+                />
+              ) : (
+                <IoMdEye
+                  className='text-blue text-2xl cursor-pointer'
+                  onClick={() => togglePassword()}
+                />
+              )}
+            </div>
           </form>
         </div>
         <div className='flex flex-col gap-4 justify-center items-center'>
