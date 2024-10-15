@@ -24,7 +24,7 @@ const Crews = () => {
         />
         <h1 className='text-light text-4xl font-bold'>Our Crew</h1>
         <p className='text-light text-lg'>
-          Browse through the doctors specialist.
+          Browse through our experienced Crew.
         </p>
       </div>
       <div className='flex flex-col  justify-center items-center md:items-start md:flex-row gap-20'>

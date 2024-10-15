@@ -83,7 +83,7 @@ const Navbar = () => {
         ) : (
           <button
             onClick={() => navigate('/login')}
-            className='text-light px-8 py-3 rounded-md border-blue border-solid border font-light hidden md:block hover:bg-blue hover:-translate-y-1 transition-colors-transform duration-300 active:bg-slate-900'
+            className='text-light px-8 py-3 rounded-md border-blue border-solid border font-light hover:bg-blue hover:-translate-y-1 transition-colors-transform duration-300 active:bg-slate-900'
           >
             Get started
           </button>
