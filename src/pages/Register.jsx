@@ -86,7 +86,7 @@ const Register = () => {
               required
               type='text'
               placeholder='Username'
-              name='Username'
+              name='username'
               onChange={handleChange}
               className='p-2 rounded-md bg-slate-50 text-dark w-[300px] md:w-full'
             />
