@@ -3,8 +3,10 @@ import { MdPeopleAlt } from 'react-icons/md';
 import { crewData } from '../constants/Crews_constants';
 import StarRating from '../components/StarRating';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Crews = () => {
+  const navigate = useNavigate();
   const [filterCrew, setFilteredCrew] = useState(crewData);
   const [isActive, setIsActive] = useState(false);
 
@@ -15,7 +17,7 @@ const Crews = () => {
 
   return (
     <div className='flex flex-col gap-20'>
-      <div className='bg-blue flex flex-col justify-center items-center py-[50px] w-full rounded-lg hover:bg-pink transition-all duration-300'>
+      <div className='bg-blue flex flex-col justify-center items-center py-[20px] md:py-[50px] w-full rounded-lg hover:bg-pink transition-all duration-300'>
         <MdPeopleAlt
           className='text-light text-5xl hover:scale-105 transition-all duration-300 cursor-pointer'
           onClick={() => setFilteredCrew(crewData)}
@@ -25,8 +27,8 @@ const Crews = () => {
           Browse through the doctors specialist.
         </p>
       </div>
-      <div className='flex flex-row gap-20'>
-        <div>
+      <div className='flex flex-col  justify-center items-center md:items-start md:flex-row gap-20'>
+        <div className=''>
           <p
             onClick={() => applyFilter('Photographer')}
             className={`cursor-pointer text-lg ${
@@ -44,7 +46,7 @@ const Crews = () => {
             Videographers
           </p>
         </div>
-        <div className='grid md:grid-cols-3 sm:grid-cols-2 md:gap-y-6 max-w-4xl justify-center items-center cursor-pointer w-full'>
+        <div className='grid md:grid-cols-3 sm:grid-cols-2 gap-y-6 md:max-w-4xl justify-center items-center cursor-pointer w-full'>
           {filterCrew.map((crew) => (
             <div
               onClick={() => navigate(`/booking/${crew.id}`)}
@@ -54,7 +56,7 @@ const Crews = () => {
               <img
                 src={crew.image}
                 alt={crew.name}
-                className='w-40 rounded-full relative'
+                className='w-28 md:w-40 rounded-full relative'
               />
               <h3 className='text-light mt-4'>{crew.name.toUpperCase()}</h3>
               <p className='text-slate-400 text-sm'>{crew.cat}</p>

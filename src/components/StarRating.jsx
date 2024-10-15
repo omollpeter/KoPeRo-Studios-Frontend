@@ -1,7 +1,6 @@
 import { FaStar } from 'react-icons/fa';
 
 const StarRating = ({ rating }) => {
-  console.log(rating);
   return (
     <div className='flex gap-1'>
       {[...Array(5)].map((_, index) => (
