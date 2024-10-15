@@ -9,7 +9,10 @@ const Booking = () => {
   const [crewInfo, setCrewInfo] = useState({});
 
   const fetchCrewInfo = async () => {
+    console.log('Fetching crew info for ID:', crewId);
     const crewInfoData = crewData.find((crew) => crew.id === crewId);
+    console.log('Crew data:', crewData);
+    console.log('Filtered crew info data:', crewInfoData);
     setCrewInfo(crewInfoData);
   };
 
@@ -26,7 +29,7 @@ const Booking = () => {
           className='rounded-full w-52 hover:-translate-y-1 transition-all duration-300'
         />
         <div className='flex flex-col items-center md:items-start justify-center gap-2 md:gap-1'>
-          <h1 className='text-2xl font-bold'>{crewInfo.name.toUpperCase()}</h1>
+          <h1 className='text-2xl font-bold'>{crewInfo.name}</h1>
           <p className='text-slate-400 text-xl'>{crewInfo.cat}</p>
           <StarRating rating={crewInfo.stars} />
           {crewInfo.cat === 'Photographer' ? (

@@ -28,10 +28,10 @@ const Crews = () => {
         </p>
       </div>
       <div className='flex flex-col  justify-center items-center md:items-start md:flex-row gap-20'>
-        <div className=''>
+        <div>
           <p
             onClick={() => applyFilter('Photographer')}
-            className={`cursor-pointer text-lg ${
+            className={`cursor-pointer text-lg hover:text-blue ${
               isActive === 'Photographer' ? 'text-blue' : 'text-light'
             }`}
           >
@@ -39,7 +39,7 @@ const Crews = () => {
           </p>
           <p
             onClick={() => applyFilter('Videographer')}
-            className={`cursor-pointer text-lg ${
+            className={`cursor-pointer text-lg hover:text-blue ${
               isActive === 'Videographer' ? 'text-blue' : 'text-light'
             }`}
           >
