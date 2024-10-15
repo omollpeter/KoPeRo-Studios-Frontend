@@ -43,7 +43,7 @@ const Register = () => {
       await axios.post('https://mady.tech/api/v1/auth/register/', inputs);
       navigate('/login');
     } catch (err) {
-      setError('User Already Exists', err);
+      setError(err);
     }
   };
 
@@ -112,6 +112,7 @@ const Register = () => {
                 type={password1Visible ? 'text' : 'password'}
                 placeholder='Password'
                 name='password1'
+                onChange={handleChange}
                 className='text-dark border-none outline-0 w-full'
               />
               {password1Visible ? (
@@ -132,6 +133,7 @@ const Register = () => {
                 type={password2Visible ? 'text' : 'password'}
                 placeholder='Confirm Password'
                 name='password2'
+                onChange={handleChange}
                 className='text-dark border-none outline-0 w-full'
               />
               {password2Visible ? (

@@ -9,7 +9,7 @@ import { IoMdEye, IoMdEyeOff } from 'react-icons/io';
 
 const Login = () => {
   const [inputs, setInputValue] = useState({
-    username: '',
+    username_email: '',
     password: '',
   });
 
@@ -31,9 +31,11 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(inputs);
 
     try {
       await login(inputs);
+
       navigate('/');
     } catch (err) {
       setErr('Invalid Username or Password', err);
@@ -96,6 +98,7 @@ const Login = () => {
                 type={passwordVisible ? 'text' : 'password'}
                 placeholder='Password'
                 name='password'
+                onChange={handleChange}
                 className='text-dark border-none outline-0 w-full'
               />
               {passwordVisible ? (
