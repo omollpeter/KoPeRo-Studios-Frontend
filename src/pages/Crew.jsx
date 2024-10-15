@@ -2,13 +2,15 @@
 import { MdPeopleAlt } from 'react-icons/md';
 import { crewData } from '../constants/Crews_constants';
 import StarRating from '../components/StarRating';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
 
 const Crews = () => {
   const navigate = useNavigate();
   const [filterCrew, setFilteredCrew] = useState(crewData);
   const [isActive, setIsActive] = useState(false);
+  const { currentUser } = useContext(AuthContext);
 
   const applyFilter = (category) => {
     setFilteredCrew(crewData.filter((crew) => crew.cat === category));
@@ -49,7 +51,11 @@ const Crews = () => {
         <div className='grid md:grid-cols-3 sm:grid-cols-2 gap-y-6 md:max-w-4xl justify-center items-center cursor-pointer w-full'>
           {filterCrew.map((crew) => (
             <div
-              onClick={() => navigate(`/booking/${crew.id}`)}
+              onClick={() => {
+                currentUser
+                  ? navigate(`/booking/${crew.id}`)
+                  : navigate('/login');
+              }}
               key={crew.image}
               className='flex flex-col justify-center items-center hover:-translate-y-5 transition-all duration-300'
             >

@@ -1,8 +1,11 @@
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
+import { useContext } from 'react';
 import banner from '../assets/banner_1.png';
 
 const Banner = () => {
   const navigate = useNavigate();
+  const { currentUser } = useContext(AuthContext);
 
   return (
     <div className='flex bg-blue rounded-lg px-6 sm:px-10 md:px-13 lg:px-12 my-20 md:mx-10'>
@@ -14,7 +17,9 @@ const Banner = () => {
           </p>
         </div>
         <button
-          onClick={() => navigate('/login')}
+          onClick={() => {
+            currentUser ? navigate('/crew') : navigate('/login');
+          }}
           className='bg-white text-sm font-semibold sm:text-base text-blue px-8 py-3 rounded-md mt-6 hover:scale-105 transition-all'
         >
           Book Now
