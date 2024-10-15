@@ -111,7 +111,7 @@ const Register = () => {
                 required
                 type={password1Visible ? 'text' : 'password'}
                 placeholder='Password'
-                name='password_1'
+                name='password1'
                 className='text-dark border-none outline-0 w-full'
               />
               {password1Visible ? (
@@ -131,7 +131,7 @@ const Register = () => {
                 required
                 type={password2Visible ? 'text' : 'password'}
                 placeholder='Confirm Password'
-                name='password_2'
+                name='password2'
                 className='text-dark border-none outline-0 w-full'
               />
               {password2Visible ? (
