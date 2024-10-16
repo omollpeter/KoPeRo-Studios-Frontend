@@ -108,7 +108,7 @@ const Services = () => {
               </div>
               {selectedService.price && (
                 <span className='text-light text-shadow'>
-                  Rate Per Hour: Ksh.{selectedService.price}
+                  Rate Per Hour: $.{selectedService.price}
                 </span>
               )}
               <button

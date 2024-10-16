@@ -28,7 +28,7 @@ const Navbar = () => {
         src={logo}
         alt='logo'
       />
-      <ul className='hidden md:flex items-start gap-10 font-bold text-base text-light flex-grow justify-center'>
+      <ul className='hidden md:flex items-start gap-10 font-bold text-base text-light flex-grow justify-center border'>
         <NavLink to='/'>
           <li className='py-1 hover:text-blue transition-all duration-300'>
             Home
@@ -87,12 +87,20 @@ const Navbar = () => {
             </div>
           </div>
         ) : (
-          <button
-            onClick={() => navigate('/register')}
-            className='text-light px-8 py-3 rounded-md border-blue border-solid border font-light hover:bg-blue hover:-translate-y-1 transition-colors-transform duration-300 active:bg-slate-900'
-          >
-            Get started
-          </button>
+          <div className='flex flex-row gap-3'>
+            <button
+              className='text-blue text-base cursor-pointer hover:underline'
+              onClick={() => navigate('/login')}
+            >
+              Login
+            </button>
+            <button
+              onClick={() => navigate('/register')}
+              className='text-light text-base px-4 md:px-8 py-3 rounded-lg md:rounded-md border-blue border-solid border font-light hover:bg-blue hover:-translate-y-1 transition-colors-transform duration-300 active:bg-slate-900'
+            >
+              Get started
+            </button>
+          </div>
         )}
         <HiMenuAlt3
           onClick={() => setDropDown(true)}
