@@ -28,7 +28,7 @@ const Navbar = () => {
         src={logo}
         alt='logo'
       />
-      <ul className='hidden md:flex items-start gap-10 font-bold text-base text-light flex-grow justify-center border'>
+      <ul className='hidden md:flex items-start gap-10 font-bold text-base text-light flex-grow justify-center'>
         <NavLink to='/'>
           <li className='py-1 hover:text-blue transition-all duration-300'>
             Home
