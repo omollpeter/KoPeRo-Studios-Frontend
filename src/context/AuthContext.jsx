@@ -14,6 +14,7 @@ export const AuthContextProvider = ({ children }) => {
       inputs
     );
     setCurrentUser(res.data.user);
+    localStorage.setItem('accessToken', res.data.access);
   };
 
   const logout = async (inputs) => {

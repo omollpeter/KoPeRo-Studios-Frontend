@@ -1,5 +1,6 @@
 import { useContext, useState } from 'react';
 import logo from '../assets/logo_light.png';
+import profileImage from '../assets/profileImage.png';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import user_1 from '../assets/user_1.jpg';
@@ -16,6 +17,7 @@ const Navbar = () => {
   const handleLogout = () => {
     logout();
     setToken(false);
+    navigate('/');
   };
 
   return (
@@ -61,12 +63,16 @@ const Navbar = () => {
       <div className='flex items-center gap-4'>
         {currentUser ? (
           <div className='flex items-center gap-2 cursor-pointer group relative '>
-            <img className='w-10 rounded-full' src={user_1} alt='user' />
+            <img
+              className='w-10 rounded-full'
+              src={currentUser?.picture || profileImage}
+              alt='user'
+            />
             <span className='text-light'>{currentUser?.full_name}</span>
             <div className='absolute top-0 right-0 pt-14 text-base font-medium text-light z-20 opacity-0 transform -translate-y-4 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0'>
               <div className='min-w-48 bg-slate-800 rounded flex flex-col gap-4 p-4'>
                 <p
-                  onClick={() => navigate('/user-profile')}
+                  onClick={() => navigate(`/profile/${currentUser?.id}`)}
                   className='hover:text-blue cursor-pointer'
                 >
                   My profile
@@ -82,7 +88,7 @@ const Navbar = () => {
           </div>
         ) : (
           <button
-            onClick={() => navigate('/login')}
+            onClick={() => navigate('/register')}
             className='text-light px-8 py-3 rounded-md border-blue border-solid border font-light hover:bg-blue hover:-translate-y-1 transition-colors-transform duration-300 active:bg-slate-900'
           >
             Get started

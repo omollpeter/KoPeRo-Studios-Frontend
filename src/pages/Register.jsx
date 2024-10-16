@@ -40,7 +40,6 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(inputs);
 
     try {
       await axios.post('https://mady.tech/api/v1/auth/register/', inputs);
