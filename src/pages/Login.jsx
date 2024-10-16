@@ -6,6 +6,7 @@ import { FaXTwitter } from 'react-icons/fa6';
 import { useContext, useState } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { IoMdEye, IoMdEyeOff } from 'react-icons/io';
+import { toast } from 'sonner';
 
 const Login = () => {
   const [inputs, setInputValue] = useState({
@@ -34,7 +35,7 @@ const Login = () => {
 
     try {
       await login(inputs);
-
+      toast.success('Logged in Successfully');
       navigate('/');
     } catch (err) {
       setErr('Invalid Username or Password', err);
