@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
+import { toast } from 'sonner';
 import profileImage from '../assets/profileImage.png';
 
 const UserProfile = () => {
@@ -8,8 +9,10 @@ const UserProfile = () => {
   const [userData, setUserdata] = useState(null);
   const [isEdit, setIsEdit] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
+  const [imagePreview, setImagePreview] = useState(profileImage);
   const fileInputRef = useRef(null);
   const navigate = useNavigate();
+  const [pictureUrl, setPictureUrl] = useState('');
 
   const fetchUserProfile = async () => {
     const token = localStorage.getItem('accessToken');
@@ -28,6 +31,10 @@ const UserProfile = () => {
         }
       );
       setUserdata(res.data);
+
+      if (res.data.profile?.picture) {
+        setImagePreview(`https://mady.tech/media/${res.data.profile.picture}`);
+      }
     } catch (error) {
       console.error(`Error getting user profile:`, error);
     }
@@ -38,7 +45,6 @@ const UserProfile = () => {
   }, [userId]);
 
   const [inputs, setInputs] = useState({
-    picture: profileImage,
     email: '',
     first_name: '',
     last_name: '',
@@ -46,6 +52,7 @@ const UserProfile = () => {
       address: '',
       town: '',
       description: '',
+      picture: '',
       portfolio_link: '',
     },
   });
@@ -53,7 +60,6 @@ const UserProfile = () => {
   useEffect(() => {
     if (userData) {
       setInputs({
-        picture: userData.picture || profileImage,
         email: userData.email,
         first_name: userData.first_name,
         last_name: userData.last_name,
@@ -61,29 +67,23 @@ const UserProfile = () => {
           address: userData.profile?.address || '',
           town: userData.profile?.town || '',
           description: userData.profile?.description || '',
+          picture: userData.profile?.picture || profileImage,
           portfolio_link: userData.profile?.portfolio_link || '',
         },
       });
     }
   }, [userData]);
 
-  const handleFileChange = (e) => {
+  const handleFileChange = async (e) => {
     const file = e.target.files[0];
     setSelectedFile(file);
 
     if (file) {
-      setInputs((prev) => ({
-        ...prev,
-        picture: URL.createObjectURL(file),
-      }));
+      setSelectedFile(file);
+      setImagePreview(URL.createObjectURL(file));
     }
   };
-
-  const handleImageClick = () => {
-    fileInputRef.current.click();
-    setIsEdit(true);
-  };
-
+  
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -106,28 +106,46 @@ const UserProfile = () => {
     const token = localStorage.getItem('accessToken');
 
     const formData = new FormData();
-    formData.append('picture', selectedFile);
     formData.append('email', inputs.email);
     formData.append('first_name', inputs.first_name);
     formData.append('last_name', inputs.last_name);
-    formData.append('address', inputs.profile.address);
-    formData.append('town', inputs.profile.town);
-    formData.append('description', inputs.profile.description);
-    formData.append('portfolio_link', inputs.profile.portfolio_link);
+    formData.append('profile[address]', inputs.profile.address || '');
+    formData.append('profile[town]', inputs.profile.town || '');
+    formData.append('profile[description]', inputs.profile.description || '');
+    formData.append(
+      'profile[portfolio_link]',
+      inputs.profile.portfolio_link || ''
+    );
+
+    if (selectedFile) {
+      formData.append('profile[picture]', selectedFile);
+    } else {
+      formData.append('profile[picture]', null);
+    }
+
+    const formDataObject = {};
+    for (const [key, value] of formData.entries()) {
+      formDataObject[key] =
+        value instanceof File ? `File: ${value.name}` : value;
+    }
+    console.log('FormData being sent:', formDataObject);
 
     try {
       await axios.put(
-        `https://mady.tech/api/v1/auth/profile/${userId}`,
+        `https://mady.tech/api/v1/auth/profile/${userId}/`,
         formData,
         {
           headers: {
             Authorization: `Bearer ${token}`,
-            'Content-Type': 'multipart/form-data',
           },
         }
       );
+
       console.log('User info updated successfully!');
+      toast.success('User info updated successfully');
+      setIsEdit(false);
     } catch (err) {
+      toast.error('Error updating user info');
       if (err.response) {
         console.log('Error:', err.response.data);
       } else {
@@ -143,10 +161,13 @@ const UserProfile = () => {
   return (
     <div className='flex flex-col gap-4 justify-center items-center md:items-start'>
       <img
-        src={inputs.picture}
+        src={imagePreview || profileImage}
         alt='Profile'
         className='cursor-pointer w-44 rounded-full shadow-lg shadow-blue hover:-translate-y-2 hover:shadow-sm duration-300'
-        onClick={handleImageClick}
+        onClick={() => {
+          fileInputRef.current.click();
+          setIsEdit(true);
+        }}
       />
       <input
         type='file'
