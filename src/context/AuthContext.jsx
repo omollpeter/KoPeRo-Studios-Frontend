@@ -15,12 +15,12 @@ export const AuthContextProvider = ({ children }) => {
     );
     setCurrentUser(res.data.user);
     localStorage.setItem('accessToken', res.data.access);
-    localStorage.removeItem('accessToken');
   };
 
   const logout = async (inputs) => {
     await axios.post(`https://mady.tech/api/v1/auth/logout/`);
     setCurrentUser(null);
+    localStorage.removeItem('accessToken');
   };
 
   useEffect(() => {
