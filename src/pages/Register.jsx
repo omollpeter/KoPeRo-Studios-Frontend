@@ -5,8 +5,9 @@ import { FaXTwitter } from 'react-icons/fa6';
 import logo from '../assets/logo_light.png';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import profile from '../assets/profileImage.png';
+// import profile from '../assets/profileImage.png';
 import { IoMdEye, IoMdEyeOff } from 'react-icons/io';
+import { toast } from 'sonner';
 
 const Register = () => {
   const [inputs, setInputs] = useState({
@@ -20,6 +21,7 @@ const Register = () => {
     password2: '',
   });
 
+  const [focused, setFocused] = useState(false);
   const [err, setError] = useState(null);
   const [password1Visible, setPassword1Visible] = useState(false);
   const [password2Visible, setPassword2Visible] = useState(false);
@@ -47,6 +49,7 @@ const Register = () => {
     } catch (err) {
       if (err.response) {
         console.log('Error:', err.response.data);
+        // toast.error(err.response.data);
       } else {
         console.log('Error:', err.message);
       }
@@ -76,6 +79,7 @@ const Register = () => {
                 type='text'
                 name='first_name'
                 placeholder='First Name'
+                pattern='^[A-Za-z0-9]{3,16}$'
                 onChange={handleChange}
                 className='p-2 rounded-md bg-slate-50 text-dark max-[768px]:w-[130px]'
               />
@@ -83,24 +87,39 @@ const Register = () => {
                 required
                 type='text'
                 placeholder='Last Name'
+                pattern='^[A-Za-z0-9]{3,16}$'
                 name='last_name'
                 onChange={handleChange}
                 className='p-2 rounded-md bg-slate-50 text-dark max-[768px]:w-[130px]'
               />
             </div>
+
             <input
               required
               type='text'
               placeholder='Username'
               name='username'
+              pattern='^[A-Za-z0-9]{3,16}$'
               onChange={handleChange}
-              className='p-2 rounded-md bg-slate-50 text-dark w-[300px] md:w-full'
+              onBlur={() => setFocused(true)}
+              onFocus={() => setFocused(false)}
+              className={`peer p-2 rounded-md bg-slate-50 text-dark w-[300px] md:w-full ${
+                focused ? '' : 'peer-focus:ring-blue'
+              }`}
             />
+            <span
+              className={`text-red-500 text-sm hidden ${
+                focused ? 'peer-invalid:block' : 'hidden'
+              }`}
+            >
+              Username should be 3-16 characters and have no special characters
+            </span>
             <input
               required
               type='email'
               placeholder='Email'
               name='email'
+              pattern='/^[^\s@]+@[^\s@]+\.[^\s@]+$/'
               onChange={handleChange}
               className='p-2 rounded-md bg-slate-50 text-dark w-[300px] md:w-full'
             />
@@ -109,6 +128,7 @@ const Register = () => {
               type='text'
               placeholder='Phone Number'
               name='phone'
+              pattern='/^\+?[1-9][0-9]{7,14}$/'
               onChange={handleChange}
               className='p-2 rounded-md bg-slate-50 text-dark w-[300px] md:w-full'
             />
@@ -118,6 +138,7 @@ const Register = () => {
                 type={password1Visible ? 'text' : 'password'}
                 placeholder='Password'
                 name='password1'
+                pattern='/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/'
                 onChange={handleChange}
                 className='text-dark border-none outline-0 w-full'
               />
@@ -139,6 +160,7 @@ const Register = () => {
                 type={password2Visible ? 'text' : 'password'}
                 placeholder='Confirm Password'
                 name='password2'
+                pattern='/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/'
                 onChange={handleChange}
                 className='text-dark border-none outline-0 w-full'
               />
