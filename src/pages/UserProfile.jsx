@@ -83,7 +83,7 @@ const UserProfile = () => {
       setImagePreview(URL.createObjectURL(file));
     }
   };
-  
+
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -236,7 +236,7 @@ const UserProfile = () => {
           )}
         </div>
       </div>
-      <div>
+      <div className='flex justify-center items-center gap-4 h-14'>
         {isEdit ? (
           <button
             className='border rounded-full p-3 border-blue hover:bg-blue'
@@ -252,6 +252,12 @@ const UserProfile = () => {
             Edit Profile
           </button>
         )}
+        <button
+          onClick={() => navigate('/user-appointments')}
+          className='bg-blue text-light text-sm md:text-md font-semibold px-6 py-3 rounded-lg my-6 hover:scale-105 transition-all'
+        >
+          My Appointments
+        </button>
       </div>
     </div>
   );
