@@ -18,7 +18,10 @@ const TopCrew = () => {
       <div className='grid md:grid-cols-6 sm:grid-cols-2 gap-2 justify-center items-center cursor-pointer '>
         {crewData.slice(0, 6).map((crew) => (
           <div
-            onClick={() => navigate(`/booking/${crew.id}`)}
+            onClick={() => {
+              navigate(`/booking/${crew.id}`);
+              scrollTo(0, 0);
+            }}
             key={crew.image}
             className='flex flex-col justify-center items-center hover:-translate-y-5 transition-all duration-300'
           >

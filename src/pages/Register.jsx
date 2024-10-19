@@ -21,10 +21,45 @@ const Register = () => {
     password2: '',
   });
 
-  const [focused, setFocused] = useState(false);
+  const [focusedFields, setFocusedFields] = useState({
+    username: false,
+    email: false,
+    phone: false,
+    password1: false,
+    password2: false,
+  });
   const [err, setError] = useState(null);
+  const [passwordError, setPasswordError] = useState('');
+  const [confirmPasswordError, setConfirmPasswordError] = useState('');
   const [password1Visible, setPassword1Visible] = useState(false);
   const [password2Visible, setPassword2Visible] = useState(false);
+
+  const handleFocus = (field) => {
+    setFocusedFields((prev) => ({ ...prev, [field]: false }));
+  };
+
+  const handleBlur = (field) => {
+    setFocusedFields((prev) => ({ ...prev, [field]: true }));
+
+    if (field === 'password1') {
+      const passwordPattern =
+        /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()_+={};:'",<.>]).{8,}$/;
+      if (!passwordPattern.test(inputs.password1)) {
+        setPasswordError(
+          'Password must contain at least 8 characters, \n including uppercase, lowercase, number, and special character.'
+        );
+      } else {
+        setPasswordError('');
+      }
+    }
+    if (field === 'password2') {
+      if (inputs.password1 !== inputs.password2) {
+        setConfirmPasswordError('Passwords do not match.');
+      } else {
+        setConfirmPasswordError('');
+      }
+    }
+  };
 
   const togglePassword1 = () => {
     setPassword1Visible(!password1Visible);
@@ -38,6 +73,10 @@ const Register = () => {
 
   const handleChange = (e) => {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+
+    if (e.target.name === 'password1') {
+      setPasswordError('');
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -101,15 +140,15 @@ const Register = () => {
               name='username'
               pattern='^[A-Za-z0-9]{3,16}$'
               onChange={handleChange}
-              onBlur={() => setFocused(true)}
-              onFocus={() => setFocused(false)}
+              onBlur={() => handleBlur('username')}
+              onFocus={() => handleFocus('username')}
               className={`peer p-2 rounded-md bg-slate-50 text-dark w-[300px] md:w-full ${
-                focused ? '' : 'peer-focus:ring-blue'
+                focusedFields.username ? '' : 'peer-focus:ring-blue'
               }`}
             />
             <span
               className={`text-red-500 text-sm hidden ${
-                focused ? 'peer-invalid:block' : 'hidden'
+                focusedFields.username ? 'peer-invalid:block' : 'hidden'
               }`}
             >
               Username should be 3-16 characters and have no special characters
@@ -119,41 +158,75 @@ const Register = () => {
               type='email'
               placeholder='Email'
               name='email'
-              pattern='/^[^\s@]+@[^\s@]+\.[^\s@]+$/'
+              pattern='^[^\s@]+@[^\s@]+\.[^\s@]+$'
               onChange={handleChange}
-              className='p-2 rounded-md bg-slate-50 text-dark w-[300px] md:w-full'
+              onBlur={() => handleBlur('email')}
+              onFocus={() => handleFocus('email')}
+              className={`p-2 rounded-md bg-slate-50 text-dark w-[300px] md:w-full ${
+                focusedFields.email ? '' : 'peer-focus:ring-blue'
+              }`}
             />
+            <span
+              className={`text-red-500 text-sm hidden ${
+                focusedFields.email ? 'peer-invalid:block' : 'hidden'
+              }`}
+            >
+              Enter a Valid email Address
+            </span>
             <input
               required
               type='text'
               placeholder='Phone Number'
               name='phone'
-              pattern='/^\+?[1-9][0-9]{7,14}$/'
+              pattern='^\+?[1-9][0-9]{7,14}$'
               onChange={handleChange}
-              className='p-2 rounded-md bg-slate-50 text-dark w-[300px] md:w-full'
+              onBlur={() => handleBlur('phone')}
+              onFocus={() => handleFocus('phone')}
+              className={`peer p-2 rounded-md bg-slate-50 text-dark w-[300px] md:w-full ${
+                focusedFields.phone ? '' : 'peer-focus:ring-blue'
+              }`}
             />
+            <span
+              className={`text-red-500 text-sm hidden ${
+                focusedFields.phone ? 'peer-invalid:block' : 'hidden'
+              }`}
+            >
+              Enter a valid phone Number
+            </span>
             <div className='flex justify-between items-center bg-slate-50 rounded-md w-[300px] md:w-full py-2 px-[10px] '>
               <input
                 required
                 type={password1Visible ? 'text' : 'password'}
                 placeholder='Password'
                 name='password1'
-                pattern='/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/'
                 onChange={handleChange}
-                className='text-dark border-none outline-0 w-full'
+                onBlur={() => handleBlur('password1')}
+                onFocus={() => handleFocus('password1')}
+                className={`peer text-dark border-none outline-0 w-full ${
+                  focusedFields.password1 ? '' : 'peer-focus:ring-blue'
+                }`}
               />
               {password1Visible ? (
-                <IoMdEyeOff
+                <IoMdEye
                   className='text-dark text-2xl cursor-pointer'
                   onClick={() => togglePassword1()}
                 />
               ) : (
-                <IoMdEye
+                <IoMdEyeOff
                   className='text-blue text-2xl cursor-pointer'
                   onClick={() => togglePassword1()}
                 />
               )}
             </div>
+            {passwordError && (
+              <span
+                className={`text-red-500 text-sm hidden ${
+                  focusedFields.password1 ? 'peer-invalid:block' : 'hidden'
+                }`}
+              >
+                {passwordError}
+              </span>
+            )}
             <div className='flex justify-between items-center bg-slate-50 rounded-md w-[300px] md:w-full py-2 px-[10px] '>
               <input
                 required
@@ -162,20 +235,33 @@ const Register = () => {
                 name='password2'
                 pattern='/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/'
                 onChange={handleChange}
-                className='text-dark border-none outline-0 w-full'
+                onBlur={() => handleBlur('password2')}
+                onFocus={() => handleFocus('password2')}
+                className={`peer text-dark border-none outline-0 w-full ${
+                  focusedFields.password2 ? '' : 'peer-focus:ring-blue'
+                }`}
               />
               {password2Visible ? (
-                <IoMdEyeOff
+                <IoMdEye
                   className='text-dark text-2xl cursor-pointer'
                   onClick={() => togglePassword2()}
                 />
               ) : (
-                <IoMdEye
+                <IoMdEyeOff
                   className='text-blue text-2xl cursor-pointer'
                   onClick={() => togglePassword2()}
                 />
               )}
             </div>
+            {confirmPasswordError && (
+              <span
+                className={`text-red-500 text-sm hidden ${
+                  focusedFields.password2 ? 'peer-invalid:block' : 'hidden'
+                }`}
+              >
+                {confirmPasswordError}
+              </span>
+            )}
           </form>
         </div>
         <div className='flex flex-col gap-4 justify-center items-center'>

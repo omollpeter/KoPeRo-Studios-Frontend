@@ -102,12 +102,12 @@ const Login = () => {
                 className='text-dark border-none outline-0 w-full'
               />
               {passwordVisible ? (
-                <IoMdEyeOff
+                <IoMdEye
                   className='text-dark text-2xl cursor-pointer'
                   onClick={() => togglePassword()}
                 />
               ) : (
-                <IoMdEye
+                <IoMdEyeOff
                   className='text-blue text-2xl cursor-pointer'
                   onClick={() => togglePassword()}
                 />
