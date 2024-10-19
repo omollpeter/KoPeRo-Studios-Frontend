@@ -5,7 +5,6 @@ import { FaXTwitter } from 'react-icons/fa6';
 import logo from '../assets/logo_light.png';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-// import profile from '../assets/profileImage.png';
 import { IoMdEye, IoMdEyeOff } from 'react-icons/io';
 import { toast } from 'sonner';
 
@@ -28,37 +27,81 @@ const Register = () => {
     password1: false,
     password2: false,
   });
-  const [err, setError] = useState(null);
+  const [errors, setErrors] = useState({
+    first_name: '',
+    last_name: '',
+    username: '',
+    phone: '',
+    role: '',
+    email: '',
+    password1: '',
+    password2: '',
+  });
+  const [err, setErr] = useState(null);
   const [passwordError, setPasswordError] = useState('');
   const [confirmPasswordError, setConfirmPasswordError] = useState('');
   const [password1Visible, setPassword1Visible] = useState(false);
   const [password2Visible, setPassword2Visible] = useState(false);
 
+  const validateField = (name, value) => {
+    let error = '';
+
+    switch (name) {
+      case 'first_name':
+      case 'last_name':
+        if (!/^[A-Za-z]{3,16}$/.test(value)) {
+          error =
+            'Name must be 3-16 characters and contain no special characters.';
+        }
+        break;
+      case 'username':
+        if (!/^[A-Za-z0-9]{3,16}$/.test(value)) {
+          error =
+            'Username must be 3-16 characters and contain no special characters.';
+        }
+        break;
+      case 'phone':
+        if (!/^\+?[1-9][0-9]{7,14}$/.test(value)) {
+          error = 'Phone number must be between 7-14 digits with a "+" sign.';
+        }
+        break;
+      case 'email':
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+          error = 'Enter a valid email address.';
+        }
+        break;
+      case 'password1':
+        if (
+          !/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()_+={};:'",<.>]).{8,}$/.test(
+            value
+          )
+        ) {
+          error =
+            'Password must be at least 8 characters and include uppercase, lowercase, a number, and a special character.';
+        }
+        break;
+      case 'password2':
+        if (value !== inputs.password1) {
+          error = 'Passwords do not match.';
+        }
+        break;
+      default:
+        break;
+    }
+
+    return error;
+  };
+
   const handleFocus = (field) => {
     setFocusedFields((prev) => ({ ...prev, [field]: false }));
   };
 
-  const handleBlur = (field) => {
-    setFocusedFields((prev) => ({ ...prev, [field]: true }));
+  const handleBlur = (e) => {
+    const { name, value } = e.target;
 
-    if (field === 'password1') {
-      const passwordPattern =
-        /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()_+={};:'",<.>]).{8,}$/;
-      if (!passwordPattern.test(inputs.password1)) {
-        setPasswordError(
-          'Password must contain at least 8 characters, \n including uppercase, lowercase, number, and special character.'
-        );
-      } else {
-        setPasswordError('');
-      }
-    }
-    if (field === 'password2') {
-      if (inputs.password1 !== inputs.password2) {
-        setConfirmPasswordError('Passwords do not match.');
-      } else {
-        setConfirmPasswordError('');
-      }
-    }
+    const error = validateField(name, value);
+
+    setErrors((prev) => ({ ...prev, [name]: error }));
   };
 
   const togglePassword1 = () => {
@@ -72,25 +115,55 @@ const Register = () => {
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    const { name, value } = e.target;
+    setInputs((prev) => ({ ...prev, [name]: value }));
+
+    const error = new validateField(name, value);
+
+    setErrors((prev) => ({ ...prev, [name]: error }));
 
     if (e.target.name === 'password1') {
       setPasswordError('');
+    }
+
+    if (name === 'password1' || name === 'password2') {
+      setPasswordError('');
+      setConfirmPasswordError('');
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      await axios.post('https://mady.tech/api/v1/auth/register/', inputs);
-      navigate('/login');
-    } catch (err) {
-      if (err.response) {
-        console.log('Error:', err.response.data);
-        // toast.error(err.response.data);
-      } else {
-        console.log('Error:', err.message);
+    let formValid = true;
+    let newErrors = {};
+
+    Object.keys(inputs).forEach((key) => {
+      const error = validateField(key, inputs[key]);
+      if (error) {
+        formValid = false;
+        newErrors[key] = error;
+      }
+    });
+
+    console.log(errors);
+    setErrors(newErrors);
+
+    console.log(formValid);
+
+    if (formValid) {
+      try {
+        await axios.post('https://mady.tech/api/v1/auth/register/', inputs);
+        toast.error('successfully registered');
+        navigate('/login');
+      } catch (err) {
+        if (err.response) {
+          console.log('Error:', err.response.data);
+          setErr(err.response.data);
+        } else {
+          console.log('Error:', err.message);
+          setErr(err.message);
+        }
       }
     }
   };
@@ -118,92 +191,89 @@ const Register = () => {
                 type='text'
                 name='first_name'
                 placeholder='First Name'
-                pattern='^[A-Za-z0-9]{3,16}$'
+                value={inputs.first_name}
                 onChange={handleChange}
-                className='p-2 rounded-md bg-slate-50 text-dark max-[768px]:w-[130px]'
+                className={`p-2 rounded-md bg-slate-50 text-dark max-[768px]:w-[130px] ${
+                  errors.first_name ? 'border-red-500' : ''
+                }`}
               />
+
               <input
                 required
                 type='text'
+                value={inputs.last_name}
                 placeholder='Last Name'
                 pattern='^[A-Za-z0-9]{3,16}$'
                 name='last_name'
                 onChange={handleChange}
-                className='p-2 rounded-md bg-slate-50 text-dark max-[768px]:w-[130px]'
+                className={`p-2 rounded-md bg-slate-50 text-dark max-[768px]:w-[130px] ${
+                  errors.last_name ? 'border-red-500' : ''
+                }`}
               />
             </div>
-
+            {errors.first_name && (
+              <span className='text-red-500 text-sm'>{errors.first_name}</span>
+            )}
+            {errors.last_name && (
+              <span className='text-red-500 text-sm'>{errors.last_name}</span>
+            )}
             <input
               required
               type='text'
               placeholder='Username'
               name='username'
+              value={inputs.username}
               pattern='^[A-Za-z0-9]{3,16}$'
               onChange={handleChange}
-              onBlur={() => handleBlur('username')}
-              onFocus={() => handleFocus('username')}
+              onBlur={handleBlur}
               className={`peer p-2 rounded-md bg-slate-50 text-dark w-[300px] md:w-full ${
-                focusedFields.username ? '' : 'peer-focus:ring-blue'
+                errors.username ? 'border-red-500' : ''
               }`}
             />
-            <span
-              className={`text-red-500 text-sm hidden ${
-                focusedFields.username ? 'peer-invalid:block' : 'hidden'
-              }`}
-            >
-              Username should be 3-16 characters and have no special characters
-            </span>
+            {errors.username && (
+              <span className='text-red-500 text-sm'>{errors.username}</span>
+            )}
             <input
               required
               type='email'
               placeholder='Email'
               name='email'
-              pattern='^[^\s@]+@[^\s@]+\.[^\s@]+$'
+              value={inputs.email}
               onChange={handleChange}
-              onBlur={() => handleBlur('email')}
-              onFocus={() => handleFocus('email')}
+              onBlur={handleBlur}
               className={`p-2 rounded-md bg-slate-50 text-dark w-[300px] md:w-full ${
-                focusedFields.email ? '' : 'peer-focus:ring-blue'
+                errors.email ? 'border-red-500' : ''
               }`}
             />
-            <span
-              className={`text-red-500 text-sm hidden ${
-                focusedFields.email ? 'peer-invalid:block' : 'hidden'
-              }`}
-            >
-              Enter a Valid email Address
-            </span>
+            {errors.email && (
+              <span className='text-red-500 text-sm'>{errors.email}</span>
+            )}
             <input
               required
               type='text'
               placeholder='Phone Number'
               name='phone'
-              pattern='^\+?[1-9][0-9]{7,14}$'
+              value={inputs.phone}
               onChange={handleChange}
-              onBlur={() => handleBlur('phone')}
-              onFocus={() => handleFocus('phone')}
+              onBlur={handleBlur}
               className={`peer p-2 rounded-md bg-slate-50 text-dark w-[300px] md:w-full ${
-                focusedFields.phone ? '' : 'peer-focus:ring-blue'
+                errors.phone ? '' : 'border-red-500'
               }`}
             />
-            <span
-              className={`text-red-500 text-sm hidden ${
-                focusedFields.phone ? 'peer-invalid:block' : 'hidden'
-              }`}
-            >
-              Enter a valid phone Number
-            </span>
+            {errors.phone && (
+              <span className='text-red-500 text-sm'>{errors.phone}</span>
+            )}
             <div className='flex justify-between items-center bg-slate-50 rounded-md w-[300px] md:w-full py-2 px-[10px] '>
               <input
                 required
                 type={password1Visible ? 'text' : 'password'}
                 placeholder='Password'
                 name='password1'
+                value={inputs.password1}
                 onChange={handleChange}
-                onBlur={() => handleBlur('password1')}
-                onFocus={() => handleFocus('password1')}
+                onBlur={handleBlur}
                 className={`peer text-dark border-none outline-0 w-full ${
-                  focusedFields.password1 ? '' : 'peer-focus:ring-blue'
+                  errors.password1 ? 'border-red-500' : ''
                 }`}
               />
               {password1Visible ? (
@@ -218,14 +288,8 @@ const Register = () => {
                 />
               )}
             </div>
-            {passwordError && (
-              <span
-                className={`text-red-500 text-sm hidden ${
-                  focusedFields.password1 ? 'peer-invalid:block' : 'hidden'
-                }`}
-              >
-                {passwordError}
-              </span>
+            {errors.password1 && (
+              <span className='text-red-500 text-sm'>{errors.password1}</span>
             )}
             <div className='flex justify-between items-center bg-slate-50 rounded-md w-[300px] md:w-full py-2 px-[10px] '>
               <input
@@ -233,12 +297,10 @@ const Register = () => {
                 type={password2Visible ? 'text' : 'password'}
                 placeholder='Confirm Password'
                 name='password2'
-                pattern='/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/'
                 onChange={handleChange}
-                onBlur={() => handleBlur('password2')}
-                onFocus={() => handleFocus('password2')}
+                onBlur={handleBlur}
                 className={`peer text-dark border-none outline-0 w-full ${
-                  focusedFields.password2 ? '' : 'peer-focus:ring-blue'
+                  errors.password2 ? 'border-red-500' : ''
                 }`}
               />
               {password2Visible ? (
@@ -253,14 +315,8 @@ const Register = () => {
                 />
               )}
             </div>
-            {confirmPasswordError && (
-              <span
-                className={`text-red-500 text-sm hidden ${
-                  focusedFields.password2 ? 'peer-invalid:block' : 'hidden'
-                }`}
-              >
-                {confirmPasswordError}
-              </span>
+            {errors.password2 && (
+              <span className='text-red-500 text-sm'>{errors.password2}</span>
             )}
           </form>
         </div>
