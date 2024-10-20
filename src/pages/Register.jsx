@@ -154,7 +154,7 @@ const Register = () => {
     if (formValid) {
       try {
         await axios.post('https://mady.tech/api/v1/auth/register/', inputs);
-        toast.error('successfully registered');
+        toast.success('successfully registered');
         navigate('/login');
       } catch (err) {
         if (err.response) {
