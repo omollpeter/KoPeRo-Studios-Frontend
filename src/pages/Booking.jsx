@@ -1,7 +1,8 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { crewData } from '../constants/Crews_constants';
 import StarRating from '../components/StarRating';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { AuthContext } from '../context/AuthContext';
 // import { InlineWidget } from 'react-calendly';
 
 const Booking = () => {
@@ -13,6 +14,7 @@ const Booking = () => {
   const [slotIndex, setSlotIndex] = useState(0);
   const [slotTime, setSlotTime] = useState('');
   const navigate = useNavigate();
+  const { currentUser } = useContext(AuthContext);
 
   const fetchCrewInfo = async () => {
     const crewInfoData = crewData.find((crew) => crew.id === crewId);
@@ -49,15 +51,62 @@ const Booking = () => {
           hour: '2-digit',
           minute: '2-digit',
         });
-        timeSlots.push({
-          dateTime: new Date(currentDate),
-          time: formattedTime,
-        });
+
+        let day = currentDate.getDate();
+        let month = currentDate.getMonth() + 1;
+        let year = currentDate.getFullYear();
+
+        const slotDate = day + '_' + month + '_' + year;
+        const slotTime = formattedTime;
+
+        const isAvailable =
+          crewInfo.sesssionsBooked[slotDate] &&
+          crewInfo.sesssionsBooked[slotDate].includes(slotTime)
+            ? false
+            : true;
+
+        if (isAvailable) {
+          timeSlots.push({
+            dateTime: new Date(currentDate),
+            time: formattedTime,
+          });
+        }
 
         currentDate.setMinutes(currentDate.getMinutes() + 45);
       }
 
       setCrewSlots((prev) => [...prev, timeSlots]);
+    }
+  };
+
+  const bookAppointment = async () => {
+    if (!currentUser) {
+      toast.error('Log in to book an appointment');
+      navigate('/login');
+    }
+
+    try {
+      const date = crewSlots[slotIndex][0].dateTime;
+      let day = date.getDate();
+      let month = date.getMonth() + 1;
+      let year = date.getFullYear();
+
+      const slotDate = day + '_' + month + '_' + year;
+
+      const { data } = await axios.post(
+        'https://mady.tech/api/v1/auth/booking/',
+        { crewId, slotDate, slotTime }
+      );
+
+      if (data.success) {
+        toast.success('Appointment booked successfully');
+        navigate('/user-appointments');
+      } else {
+        toast.error('Failed to book appointment');
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error('Failed to book appointment');
     }
   };
 
@@ -138,7 +187,10 @@ const Booking = () => {
               </p>
             ))}
         </div>
-        <button className='bg-blue text-light text-sm md:text-md font-semibold px-12 py-4 rounded-lg my-6'>
+        <button
+          onClick={bookAppointment}
+          className='bg-blue text-light text-sm md:text-md font-semibold px-12 py-4 rounded-lg my-6'
+        >
           Book Appointment
         </button>
       </div>

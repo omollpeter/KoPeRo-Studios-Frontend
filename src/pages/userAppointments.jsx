@@ -1,6 +1,27 @@
 import { crewData } from '../constants/Crews_constants';
+import axios from 'axios';
+import { useContext, useState } from 'react';
+import { AuthContext } from '../context/AuthContext';
 
 const UserAppointments = () => {
+  const [appointments, setAppointments] = useState([]);
+  const { currentUser } = useContext(AuthContext);
+
+  const getAppointments = async () => {
+    try {
+      const response = await axios.get('/api/appointments');
+      setAppointments(response.data);
+    } catch (error) {
+      console.error('Error fetching appointments:', error);
+    }
+  };
+
+  useEffect(() => {
+    if (currentUser) {
+      getAppointments();
+    }
+  }, [currentUser]);
+
   return (
     <div>
       <p className='pb-3 mt-12 text-lg md:text-xl font-medium text-slate-400 border-b border-b-slate-600 mb-4'>
