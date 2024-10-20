@@ -10,13 +10,20 @@ const Home = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
+    const isFirstVisit = localStorage.getItem('isFirstVisit');
+
+    if (!isFirstVisit) {
+      localStorage.setItem('isFirstVisit', 'true');
+      const timer = setTimeout(() => {
+        setIsLoading(false);
+      }, 4000);
+
+      return () => clearTimeout(timer);
+    } else {
       setIsLoading(false);
-    }, 4000);
-
-    return () => clearTimeout(timer);
+    }
   }, []);
-
+  
   if (isLoading) {
     return <Preloader />;
   }
