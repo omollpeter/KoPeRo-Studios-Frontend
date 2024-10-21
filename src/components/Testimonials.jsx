@@ -45,6 +45,7 @@ const Testimonials = () => {
           <SwiperSlide key={item.name}>
             <div className='flex flex-col gap-6 mb-5 group relative text-light rounded-xl px-6 py-8 h-[250px] w-[150px] lg:h-[300px] lg:w-[300px] cursor-pointer '>
               <img
+                rel='preload'
                 className='absolute rounded-[100%] object-cover w-[70px] -top-[50px] left-[40px] lg:left-[120px] z-10 grayscale group-hover:grayscale-0'
                 src={item.image}
                 alt={item.title}

@@ -26,6 +26,7 @@ const TopCrew = () => {
             className='flex flex-col justify-center items-center hover:-translate-y-5 transition-all duration-300'
           >
             <img
+              rel='preload'
               src={crew.image}
               alt={crew.name}
               className='w-32 rounded-full relative'

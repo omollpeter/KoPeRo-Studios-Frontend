@@ -37,7 +37,9 @@ const Hero = () => {
         <img
           className='w-full md:absolute bottom-0 h-auto rounded-lg transition-transform duration-500 hover:scale-105'
           src={camera_1}
-          alt=''
+          alt='camera'
+          rel='preload'
+          fetchPriority='high'
         />
       </div>
     </div>

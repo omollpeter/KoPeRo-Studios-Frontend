@@ -56,6 +56,7 @@ const Services = () => {
                 className='flex flex-col gap-6 mb-5 group relative shadow-lg shadow-blue hover:shadow-md text-light rounded-xl px-6 py-8 h-[350px] w-[150px] lg:h-[400px] lg:w-[300px] overflow-hidden cursor-pointer'
               >
                 <div
+                  rel='preload'
                   className='absolute inset-0 bg-cover bg-center group-hover:shadow-lg group-hover:shadow-blue/30 group-hover:rotate-1 group-hover:scale-105 transition-all duration-300 ease-in-out hover:skew-x-2 hover:skew-y-1'
                   style={{ backgroundImage: `url(${item.backgroundImage})` }}
                 />
