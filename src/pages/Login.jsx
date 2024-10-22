@@ -52,9 +52,7 @@ const Login = () => {
             className='w-[130px] cursor-pointer hover:scale-105 transition-all duration-300'
             onClick={() => navigate('/')}
           />
-
           <h1 className='text-4xl font-extrabold '>Log In</h1>
-
           <div className='flex flex-row space-x-3'>
             <div className='flex flex-row space-x-2 justify-center items-center border border-slate-400  rounded-lg w-[130px]  max-[768px]:w-[100px] h-12 p-3 hover:border-blue cursor-pointer'>
               <FcGoogle className='cursor-pointer text-3xl ' />
