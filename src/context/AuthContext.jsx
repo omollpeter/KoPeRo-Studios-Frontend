@@ -10,7 +10,7 @@ export const AuthContextProvider = ({ children }) => {
 
   const login = async (inputs) => {
     const res = await axios.post(
-      `https://mady.tech/api/v1/auth/login/`,
+      `https://mady.tech/api/v1/auth/login/client/`,
       inputs
     );
     setCurrentUser(res.data.user);

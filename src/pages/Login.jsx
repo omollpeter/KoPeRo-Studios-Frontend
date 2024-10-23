@@ -10,7 +10,7 @@ import { toast } from 'sonner';
 
 const Login = () => {
   const [inputs, setInputValue] = useState({
-    username_email: '',
+    email: '',
     password: '',
   });
 
@@ -32,6 +32,7 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(inputs);
 
     try {
       await login(inputs);
@@ -86,7 +87,7 @@ const Login = () => {
               required
               type='text'
               placeholder='Username'
-              name='username_email'
+              name='email'
               onChange={handleChange}
               className='p-2 rounded-md bg-slate-50 text-dark w-[300px] md:w-full'
             />

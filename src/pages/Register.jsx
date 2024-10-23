@@ -16,7 +16,7 @@ const Register = () => {
     phone: '',
     role: 'regular',
     email: '',
-    password1: '',
+    password: '',
     password2: '',
   });
 
@@ -24,7 +24,7 @@ const Register = () => {
     username: false,
     email: false,
     phone: false,
-    password1: false,
+    password: false,
     password2: false,
   });
   const [errors, setErrors] = useState({
@@ -34,13 +34,13 @@ const Register = () => {
     phone: '',
     role: '',
     email: '',
-    password1: '',
+    password: '',
     password2: '',
   });
   const [err, setErr] = useState(null);
   const [passwordError, setPasswordError] = useState('');
   const [confirmPasswordError, setConfirmPasswordError] = useState('');
-  const [password1Visible, setPassword1Visible] = useState(false);
+  const [passwordVisible, setPasswordVisible] = useState(false);
   const [password2Visible, setPassword2Visible] = useState(false);
 
   const validateField = (name, value) => {
@@ -70,7 +70,7 @@ const Register = () => {
           error = 'Enter a valid email address.';
         }
         break;
-      case 'password1':
+      case 'password':
         if (
           !/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()_+={};:'",<.>]).{8,}$/.test(
             value
@@ -81,7 +81,7 @@ const Register = () => {
         }
         break;
       case 'password2':
-        if (value !== inputs.password1) {
+        if (value !== inputs.password) {
           error = 'Passwords do not match.';
         }
         break;
@@ -104,8 +104,8 @@ const Register = () => {
     setErrors((prev) => ({ ...prev, [name]: error }));
   };
 
-  const togglePassword1 = () => {
-    setPassword1Visible(!password1Visible);
+  const togglePassword = () => {
+    setPasswordVisible(!passwordVisible);
   };
 
   const togglePassword2 = () => {
@@ -122,11 +122,11 @@ const Register = () => {
 
     setErrors((prev) => ({ ...prev, [name]: error }));
 
-    if (e.target.name === 'password1') {
+    if (e.target.name === 'password') {
       setPasswordError('');
     }
 
-    if (name === 'password1' || name === 'password2') {
+    if (name === 'password' || name === 'password2') {
       setPasswordError('');
       setConfirmPasswordError('');
     }
@@ -153,7 +153,10 @@ const Register = () => {
 
     if (formValid) {
       try {
-        await axios.post('https://mady.tech/api/v1/auth/register/', inputs);
+        await axios.post(
+          'https://mady.tech/api/v1/auth/register/client/',
+          inputs
+        );
         toast.success('successfully registered');
         navigate('/login');
       } catch (err) {
@@ -266,30 +269,30 @@ const Register = () => {
             <div className='flex justify-between items-center bg-slate-50 rounded-md w-[300px] md:w-full py-2 px-[10px] '>
               <input
                 required
-                type={password1Visible ? 'text' : 'password'}
+                type={passwordVisible ? 'text' : 'password'}
                 placeholder='Password'
-                name='password1'
-                value={inputs.password1}
+                name='password'
+                value={inputs.password}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 className={`peer text-dark border-none outline-0 w-full ${
-                  errors.password1 ? 'border-red-500' : ''
+                  errors.password ? 'border-red-500' : ''
                 }`}
               />
-              {password1Visible ? (
+              {passwordVisible ? (
                 <IoMdEye
                   className='text-dark text-2xl cursor-pointer'
-                  onClick={() => togglePassword1()}
+                  onClick={() => togglePassword()}
                 />
               ) : (
                 <IoMdEyeOff
                   className='text-blue text-2xl cursor-pointer'
-                  onClick={() => togglePassword1()}
+                  onClick={() => togglePassword()}
                 />
               )}
             </div>
-            {errors.password1 && (
-              <span className='text-red-500 text-sm'>{errors.password1}</span>
+            {errors.password && (
+              <span className='text-red-500 text-sm'>{errors.password}</span>
             )}
             <div className='flex justify-between items-center bg-slate-50 rounded-md w-[300px] md:w-full py-2 px-[10px] '>
               <input
