@@ -12,7 +12,6 @@ const UserProfile = () => {
   const [imagePreview, setImagePreview] = useState(profileImage);
   const fileInputRef = useRef(null);
   const navigate = useNavigate();
-  const [pictureUrl, setPictureUrl] = useState('');
 
   const fetchUserProfile = async () => {
     const token = localStorage.getItem('accessToken');
@@ -23,17 +22,20 @@ const UserProfile = () => {
 
     try {
       const res = await axios.get(
-        `https://mady.tech/api/v1/auth/profile/${userId}`,
+        `https://mady.tech/api/v1/auth/clients/${userId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         }
       );
+      console.log(res.data);
       setUserdata(res.data);
+      console.log('Image from backend:', res.data.image);
 
-      if (res.data.profile?.picture) {
-        setImagePreview(`https://mady.tech/media/${res.data.profile.picture}`);
+      if (res.data.image) {
+        setImagePreview(`https://mady.tech${res.data.image}`);
+        console.log('Image preview:', imagePreview);
       }
     } catch (error) {
       console.error(`Error getting user profile:`, error);
@@ -45,31 +47,19 @@ const UserProfile = () => {
   }, [userId]);
 
   const [inputs, setInputs] = useState({
-    email: '',
     first_name: '',
     last_name: '',
-    profile: {
-      address: '',
-      town: '',
-      description: '',
-      picture: '',
-      portfolio_link: '',
-    },
+    phone: '',
+    bio: '',
   });
 
   useEffect(() => {
     if (userData) {
       setInputs({
-        email: userData.email,
-        first_name: userData.first_name,
-        last_name: userData.last_name,
-        profile: {
-          address: userData.profile?.address || '',
-          town: userData.profile?.town || '',
-          description: userData.profile?.description || '',
-          picture: userData.profile?.picture || profileImage,
-          portfolio_link: userData.profile?.portfolio_link || '',
-        },
+        first_name: userData.first_name || '',
+        last_name: userData.last_name || '',
+        phone: userData.phone || '',
+        bio: userData.bio || '',
       });
     }
   }, [userData]);
@@ -86,19 +76,7 @@ const UserProfile = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-
-    if (name.startsWith('profile.')) {
-      const profileField = name.split('.')[1];
-      setInputs((prev) => ({
-        ...prev,
-        profile: {
-          ...prev.profile,
-          [profileField]: value,
-        },
-      }));
-    } else {
-      setInputs((prev) => ({ ...prev, [name]: value }));
-    }
+    setInputs((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
@@ -106,33 +84,18 @@ const UserProfile = () => {
     const token = localStorage.getItem('accessToken');
 
     const formData = new FormData();
-    formData.append('email', inputs.email);
     formData.append('first_name', inputs.first_name);
     formData.append('last_name', inputs.last_name);
-    formData.append('profile[address]', inputs.profile.address || '');
-    formData.append('profile[town]', inputs.profile.town || '');
-    formData.append('profile[description]', inputs.profile.description || '');
-    formData.append(
-      'profile[portfolio_link]',
-      inputs.profile.portfolio_link || ''
-    );
+    formData.append('phone', inputs.phone);
+    formData.append('bio', inputs.bio);
 
     if (selectedFile) {
-      formData.append('profile[picture]', selectedFile);
-    } else {
-      formData.append('profile[picture]', null);
+      formData.append('image', selectedFile);
     }
-
-    const formDataObject = {};
-    for (const [key, value] of formData.entries()) {
-      formDataObject[key] =
-        value instanceof File ? `File: ${value.name}` : value;
-    }
-    console.log('FormData being sent:', formDataObject);
 
     try {
-      await axios.put(
-        `https://mady.tech/api/v1/auth/profile/${userId}/`,
+      await axios.patch(
+        `https://mady.tech/api/v1/auth/clients/${userId}/`,
         formData,
         {
           headers: {
@@ -140,6 +103,8 @@ const UserProfile = () => {
           },
         }
       );
+
+      fetchUserProfile();
 
       console.log('User info updated successfully!');
       toast.success('User info updated successfully');
@@ -159,11 +124,11 @@ const UserProfile = () => {
   }
 
   return (
-    <div className='flex flex-col gap-4 justify-center items-center md:items-start'>
+    <div className='flex flex-col gap-4 justify-center items-center md:items-start '>
       <img
-        src={imagePreview || profileImage}
+        src={imagePreview}
         alt='Profile'
-        className='cursor-pointer w-44 rounded-full shadow-lg shadow-blue hover:-translate-y-2 hover:shadow-sm duration-300'
+        className='cursor-pointer w-44 h-44 rounded-full object-cover shadow-lg shadow-blue hover:-translate-y-2 hover:shadow-sm duration-300'
         onClick={() => {
           fileInputRef.current.click();
           setIsEdit(true);
@@ -176,66 +141,73 @@ const UserProfile = () => {
         onChange={handleFileChange}
         style={{ display: 'none' }}
       />
+      <p className='text-3xl'>{userData.username}</p>
+      <hr className='bg-slate-400 w-[400px]' />
 
-      {isEdit ? (
-        <div className='flex flex-row gap-4 text-light '>
-          <input
-            type='text'
-            name='first_name'
-            placeholder='First Name'
-            onChange={handleChange}
-            value={inputs.first_name}
-            className='p-2 rounded-md bg-slate-800 w-44'
-          />
-          <input
-            type='text'
-            name='last_name'
-            placeholder='Last Name'
-            onChange={handleChange}
-            value={inputs.last_name}
-            className='p-2 rounded-md bg-slate-800 w-44'
-          />
-        </div>
-      ) : (
-        <p className='text-3xl'>{`${userData.first_name} ${userData.last_name}`}</p>
-      )}
-      <hr className='bg-slate-800 w-[400px]' />
-
-      <div className='flex flex-col gap-3 mb-8'>
-        <p className='text-2xl font-semibold'>CONTACT INFORMATION</p>
-        <div className='flex  gap-5'>
-          <p>Email: </p>
-          <p className='text-blue'>{userData.email}</p>
-        </div>
-        <div className='flex gap-5'>
-          <p>Address: </p>
-          {isEdit ? (
+      <div className='flex flex-row gap-4 text-light w-[400px]'>
+        {isEdit ? (
+          <div className='flex flex-col gap-5 w-full'>
             <input
               type='text'
-              name='profile.address'
+              name='first_name'
+              placeholder='First name'
               onChange={handleChange}
-              value={inputs.profile.address}
-              className='p-1 rounded-md bg-slate-800'
+              value={inputs.first_name}
+              className='p-2 rounded-md bg-slate-800'
             />
-          ) : (
-            <p>{userData.profile?.address || ''}</p>
-          )}
-        </div>
-        <div className='flex gap-5'>
-          <p>Town: </p>
-          {isEdit ? (
             <input
               type='text'
-              name='profile.town'
+              name='last_name'
+              placeholder='Last name'
               onChange={handleChange}
-              value={inputs.profile.town}
-              className='p-1 rounded-md bg-slate-800 w-full'
+              value={inputs.last_name}
+              className='p-2 rounded-md bg-slate-800'
             />
-          ) : (
-            <p>{userData.profile?.town || ''}</p>
-          )}
-        </div>
+            <input
+              type='text'
+              name='phone'
+              placeholder='Phone'
+              onChange={handleChange}
+              value={inputs.phone}
+              className='p-2 rounded-md bg-slate-800'
+            />
+            <textarea
+              name='bio'
+              placeholder='Bio'
+              onChange={handleChange}
+              value={inputs.bio}
+              className='p-2 rounded-md bg-slate-800'
+            />
+          </div>
+        ) : (
+          <div className='flex flex-col gap-3 text-lg '>
+            <div className='flex flex-row gap-5'>
+              <p className=''>
+                <span className='text-slate-400'>First Name: </span>
+                {`${userData.first_name}`}
+              </p>
+              <p className=''>
+                <span className='text-slate-400'>Last name:</span>{' '}
+                {`${userData.last_name}`}
+              </p>
+            </div>
+            <p className='text-slate-400'>
+              Email: <span className='text-blue'>{userData.email}</span>
+            </p>
+            <p>
+              {' '}
+              <span className='text-slate-400'>Phone:</span>{' '}
+              {userData.phone || 'No phone number provided'}
+            </p>
+            <p>
+              {' '}
+              <span className='text-slate-400'>Bio:</span>{' '}
+              {userData.bio || 'No bio provided'}
+            </p>
+          </div>
+        )}
       </div>
+
       <div className='flex justify-center items-center gap-4 h-14'>
         {isEdit ? (
           <button

@@ -61,7 +61,7 @@ const Register = () => {
         }
         break;
       case 'phone':
-        if (!/^\+?[1-9][0-9]{7,14}$/.test(value)) {
+        if (!/^[0-9]{7,14}$/.test(value)) {
           error = 'Phone number must be between 7-14 digits with a "+" sign.';
         }
         break;
@@ -77,7 +77,7 @@ const Register = () => {
           )
         ) {
           error =
-            'Password must be at least 8 characters and include uppercase, lowercase, a number, and a special character.';
+            'Password must be at least 8 characters and include uppercase, \n lowercase, a number, and a special character.';
         }
         break;
       case 'password2':

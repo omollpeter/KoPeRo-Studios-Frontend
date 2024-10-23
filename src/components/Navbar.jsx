@@ -17,7 +17,6 @@ const Navbar = () => {
 
   const handleLogout = () => {
     logout();
-    setToken(false);
     toast.success('Logged out Successfully');
     navigate('/');
   };
@@ -70,11 +69,11 @@ const Navbar = () => {
               src={currentUser?.picture || profileImage}
               alt='user'
             />
-            <span className='text-light'>{currentUser?.full_name}</span>
+            <span className='text-light'>{currentUser?.username}</span>
             <div className='absolute top-0 right-0 pt-14 text-base font-medium text-light z-20 opacity-0 transform -translate-y-4 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0'>
               <div className='min-w-48 bg-slate-800 rounded flex flex-col gap-4 p-4'>
                 <p
-                  onClick={() => navigate(`/profile/${currentUser?.id}`)}
+                  onClick={() => navigate(`/clients/${currentUser?.id}`)}
                   className='hover:text-blue cursor-pointer'
                 >
                   My profile

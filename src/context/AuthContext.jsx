@@ -13,8 +13,9 @@ export const AuthContextProvider = ({ children }) => {
       `https://mady.tech/api/v1/auth/login/client/`,
       inputs
     );
+    console.log(res.data)
     setCurrentUser(res.data.user);
-    localStorage.setItem('accessToken', res.data.access);
+    localStorage.setItem('accessToken', res.data.tokens.access);
   };
 
   const logout = async (inputs) => {
