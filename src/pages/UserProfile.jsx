@@ -34,8 +34,7 @@ const UserProfile = () => {
       console.log('Image from backend:', res.data.image);
 
       if (res.data.image) {
-        setImagePreview(`https://mady.tech${res.data.image}`);
-        console.log('Image preview:', imagePreview);
+        fetchImage(res.data.image);
       }
     } catch (error) {
       console.error(`Error getting user profile:`, error);
@@ -45,6 +44,23 @@ const UserProfile = () => {
   useEffect(() => {
     fetchUserProfile();
   }, [userId]);
+
+  const fetchImage = async (imagePath) => {
+    const token = localStorage.getItem('accessToken');
+    try {
+      const res = await axios.get(`https://mady.tech${imagePath}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        responseType: 'blob',
+      });
+
+      const imageUrl = URL.createObjectURL(res.data);
+      setImagePreview(imageUrl);
+    } catch (error) {
+      console.error('Error fetching image', error);
+    }
+  };
 
   const [inputs, setInputs] = useState({
     first_name: '',
