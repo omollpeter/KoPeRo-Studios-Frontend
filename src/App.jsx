@@ -14,6 +14,7 @@ import UserAppointments from './pages/userAppointments';
 import Booking from './pages/Booking';
 import Services from './pages/Service';
 import Register from './pages/Register';
+import CrewAppointments from './Admin/CrewAppointments';
 
 const router = createBrowserRouter([
   {
@@ -46,6 +47,7 @@ const router = createBrowserRouter([
       { path: 'login', element: <CrewLogin /> },
       { path: 'profile/:crewId', element: <CrewProfile /> },
       { path: 'dashboard/:crewId', element: <CrewDashboard /> },
+      { path: 'appointments/:crewId', element: <CrewAppointments /> },
     ],
   },
 ]);

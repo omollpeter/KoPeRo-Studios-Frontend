@@ -7,6 +7,7 @@ import profileImage from '../assets/profileImage.png';
 import axios from 'axios';
 import StarRating from '../components/StarRating';
 import { toast } from 'sonner';
+import { MdBookOnline } from 'react-icons/md';
 
 const CrewProfile = () => {
   const { crewId } = useParams();
@@ -151,7 +152,16 @@ const CrewProfile = () => {
           text='Dashboard'
           to={`/crew/dashboard/${crewId}`}
         />
-        <SidebarItem icon={<CgProfile />} text='Profile' active />
+        <SidebarItem
+          icon={<CgProfile />}
+          text='Profile'
+          active
+        />
+        <SidebarItem
+          icon={<MdBookOnline />}
+          text={'My Appointments'}
+          to={`/crew/appointments/${crewId}`}
+        />
       </Sidebar>
       {/*---------User profile ---------*/}
       <div className='ml-10 mt-5'>
