@@ -1,11 +1,13 @@
 import { MoreVertical, ChevronLast, ChevronFirst } from 'lucide-react';
 import { useContext, createContext, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { CrewContext } from '../context/CrewContext';
 
 const SidebarContext = createContext();
 
 export default function Sidebar({ children }) {
   const [expanded, setExpanded] = useState(true);
+  const { currentUser } = useContext(CrewContext);
 
   return (
     <aside className='h-screen flex'>
@@ -35,8 +37,10 @@ export default function Sidebar({ children }) {
             }`}
           >
             <div className='leading-4'>
-              <h4 className='font-semibold'>John Doe</h4>
-              <span className='text-xs text-gray-600'>johndoe@gmail.com</span>
+              <h4 className='font-semibold'>{currentUser?.full_name}</h4>
+              <span className='text-xs text-gray-600'>
+                {currentUser?.email}
+              </span>
             </div>
             <MoreVertical size={20} />
           </div>
