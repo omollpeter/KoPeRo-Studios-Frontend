@@ -1,31 +1,24 @@
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
 import Home from './pages/Home';
 import Crew from './pages/Crew';
-import Login from './pages/Login';
+import CrewLogin from './Admin/CrewLogin';
+import ClientLogin from './pages/ClientLogin';
+import CrewProfile from './Admin/CrewProfile';
+import CrewDashboard from './Admin/CrewDashboard';
+import CrewLayout from './layouts/CrewLayout';
+import ClientLayout from './layouts/ClientLayout';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import UserProfile from './pages/UserProfile';
 import UserAppointments from './pages/userAppointments';
 import Booking from './pages/Booking';
 import Services from './pages/Service';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
 import Register from './pages/Register';
-
-const Layout = () => {
-  return (
-    <>
-      <Navbar />
-      <Outlet />
-      <Footer />
-    </>
-  );
-};
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Layout />,
+    element: <ClientLayout />,
     children: [
       { path: '/', element: <Home /> },
       { path: '/crew', element: <Crew /> },
@@ -44,7 +37,16 @@ const router = createBrowserRouter([
   },
   {
     path: '/login/',
-    element: <Login />,
+    element: <ClientLogin />,
+  },
+  {
+    path: '/crew',
+    element: <CrewLayout />,
+    children: [
+      { path: 'login', element: <CrewLogin /> },
+      { path: 'profile/:crewId', element: <CrewProfile /> },
+      { path: 'dashboard/:crewId', element: <CrewDashboard /> },
+    ],
   },
 ]);
 
