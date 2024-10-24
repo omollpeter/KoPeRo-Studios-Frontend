@@ -21,7 +21,7 @@ const CrewAppointments = () => {
           text='Profile'
           to={`/crew/profile/${crewId}`}
         />
-        <SidebarItem icon={<MdBookOnline />} text={'My Appointments'} active />
+        <SidebarItem icon={<MdBookOnline />} text={'Appointments'} active />
       </Sidebar>
       <div className='ml-10 mt-5'>
         <h1>Appointments</h1>

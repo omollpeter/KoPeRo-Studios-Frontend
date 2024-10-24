@@ -21,7 +21,7 @@ const CrewDashboard = () => {
         />
         <SidebarItem
           icon={<MdBookOnline />}
-          text={'My Appointments'}
+          text={'Appointments'}
           to={`/crew/appointments/${crewId}`}
         />
       </Sidebar>
