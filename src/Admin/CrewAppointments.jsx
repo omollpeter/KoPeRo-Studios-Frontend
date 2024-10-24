@@ -23,7 +23,7 @@ const CrewAppointments = () => {
         />
         <SidebarItem icon={<MdBookOnline />} text={'My Appointments'} active />
       </Sidebar>
-      <div>
+      <div className='ml-10 mt-5'>
         <h1>Appointments</h1>
       </div>
     </div>

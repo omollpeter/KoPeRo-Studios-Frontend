@@ -25,7 +25,7 @@ const CrewDashboard = () => {
           to={`/crew/appointments/${crewId}`}
         />
       </Sidebar>
-      <div>
+      <div className='ml-10 mt-5'>
         <h1>Welcome to the Crew Dashboard</h1>
       </div>
     </div>
