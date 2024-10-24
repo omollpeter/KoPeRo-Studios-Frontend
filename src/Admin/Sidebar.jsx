@@ -2,6 +2,7 @@ import { MoreVertical, ChevronLast, ChevronFirst } from 'lucide-react';
 import { useContext, createContext, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { CrewContext } from '../context/CrewContext';
+import logo from '../assets/camera_side.png';
 
 const SidebarContext = createContext();
 
@@ -12,7 +13,14 @@ export default function Sidebar({ children }) {
   return (
     <aside className='h-screen flex'>
       <nav className='h-full flex flex-col bg-blue bg-opacity-5 border-r border-r-slate-700 shadow-sm'>
-        <div className='p-4 pb-2 flex items-center justify-end'>
+        <div className='p-4 pb-2 flex items-center justify-between'>
+          <img
+            src={logo}
+            className={`overflow-hidden transition-all ${
+              expanded ? 'w-28' : 'w-0'
+            }`}
+            alt=''
+          />
           <button
             onClick={() => setExpanded((curr) => !curr)}
             className='p-1.5 rounded-lg bg-slate-700 hover:bg-slate-800'
