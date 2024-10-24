@@ -5,6 +5,7 @@ import Sidebar, { SidebarItem } from '../Admin/Sidebar';
 import { useNavigate, useParams } from 'react-router-dom';
 import profileImage from '../assets/profileImage.png';
 import axios from 'axios';
+import StarRating from '../components/StarRating';
 import { toast } from 'sonner';
 
 const CrewProfile = () => {
@@ -180,7 +181,7 @@ const CrewProfile = () => {
             </p>
           </div>
           <hr className='bg-slate-400 w-[400px]' />
-
+          <StarRating rating={userData.average_rating} />
           <div className='flex flex-row gap-4 text-light w-[400px]'>
             {isEdit ? (
               <div className='flex flex-col gap-5 w-full'>
