@@ -35,9 +35,9 @@ const CrewLogin = () => {
     console.log(inputs);
 
     try {
-      await login(inputs);
+      const res = await login(inputs);
       toast.success('Logged in Successfully');
-      navigate(`/crew/dashboard/${currentUser?.id}`);
+      navigate(`/crew/dashboard/${res.user.id}`);
     } catch (err) {
       toast.error('Invalid Username or Password');
       setErr('Invalid Username or Password', err);

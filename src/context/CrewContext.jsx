@@ -16,6 +16,8 @@ export const CrewContextProvider = ({ children }) => {
     console.log(res.data);
     setCurrentUser(res.data.user);
     localStorage.setItem('accessToken', res.data.tokens.access);
+    localStorage.setItem('refreshToken', res.data.tokens.refresh);
+    return res.data;
   };
 
   const logout = async (inputs) => {
