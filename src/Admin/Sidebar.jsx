@@ -79,7 +79,7 @@ export function SidebarItem({ icon, text, active, to, alert }) {
           }
         `}
     >
-      <span className='text-xl'>{icon}</span>
+      <span className='text-3xl'>{icon}</span>
       <span
         className={`overflow-hidden transition-all ${
           expanded ? 'w-52 ml-3' : 'w-0'
