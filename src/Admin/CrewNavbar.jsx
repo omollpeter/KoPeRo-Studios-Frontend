@@ -26,13 +26,16 @@ const Navbar = () => {
           crew Dashboard
         </p>
       </div>
-      {currentUser? (<button
-        className='bg-blue text-light text-md px-6 md:px-10 py-2 rounded-full hover:bg-pink transition-all'
-        onClick={() => handleLogout()}
-      >
-        Logout
-      </button>): (<p className='text-blue font-bold'>WELCOME!</p>)}
-      
+      {currentUser ? (
+        <button
+          className='bg-blue text-light text-md px-6 md:px-10 py-2 rounded-full hover:bg-pink transition-all'
+          onClick={() => handleLogout()}
+        >
+          Logout
+        </button>
+      ) : (
+        <p className='text-blue font-bold'>WELCOME!</p>
+      )}
     </div>
   );
 };
