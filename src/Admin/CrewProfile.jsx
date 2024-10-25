@@ -139,11 +139,6 @@ const CrewProfile = () => {
       }
     }
   };
-
-  if (!userData) {
-    return <div>Loading...</div>;
-  }
-
   return (
     <div className='flex'>
       <Sidebar>
@@ -152,11 +147,7 @@ const CrewProfile = () => {
           text='Dashboard'
           to={`/crew/dashboard/${crewId}`}
         />
-        <SidebarItem
-          icon={<CgProfile />}
-          text='Profile'
-          active
-        />
+        <SidebarItem icon={<CgProfile />} text='Profile' active />
         <SidebarItem
           icon={<MdBookOnline />}
           text='Appointments'
@@ -165,121 +156,127 @@ const CrewProfile = () => {
       </Sidebar>
       {/*---------User profile ---------*/}
       <div className='ml-10 mt-5'>
-        <div className='flex flex-col gap-4 justify-center items-center md:items-start '>
-          <img
-            src={imagePreview}
-            alt='Profile'
-            className='cursor-pointer w-44 h-44 rounded-full object-cover shadow-lg shadow-blue hover:-translate-y-2 hover:shadow-sm duration-300'
-            onClick={() => {
-              fileInputRef.current.click();
-              setIsEdit(true);
-            }}
-          />
-          <input
-            type='file'
-            accept='image/*'
-            ref={fileInputRef}
-            onChange={handleFileChange}
-            style={{ display: 'none' }}
-          />
-          <div className='flex justify-center items-center gap-5'>
-            <p className='text-3xl'>{userData.username}</p>
-            <span>•</span>
-            <p className='text-2xl  text-slate-400'>
-              {userData.category.charAt(0).toUpperCase() +
-                userData.category.slice(1)}
-            </p>
+        {!userData ? (
+          <div className='flex justify-center items-center h-full'>
+            <p>Loading...</p>
           </div>
-          <hr className='bg-slate-400 w-[400px]' />
-          <StarRating rating={userData.average_rating} />
-          <div className='flex flex-row gap-4 text-light w-[400px]'>
-            {isEdit ? (
-              <div className='flex flex-col gap-5 w-full'>
-                <input
-                  type='text'
-                  name='first_name'
-                  placeholder='First name'
-                  onChange={handleChange}
-                  value={inputs.first_name}
-                  className='p-2 rounded-md bg-slate-800'
-                />
-                <input
-                  type='text'
-                  name='last_name'
-                  placeholder='Last name'
-                  onChange={handleChange}
-                  value={inputs.last_name}
-                  className='p-2 rounded-md bg-slate-800'
-                />
-                <input
-                  type='text'
-                  name='phone'
-                  placeholder='Phone'
-                  onChange={handleChange}
-                  value={inputs.phone}
-                  className='p-2 rounded-md bg-slate-800'
-                />
-                <textarea
-                  name='bio'
-                  placeholder='Bio'
-                  onChange={handleChange}
-                  value={inputs.bio}
-                  className='p-2 rounded-md bg-slate-800'
-                />
-              </div>
-            ) : (
-              <div className='flex flex-col gap-3 text-lg '>
-                <div className='flex flex-row gap-5'>
-                  <p className=''>
-                    <span className='text-slate-400'>First Name: </span>
-                    {`${userData.first_name}`}
+        ) : (
+          <div className='flex flex-col gap-4 justify-center items-center md:items-start '>
+            <img
+              src={imagePreview}
+              alt='Profile'
+              className='cursor-pointer w-44 h-44 rounded-full object-cover shadow-lg shadow-blue hover:-translate-y-2 hover:shadow-sm duration-300'
+              onClick={() => {
+                fileInputRef.current.click();
+                setIsEdit(true);
+              }}
+            />
+            <input
+              type='file'
+              accept='image/*'
+              ref={fileInputRef}
+              onChange={handleFileChange}
+              style={{ display: 'none' }}
+            />
+            <div className='flex justify-center items-center gap-5'>
+              <p className='text-3xl'>{userData.username}</p>
+              <span>•</span>
+              <p className='text-2xl  text-slate-400'>
+                {userData.category.charAt(0).toUpperCase() +
+                  userData.category.slice(1)}
+              </p>
+            </div>
+            <hr className='bg-slate-400 w-[400px]' />
+            <StarRating rating={userData.average_rating} />
+            <div className='flex flex-row gap-4 text-light w-[400px]'>
+              {isEdit ? (
+                <div className='flex flex-col gap-5 w-full'>
+                  <input
+                    type='text'
+                    name='first_name'
+                    placeholder='First name'
+                    onChange={handleChange}
+                    value={inputs.first_name}
+                    className='p-2 rounded-md bg-slate-800'
+                  />
+                  <input
+                    type='text'
+                    name='last_name'
+                    placeholder='Last name'
+                    onChange={handleChange}
+                    value={inputs.last_name}
+                    className='p-2 rounded-md bg-slate-800'
+                  />
+                  <input
+                    type='text'
+                    name='phone'
+                    placeholder='Phone'
+                    onChange={handleChange}
+                    value={inputs.phone}
+                    className='p-2 rounded-md bg-slate-800'
+                  />
+                  <textarea
+                    name='bio'
+                    placeholder='Bio'
+                    onChange={handleChange}
+                    value={inputs.bio}
+                    className='p-2 rounded-md bg-slate-800'
+                  />
+                </div>
+              ) : (
+                <div className='flex flex-col gap-3 text-lg '>
+                  <div className='flex flex-row gap-5'>
+                    <p className=''>
+                      <span className='text-slate-400'>First Name: </span>
+                      {`${userData.first_name}`}
+                    </p>
+                    <p className=''>
+                      <span className='text-slate-400'>Last name:</span>{' '}
+                      {`${userData.last_name}`}
+                    </p>
+                  </div>
+                  <p className='text-slate-400'>
+                    Email: <span className='text-blue'>{userData.email}</span>
                   </p>
-                  <p className=''>
-                    <span className='text-slate-400'>Last name:</span>{' '}
-                    {`${userData.last_name}`}
+                  <p>
+                    {' '}
+                    <span className='text-slate-400'>Phone:</span>{' '}
+                    {userData.phone || 'No phone number provided'}
+                  </p>
+                  <p>
+                    {' '}
+                    <span className='text-slate-400'>Bio:</span>{' '}
+                    {userData.bio || 'No bio provided'}
                   </p>
                 </div>
-                <p className='text-slate-400'>
-                  Email: <span className='text-blue'>{userData.email}</span>
-                </p>
-                <p>
-                  {' '}
-                  <span className='text-slate-400'>Phone:</span>{' '}
-                  {userData.phone || 'No phone number provided'}
-                </p>
-                <p>
-                  {' '}
-                  <span className='text-slate-400'>Bio:</span>{' '}
-                  {userData.bio || 'No bio provided'}
-                </p>
-              </div>
-            )}
-          </div>
+              )}
+            </div>
 
-          <div className='flex justify-center items-center gap-4 h-14'>
-            {isEdit ? (
+            <div className='flex justify-center items-center gap-4 h-14'>
+              {isEdit ? (
+                <button
+                  className='border rounded-full p-3 border-blue hover:bg-blue'
+                  onClick={handleSubmit}
+                >
+                  Save Information
+                </button>
+              ) : (
+                <button
+                  className='border rounded-full p-3 border-blue hover:bg-blue'
+                  onClick={() => setIsEdit(true)}
+                >
+                  Edit Profile
+                </button>
+              )}
               <button
-                className='border rounded-full p-3 border-blue hover:bg-blue'
-                onClick={handleSubmit}
+                onClick={() => navigate('/user-appointments')}
+                className='bg-blue text-light text-sm md:text-md font-semibold px-6 py-3 rounded-lg my-6 hover:scale-105 transition-all'
               >
-                Save Information
+                My Appointments
               </button>
-            ) : (
-              <button
-                className='border rounded-full p-3 border-blue hover:bg-blue'
-                onClick={() => setIsEdit(true)}
-              >
-                Edit Profile
-              </button>
-            )}
-            <button
-              onClick={() => navigate('/user-appointments')}
-              className='bg-blue text-light text-sm md:text-md font-semibold px-6 py-3 rounded-lg my-6 hover:scale-105 transition-all'
-            >
-              My Appointments
-            </button>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
