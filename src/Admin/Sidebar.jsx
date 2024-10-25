@@ -12,7 +12,7 @@ export default function Sidebar({ children }) {
 
   return (
     <aside className='h-screen flex'>
-      <nav className='h-full flex flex-col bg-blue bg-opacity-5 border-r border-r-slate-700 shadow-sm'>
+      <nav className='h-full flex flex-col bg-blue bg-opacity-5 border-r border-r-slate-800 shadow-sm'>
         <div className='p-4 pb-2 flex items-center justify-between'>
           <img
             src={logo}
