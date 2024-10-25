@@ -3,6 +3,8 @@ import { crewData } from '../constants/Crews_constants';
 import StarRating from '../components/StarRating';
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../context/AuthContext';
+import axios from 'axios';
+import { toast } from 'sonner';
 // import { InlineWidget } from 'react-calendly';
 
 const Booking = () => {
@@ -60,8 +62,9 @@ const Booking = () => {
         const slotTime = formattedTime;
 
         const isAvailable =
-          crewInfo.sesssionsBooked[slotDate] &&
-          crewInfo.sesssionsBooked[slotDate].includes(slotTime)
+          crewInfo.sessionsBooked &&
+          crewInfo.sessionsBooked[slotDate] &&
+          crewInfo.sessionsBooked[slotDate].includes(slotTime)
             ? false
             : true;
 
@@ -84,6 +87,7 @@ const Booking = () => {
       toast.error('Log in to book an appointment');
       navigate('/login');
     }
+    const token = localStorage.getItem('accessToken');
 
     try {
       const date = crewSlots[slotIndex][0].dateTime;
@@ -94,8 +98,17 @@ const Booking = () => {
       const slotDate = day + '_' + month + '_' + year;
 
       const { data } = await axios.post(
-        'https://mady.tech/api/v1/auth/booking/',
-        { crewId, slotDate, slotTime }
+        'https://mady.tech/api/v1/booking/',
+        {
+          crewId,
+          slotDate,
+          slotTime,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
 
       if (data.success) {
@@ -103,6 +116,7 @@ const Booking = () => {
         navigate('/user-appointments');
       } else {
         toast.error('Failed to book appointment');
+        console.log(data);
       }
     } catch (error) {
       console.log(error);
