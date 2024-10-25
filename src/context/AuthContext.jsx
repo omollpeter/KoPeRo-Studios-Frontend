@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from 'react';
 import axios from 'axios';
+import { toast } from 'sonner';
 
 export const AuthContext = createContext();
 
@@ -13,15 +14,32 @@ export const AuthContextProvider = ({ children }) => {
       `https://mady.tech/api/v1/auth/login/client/`,
       inputs
     );
-    console.log(res.data)
+    console.log(res.data);
     setCurrentUser(res.data.user);
     localStorage.setItem('accessToken', res.data.tokens.access);
+    localStorage.setItem('refreshToken', res.data.tokens.refresh);
   };
 
   const logout = async (inputs) => {
-    await axios.post(`https://mady.tech/api/v1/auth/logout/`);
-    setCurrentUser(null);
-    localStorage.removeItem('accessToken');
+    const accessToken = localStorage.getItem('accessToken');
+    const refreshToken = localStorage.getItem('refreshToken');
+    try {
+      await axios.post(
+        `https://mady.tech/api/v1/auth/logout/`,
+        { refresh: refreshToken },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+      setCurrentUser(null);
+      localStorage.removeItem('accessToken');
+      localStorage.removeItem('refreshToken');
+    } catch (error) {
+      toast.error('Error logging out');
+      console.error('Error logging out:', error);
+    }
   };
 
   useEffect(() => {

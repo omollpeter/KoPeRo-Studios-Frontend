@@ -19,9 +19,25 @@ export const CrewContextProvider = ({ children }) => {
   };
 
   const logout = async (inputs) => {
-    await axios.post(`https://mady.tech/api/v1/auth/logout/`);
-    setCurrentUser(null);
-    localStorage.removeItem('accessToken');
+    const accessToken = localStorage.getItem('accessToken');
+    const refreshToken = localStorage.getItem('refreshToken');
+    try {
+      await axios.post(
+        `https://mady.tech/api/v1/auth/logout/`,
+        { refresh: refreshToken },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+      setCurrentUser(null);
+      localStorage.removeItem('accessToken');
+      localStorage.removeItem('refreshToken');
+    } catch (error) {
+      toast.error('Error logging out');
+      console.error('Error logging out:', error);
+    }
   };
 
   useEffect(() => {
