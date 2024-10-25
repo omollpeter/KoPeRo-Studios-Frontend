@@ -39,7 +39,7 @@ const Login = () => {
       toast.success('Logged in Successfully');
       navigate('/');
     } catch (err) {
-      setErr('Invalid Username or Password', err);
+      setErr('Invalid Email or Password', err);
     }
   };
 
