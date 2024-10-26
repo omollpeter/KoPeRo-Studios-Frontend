@@ -15,6 +15,7 @@ import Booking from './pages/Booking';
 import Services from './pages/Service';
 import Register from './pages/Register';
 import CrewAppointments from './Admin/CrewAppointments';
+import PasswordReset from './pages/PasswordReset';
 
 const router = createBrowserRouter([
   {
@@ -27,9 +28,10 @@ const router = createBrowserRouter([
       { path: '/about', element: <About /> },
       { path: '/contact', element: <Contact /> },
       { path: '/services', element: <Services /> },
+      { path: '/services/:crewId', element: <Services /> },
       { path: '/clients/:userId', element: <UserProfile /> },
       { path: '/user-appointments', element: <UserAppointments /> },
-      { path: '/booking/:crewId', element: <Booking /> },
+      { path: '/booking/:crewId/:serviceId', element: <Booking /> },
     ],
   },
   {
@@ -39,6 +41,10 @@ const router = createBrowserRouter([
   {
     path: '/login/',
     element: <ClientLogin />,
+  },
+  {
+    path: '/password-reset/:clientId',
+    element: <PasswordReset />,
   },
   {
     path: '/crew',

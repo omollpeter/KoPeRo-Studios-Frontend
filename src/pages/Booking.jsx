@@ -1,5 +1,4 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import { crewData } from '../constants/Crews_constants';
 import StarRating from '../components/StarRating';
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../context/AuthContext';
@@ -8,19 +7,45 @@ import { toast } from 'sonner';
 // import { InlineWidget } from 'react-calendly';
 
 const Booking = () => {
-  const { crewId } = useParams();
-  const weekDays = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+  const { crewId, serviceId } = useParams();
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    console.log(crewId);
+    if (!crewId) {
+      toast.error('Please select a crew member to book an appointment.');
+      navigate('/crew');
+    }
+  }, [crewId, navigate]);
+
+  const weekDays = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
   const [crewInfo, setCrewInfo] = useState({});
+  const [crewData, setCrewData] = useState([]);
+  const [serviceInfo, setServiceInfo] = useState({});
   const [crewSlots, setCrewSlots] = useState([]);
   const [slotIndex, setSlotIndex] = useState(0);
   const [slotTime, setSlotTime] = useState('');
-  const navigate = useNavigate();
+
   const { currentUser } = useContext(AuthContext);
 
   const fetchCrewInfo = async () => {
-    const crewInfoData = crewData.find((crew) => crew.id === crewId);
-    setCrewInfo(crewInfoData);
+    try {
+      const res = await axios.get('https://mady.tech/api/v1/auth/crews/');
+      setCrewData(res.data.results);
+      const crewInfoData = res.data.results.find((crew) => crew.id === crewId);
+      setCrewInfo(crewInfoData);
+    } catch (err) {
+      console.error('Error fetching crew Data: ', err);
+    }
+  };
+
+  const fetchServiceInfo = async () => {
+    try {
+      const res = await axios.get('https://mady.tech/api/v1/services/');
+      setServiceInfo(res.data.results);
+    } catch (err) {
+      console.error('Error fetching crew Data: ', err);
+    }
   };
 
   const getAvailableSlots = async () => {
@@ -52,6 +77,7 @@ const Booking = () => {
         let formattedTime = currentDate.toLocaleTimeString([], {
           hour: '2-digit',
           minute: '2-digit',
+          hourCycle: 'h23',
         });
 
         let day = currentDate.getDate();
@@ -75,7 +101,7 @@ const Booking = () => {
           });
         }
 
-        currentDate.setMinutes(currentDate.getMinutes() + 45);
+        currentDate.setMinutes(currentDate.getMinutes() + 60);
       }
 
       setCrewSlots((prev) => [...prev, timeSlots]);
@@ -86,23 +112,31 @@ const Booking = () => {
     if (!currentUser) {
       toast.error('Log in to book an appointment');
       navigate('/login');
+      return;
     }
     const token = localStorage.getItem('accessToken');
+    const clientId = currentUser.id;
 
     try {
       const date = crewSlots[slotIndex][0].dateTime;
-      let day = date.getDate();
-      let month = date.getMonth() + 1;
-      let year = date.getFullYear();
+      // let day = date.getDate();
+      // let month = date.getMonth() + 1;
+      // let year = date.getFullYear();
+      // const slotDate = day + '_' + month + '_' + year;
 
-      const slotDate = day + '_' + month + '_' + year;
+      const finalDate = date.toISOString().split('T')[0];
+      // const finalTime = date.toTimeString().split(' ')[0].slice(0, 5);
+      const finalTime = slotTime;
+      console.log(finalTime);
 
-      const { data } = await axios.post(
+      const res = await axios.post(
         'https://mady.tech/api/v1/booking/',
         {
-          crewId,
-          slotDate,
-          slotTime,
+          crew: crewId,
+          client: clientId,
+          service: serviceId,
+          date: finalDate,
+          time: finalTime,
         },
         {
           headers: {
@@ -110,14 +144,9 @@ const Booking = () => {
           },
         }
       );
-
-      if (data.success) {
-        toast.success('Appointment booked successfully');
-        navigate('/user-appointments');
-      } else {
-        toast.error('Failed to book appointment');
-        console.log(data);
-      }
+      console.log(res.data);
+      toast.success('Appointment booked successfully');
+      navigate('/user-appointments');
     } catch (error) {
       console.log(error);
       toast.error('Failed to book appointment');
@@ -126,7 +155,11 @@ const Booking = () => {
 
   useEffect(() => {
     fetchCrewInfo();
-  }, [crewData, crewId]);
+  }, [crewId]);
+
+  useContext(() => {
+    fetchServiceInfo();
+  }, [serviceId]);
 
   useEffect(() => {
     getAvailableSlots();
@@ -136,16 +169,20 @@ const Booking = () => {
     console.log(crewSlots);
   }, [crewSlots]);
 
+  if (!crewInfo) {
+    return <div>Loading</div>; // Or a loading indicator
+  }
+
   return (
     <div>
       <div className='flex flex-col md:flex-row justify-center md:justify-start items-center gap-4'>
         <img
           src={crewInfo.image}
-          alt={crewInfo.name}
+          alt={crewInfo.full_name}
           className='rounded-full w-52 hover:-translate-y-1 transition-all duration-300'
         />
         <div className='flex flex-col items-center md:items-start justify-center gap-2 md:gap-1'>
-          <h1 className='text-2xl font-bold'>{crewInfo.name}</h1>
+          <h1 className='text-2xl font-bold'>{crewInfo.full_name}</h1>
           <p className='text-slate-400 text-xl'>{crewInfo.cat}</p>
           <StarRating rating={crewInfo.stars} />
           {crewInfo.cat === 'Photographer' ? (
@@ -211,15 +248,15 @@ const Booking = () => {
 
       {/*-------- calendly option -------*/}
       {/* <InlineWidget
-        url='https://calendly.com/iganzaroy55/appointment'
-        pageSettings={{
-          backgroundColor: '#94a3b8',
-          hideEventTypeDetails: false,
-          hideLandingPageDetails: false,
-          primaryColor: '#2563eb',
-          textColor: '#ffff',
-        }}
-      /> */}
+          url='https://calendly.com/iganzaroy55/appointment'
+          pageSettings={{
+            backgroundColor: '#94a3b8',
+            hideEventTypeDetails: false,
+            hideLandingPageDetails: false,
+            primaryColor: '#2563eb',
+            textColor: '#ffff',
+          }}
+        /> */}
       <div className='flex flex-col gap-5 my-10'>
         <div className='flex flex-col gap-3 justify-center items-center'>
           <h1 className='relative font-bold before:absolute before:rounded-md before:-bottom-[0.1px] before:left-0 before:w-full before:h-[13px] before:bg-blue before:-z-20 hover:before:bg-pink transition duration-300 text-white text-4xl'>
@@ -241,10 +278,12 @@ const Booking = () => {
               >
                 <img
                   src={crew.image}
-                  alt={crew.name}
+                  alt={crew.full_name}
                   className='w-32 rounded-full relative'
                 />
-                <h3 className='text-light mt-4'>{crew.name.toUpperCase()}</h3>
+                <h3 className='text-light mt-4'>
+                  {crew.full_name.toUpperCase()}
+                </h3>
                 <p className='text-slate-400 text-sm'>{crew.cat}</p>
                 <StarRating rating={crew.stars} />
               </div>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import { ServicesPageData } from '../constants/constants';
 import { FaHandshakeSimple } from 'react-icons/fa6';
@@ -12,10 +12,26 @@ import partner_5 from '../assets/partner_5.png';
 import partner_6 from '../assets/partner_6.png';
 import partner_7 from '../assets/partner_7.png';
 import partner_8 from '../assets/partner_8.png';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { toast } from 'sonner';
 
 const Services = () => {
   const navigate = useNavigate();
+  const { crewId } = useParams();
+  const toastShownRef = useRef(false);
+
+  useEffect(() => {
+    if (!crewId && !toastShownRef.current) {
+      toast.info(
+        'Kindly select a crew member to make a booking. You will be redirected shortly.'
+      );
+      toastShownRef.current = true;
+
+      setTimeout(() => {
+        navigate('/crew');
+      }, 3000);
+    }
+  }, [crewId, navigate]);
 
   // State to store the selected service data
   const [services, setServices] = useState([]);
@@ -46,6 +62,7 @@ const Services = () => {
     e.preventDefault();
 
     setSelectedService({
+      id: service.id,
       Title: service.name,
       Tag: service.tag,
       Description: service.description,
@@ -114,7 +131,7 @@ const Services = () => {
               <button
                 className='bg-blue text-white py-2 px-4 rounded w-[150px] group-hover:bg-slate-800'
                 onClick={() => {
-                  navigate('/crew');
+                  navigate(`/booking/${crewId}/${selectedService.id}`);
                   scrollTo(0, 0);
                 }}
               >

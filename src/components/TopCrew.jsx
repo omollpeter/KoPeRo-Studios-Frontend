@@ -2,7 +2,6 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { crewData } from '../constants/Crews_constants';
 import StarRating from './StarRating';
-import { FaStar } from 'react-icons/fa';
 
 const TopCrew = () => {
   const navigate = useNavigate();

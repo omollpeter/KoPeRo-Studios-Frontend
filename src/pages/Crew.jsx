@@ -1,19 +1,35 @@
 // import { useParams } from 'react-router-dom';
 import { MdPeopleAlt } from 'react-icons/md';
-import { crewData } from '../constants/Crews_constants';
+// import { crewData } from '../constants/Crews_constants';
 import StarRating from '../components/StarRating';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
+import profile from '../assets/profileImage.png';
+import axios from 'axios';
 
 const Crews = () => {
   const navigate = useNavigate();
+  const { currentUser } = useContext(AuthContext);
+  const [crewData, setCrewData] = useState([]);
   const [filterCrew, setFilteredCrew] = useState(crewData);
   const [isActive, setIsActive] = useState(false);
-  const { currentUser } = useContext(AuthContext);
+
+  useEffect(() => {
+    const fetchCrewData = async () => {
+      try {
+        const res = await axios.get('https://mady.tech/api/v1/auth/crews/');
+        setCrewData(res.data.results);
+        setFilteredCrew(res.data.results);
+      } catch (err) {
+        console.error('Error fetching crew Data: ', err);
+      }
+    };
+    fetchCrewData();
+  });
 
   const applyFilter = (category) => {
-    setFilteredCrew(crewData.filter((crew) => crew.cat === category));
+    setFilteredCrew(crewData.filter((crew) => crew.category === category));
     setIsActive(category);
   };
 
@@ -53,18 +69,20 @@ const Crews = () => {
             <div
               onClick={() => {
                 currentUser
-                  ? navigate(`/booking/${crew.id}`)
+                  ? navigate(`/services/${crew.id}`)
                   : navigate('/login');
               }}
               key={crew.image}
               className='flex flex-col justify-center items-center hover:-translate-y-5 transition-all duration-300'
             >
               <img
-                src={crew.image}
-                alt={crew.name}
+                src={crew.image || profile}
+                alt={crew.full_name}
                 className='w-28 md:w-40 rounded-full relative'
               />
-              <h3 className='text-light mt-4'>{crew.name.toUpperCase()}</h3>
+              <h3 className='text-light mt-4'>
+                {crew.full_name.toUpperCase()}
+              </h3>
               <p className='text-slate-400 text-sm'>{crew.cat}</p>
               <StarRating rating={crew.stars} />
             </div>
