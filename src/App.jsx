@@ -10,7 +10,7 @@ import ClientLayout from './layouts/ClientLayout';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import UserProfile from './pages/UserProfile';
-import UserAppointments from './pages/userAppointments';
+import UserAppointments from './pages/UserAppointments';
 import Booking from './pages/Booking';
 import Services from './pages/Service';
 import Register from './pages/Register';
@@ -42,10 +42,7 @@ const router = createBrowserRouter([
     path: '/login/',
     element: <ClientLogin />,
   },
-  {
-    path: '/password-reset/:clientId',
-    element: <PasswordReset />,
-  },
+  { path: '/password-reset', element: <PasswordReset /> },
   {
     path: '/crew',
     element: <CrewLayout />,

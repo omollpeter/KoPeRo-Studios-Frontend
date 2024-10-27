@@ -86,7 +86,7 @@ const Login = () => {
             <input
               required
               type='text'
-              placeholder='Username'
+              placeholder='Email'
               name='email'
               onChange={handleChange}
               className='p-2 rounded-md bg-slate-50 text-dark w-[300px] md:w-full'

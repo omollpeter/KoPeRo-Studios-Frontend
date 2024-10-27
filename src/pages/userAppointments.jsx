@@ -17,7 +17,7 @@ const UserAppointments = () => {
         },
       });
       setBookingInfo(res.data.results);
-      console.log()
+      console.log();
     } catch (err) {
       console.error('Error fetching booking data: ', err);
     }
@@ -65,17 +65,25 @@ const UserAppointments = () => {
                   />
                 </div>
                 <div className='flex-1 text-base text-slate-400'>
-                  <p className='text-light font-semibold text-lg'>{crew.full_name}</p>
+                  <p className='text-light font-semibold text-lg'>
+                    {crew.full_name}
+                  </p>
                   <p>{crew.category}</p>
                 </div>
               </div>
 
               {/* Display each booking as a separate appointment */}
               {crewBookings.map((booking, bookingIndex) => (
-                <div key={bookingIndex} className='py-3 flex flex-col md:flex-row gap-9 '>
+                <div
+                  key={bookingIndex}
+                  className='py-3 flex flex-col md:flex-row gap-9 '
+                >
                   <div>
                     <p className='text-light font-medium text-lg'>
-                      Service: <span className='text-slate-400'>{booking.service_name}</span> 
+                      Service:{' '}
+                      <span className='text-slate-400'>
+                        {booking.service_name}
+                      </span>
                     </p>
                     <p className='text-sm md:text-base'>
                       <span className='font-medium'>Date & Time: </span>
