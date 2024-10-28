@@ -115,13 +115,12 @@ const Login = () => {
           </form>
         </div>
         <div className='flex flex-col gap-4 justify-center items-center'>
-          <a
-            href=''
+          <p
             onClick={() => navigate('/password-reset')}
-            className='hover:underline hover:text-blue'
+            className='hover:underline hover:text-blue cursor-pointer'
           >
             Forgot password?
-          </a>
+          </p>
           <button
             onClick={handleSubmit}
             className='bg-blue p-3 w-[140px] max-[768px]:w-[120px] rounded-md transition-all duration-300 hover:scale-105'

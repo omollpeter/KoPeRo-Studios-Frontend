@@ -17,6 +17,7 @@ import Register from './pages/Register';
 import CrewAppointments from './Admin/CrewAppointments';
 import PasswordReset from './pages/PasswordReset';
 import PasswordConfirm from './pages/PasswordConfirm';
+import CrewPasswordReset from './Admin/CrewPasswordReset';
 
 const router = createBrowserRouter([
   {
@@ -53,6 +54,7 @@ const router = createBrowserRouter([
       { path: 'profile/:crewId', element: <CrewProfile /> },
       { path: 'dashboard/:crewId', element: <CrewDashboard /> },
       { path: 'appointments/:crewId', element: <CrewAppointments /> },
+      { path: 'crew-password-reset', element: <CrewPasswordReset /> },
     ],
   },
 ]);
