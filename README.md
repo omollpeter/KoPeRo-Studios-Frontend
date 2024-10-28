@@ -6,26 +6,9 @@ whenever and however you need it in just few steps.</h2>
     This is a full-stack booking platform built using React (frontend) and Django (backend), enabling users to easily book services with experienced photographers and videographers. The platform offers a wide range of services and allows clients to connect directly with professionals in a streamlined and user-friendly manner.
   </p>
   <img src="https://github.com/omollpeter/KoPeRo-Studios-Frontend/blob/main/src/assets/cover-photo.png"style="border-radius: 10px; box-shadow: 0 5px 20px rgba(43, 0, 56, 0.559);"/>
-  [![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
-
 </div>
 
-<!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
 <a id="readme-top"></a>
-
-<!-- PROJECT LOGO -->
-<br />
-<div align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
-  </a>
-
-  <h3 align="center">Best-README-Template</h3>
 
   <p align="center">
     An awesome README template to jumpstart your projects!
@@ -72,47 +55,56 @@ whenever and however you need it in just few steps.</h2>
 
 
 <!-- ABOUT THE PROJECT -->
-## About The Project
-
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
-
-There are many great README templates available on GitHub; however, I didn't find one that really suited my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.
-
-Here's why:
-* Your time should be focused on creating something amazing. A project that solves a problem and helps others
-* You shouldn't be doing the same tasks over and over like creating a README from scratch
-* You should implement DRY principles to the rest of your life :smile:
-
-Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have contributed to expanding this template!
-
-Use the `BLANK_README.md` to get started.
+## Features of The Project
+- **User and Crew Profiles:** Users and crew members have distinct profiles, each with tailored navigation and features.
+- **Service Selection and Booking:** Clients can view available services and book appointments with professionals, filtering by date and availability.
+- **Role-Based Navigation:** Custom dashboards and navigation bars for crew and users.
+- **Authentication:** Users and crew members can log in and register with unique role-based access, using token-based authentication.
+- **Appointment Management:** Both clients and crew members can manage appointments with status tracking, such as booked or completed.
+- **Profile and Image Upload:** Users can update profile pictures directly in the PUT request.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
-### Built With
+### Project Structure
+The project is organized into two main directories:
 
-This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
-
-* [![Next][Next.js]][Next-url]
-* [![React][React.js]][React-url]
-* [![Vue][Vue.js]][Vue-url]
-* [![Angular][Angular.io]][Angular-url]
-* [![Svelte][Svelte.dev]][Svelte-url]
-* [![Laravel][Laravel.com]][Laravel-url]
-* [![Bootstrap][Bootstrap.com]][Bootstrap-url]
-* [![JQuery][JQuery.com]][JQuery-url]
+[![React][React.js]][React-url] 
+- **Frontend:** Built with React, using Vite as the bundler.
+- **Backend:** Developed with Django, handling API endpoints, authentication, and data management for bookings and profiles. 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
 
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+### Installation and Setup
+Ensure you have Node.js and npm installed for frontend setup, and Python for backend setup. Clone both repositories for a complete setup.
+
+#### 1. Clone the Repositories
+Clone this repository and the backend server repository.
+```sh
+git clone <frontend-repo-url>
+git clone <backend-repo-url>
+```
+
+#### 2. Frontend Setup
+1. Navigate to the frontend directory.
+   ```sh
+   cd KoPeRo-Studios-Frontend
+   ```
+2, Install Dependancies
+```sh
+npm install
+```
+3. Run the development server.
+```sh
+   npm run dev
+```
+
+#### 3. Backend Setup
+For backend setup and API details, please refer to the backend server repository link provided here: <backend-repo-url>. Follow the instructions in the backend repository README for database migrations, environment configurations, and server startup.
 
 ### Prerequisites
 
