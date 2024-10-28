@@ -70,6 +70,7 @@ const Services = () => {
       image: service.image,
       price: service.rate_per_hour,
     });
+    console.log(selectedService);
     setIsActive(service.title);
   };
 
