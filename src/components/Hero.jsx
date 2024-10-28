@@ -1,8 +1,23 @@
 import { useNavigate } from 'react-router-dom';
 import camera_1 from '../assets/camera_1.svg';
+import { AuthContext } from '../context/AuthContext';
+import { useContext } from 'react';
+import { toast } from 'sonner';
 
 const Hero = () => {
   const navigate = useNavigate();
+  const { currentUser } = useContext(AuthContext);
+
+  const handleClick = () => {
+    console.log(currentUser);
+    if (currentUser) {
+      navigate('/crew');
+      toast.info('Select a Crew Member to Book a Session');
+    } else {
+      toast.error('Please Login to Book a Session');
+      navigate('/login');
+    }
+  };
 
   return (
     <div className='flex flex-col md:flex-row flex-wrap px-6 md:px-10 lg:px-20 mb-10'>
@@ -20,8 +35,8 @@ const Hero = () => {
         </p>
         <div className='flex gap-5 justify-center'>
           <a
-            onClick={() => navigate('/crew')}
-            className='bg-blue px-5 md:px-8  py-3 rounded-md text-sm m-auto md:m-0 hover:scale-105 transition-all duration-300'
+            onClick={handleClick}
+            className='bg-blue px-5 md:px-8 cursor-pointer  py-3 rounded-md text-sm m-auto md:m-0 hover:scale-105 transition-all duration-300'
           >
             Book Session
           </a>

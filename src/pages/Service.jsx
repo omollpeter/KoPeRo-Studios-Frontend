@@ -1,9 +1,10 @@
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import { ServicesPageData } from '../constants/constants';
 import { FaHandshakeSimple } from 'react-icons/fa6';
 import { IoIosArrowForward } from 'react-icons/io';
 import photographer_1 from '../assets/photographer_1.jpg';
+import { AuthContext } from '../context/AuthContext';
 import partner_1 from '../assets/partner_1.png';
 import partner_2 from '../assets/partner_2.png';
 import partner_3 from '../assets/partner_3.png';
@@ -19,19 +20,8 @@ const Services = () => {
   const navigate = useNavigate();
   const { crewId } = useParams();
   const toastShownRef = useRef(false);
+  const currentUser = useContext(AuthContext);
 
-  useEffect(() => {
-    if (!crewId && !toastShownRef.current) {
-      toast.info(
-        'Kindly select a crew member to make a booking. You will be redirected shortly.'
-      );
-      toastShownRef.current = true;
-
-      setTimeout(() => {
-        navigate('/crew');
-      }, 3000);
-    }
-  }, [crewId, navigate]);
 
   // State to store the selected service data
   const [services, setServices] = useState([]);
