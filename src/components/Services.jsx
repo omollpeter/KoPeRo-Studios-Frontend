@@ -43,7 +43,7 @@ const Services = () => {
             prevEl: '.swiper-button-prev',
           }}
           modules={[FreeMode, Pagination, Navigation]}
-          className='max-w-[90%] lg:w-full py-8 border'
+          className='max-w-[90%] lg:w-full py-8'
           id='services'
         >
           {servicesData.map((item) => (
