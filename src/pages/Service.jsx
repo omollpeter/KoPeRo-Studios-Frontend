@@ -20,9 +20,8 @@ const Services = () => {
   const navigate = useNavigate();
   const { crewId } = useParams();
   const toastShownRef = useRef(false);
-  const currentUser = useContext(AuthContext);
-
-
+  const { currentUser } = useContext(AuthContext);
+  const [isActive, setIsActive] = useState(false);
   // State to store the selected service data
   const [services, setServices] = useState([]);
   const [selectedService, setSelectedService] = useState({
@@ -47,8 +46,6 @@ const Services = () => {
     fetchData();
   }, []);
 
-  const [isActive, setIsActive] = useState(false);
-
   const handleClick = (service, e) => {
     e.preventDefault();
 
@@ -62,6 +59,21 @@ const Services = () => {
     });
     console.log(selectedService);
     setIsActive(service.title);
+  };
+
+  const handleClickBook = () => {
+    if (currentUser) {
+      if (!crewId) {
+        toast.error('Please select a crew member to book this service.');
+        navigate('/crew');
+      } else {
+        navigate(`/booking/${crewId}/${selectedService.id}`);
+        toast.info('Select a date and time to make an appointment');
+      }
+    } else {
+      toast.error('Please sign in to book a service.');
+      navigate('/login');
+    }
   };
 
   return (
@@ -120,15 +132,17 @@ const Services = () => {
                   Rate Per Hour: $.{selectedService.price}
                 </span>
               )}
-              <button
-                className='bg-blue text-white py-2 px-4 rounded w-[150px] group-hover:bg-slate-800'
-                onClick={() => {
-                  navigate(`/booking/${crewId}/${selectedService.id}`);
-                  scrollTo(0, 0);
-                }}
-              >
-                Book Session
-              </button>
+              {selectedService.price && (
+                <button
+                  className='bg-blue text-white py-2 px-4 rounded w-[150px] group-hover:bg-slate-800'
+                  onClick={() => {
+                    handleClickBook();
+                    scrollTo(0, 0);
+                  }}
+                >
+                  Book Session
+                </button>
+              )}
             </div>
           </div>
         </div>
