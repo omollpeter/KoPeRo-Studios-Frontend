@@ -269,7 +269,7 @@ const CrewProfile = () => {
                 </button>
               )}
               <button
-                onClick={() => navigate('/user-appointments')}
+                onClick={() => navigate(`/crew/appointments/${crewId}`)}
                 className='bg-blue text-light text-sm md:text-md font-semibold px-6 py-3 rounded-lg my-6 hover:scale-105 transition-all'
               >
                 My Appointments

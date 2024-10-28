@@ -34,6 +34,7 @@ const Booking = () => {
       setCrewData(res.data.results);
       const crewInfoData = res.data.results.find((crew) => crew.id === crewId);
       setCrewInfo(crewInfoData);
+      console.log(crewInfo);
     } catch (err) {
       console.error('Error fetching crew Data: ', err);
     }
