@@ -5,9 +5,11 @@ import { AuthContext } from '../context/AuthContext';
 const UserAppointments = () => {
   const [crewData, setCrewData] = useState([]);
   const { currentUser } = useContext(AuthContext);
-  const [BookingInfo, setBookingInfo] = useState([]);
-
+  const [bookingInfo, setBookingInfo] = useState([]);
+  const [showPopup, setShowPopup] = useState(false);
+  const [selectedBookingId, setSelectedBookingId] = useState(null);
   const token = localStorage.getItem('accessToken');
+  const [isPaid, setIsPaid] = useState(false);
 
   const fetchBookingInfo = async () => {
     try {
@@ -17,7 +19,6 @@ const UserAppointments = () => {
         },
       });
       setBookingInfo(res.data.results);
-      console.log();
     } catch (err) {
       console.error('Error fetching booking data: ', err);
     }
@@ -30,6 +31,15 @@ const UserAppointments = () => {
     } catch (err) {
       console.error('Error fetching crew data: ', err);
     }
+  };
+
+  const handlePayNow = (bookingId) => {
+    setSelectedBookingId(bookingId);
+    setShowPopup(true);
+  };
+
+  const handlePay = async () => {
+    setShowPopup(false);
   };
 
   useEffect(() => {
@@ -46,12 +56,9 @@ const UserAppointments = () => {
       </p>
       <div>
         {crewData.map((crew, index) => {
-          // Filter bookings for the current crew member
-          const crewBookings = BookingInfo.filter(
+          const crewBookings = bookingInfo.filter(
             (booking) => booking.crew === crew.full_name
           );
-
-          // If no bookings for this crew member, return null
           if (crewBookings.length === 0) return null;
 
           return (
@@ -92,7 +99,10 @@ const UserAppointments = () => {
                     </p>
                   </div>
                   <div className='flex flex-row gap-2'>
-                    <button className='text-base text-slate-400 text-center sm:min-w-32 py-2 border border-slate-500 rounded-lg  hover:bg-blue hover:text-light transition-all duration-300'>
+                    <button
+                      onClick={() => handlePayNow(booking.id)}
+                      className='text-base text-slate-400 text-center sm:min-w-32 py-2 border border-slate-500 rounded-lg  hover:bg-blue hover:text-light transition-all duration-300'
+                    >
                       Pay Now
                     </button>
                     <button className='text-base text-slate-400 text-center sm:min-w-44 py-2 border border-slate-500 rounded-lg hover:bg-red-600 hover:text-light transition-all duration-300'>
@@ -104,6 +114,30 @@ const UserAppointments = () => {
             </div>
           );
         })}
+
+        {/* Payment Popup */}
+        {showPopup && (
+          <div className='fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50'>
+            <div className='bg-blue p-6 rounded shadow-lg'>
+              <h2 className='text-lg font-semibold mb-4'>Confirm Payment</h2>
+              <p>Are you sure you want to pay for this appointment?</p>
+              <div className='mt-4 flex justify-end'>
+                <button
+                  onClick={handlePay}
+                  className='bg-slate-900 text-white px-4 py-2 rounded mr-4'
+                >
+                  PAY
+                </button>
+                <button
+                  onClick={() => setShowPopup(false)}
+                  className='bg-slate-700 bg-op text-light px-4 py-2 rounded'
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

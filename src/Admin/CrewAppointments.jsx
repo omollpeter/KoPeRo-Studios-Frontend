@@ -76,6 +76,9 @@ const CrewAppointments = () => {
                       {new Date(booking.date).toLocaleDateString()} -{' '}
                       {booking.time}
                     </p>
+                    <p className='text-slate-400'>
+                      {booking.is_paid ? 'PAID' : 'NOT PAID'}
+                    </p>
                   </div>
                   <div className='flex flex-row gap-2 md:flex-col'>
                     <button className='text-base text-slate-400 text-center sm:min-w-32 py-2 border border-slate-500 rounded-lg hover:bg-green-600 hover:text-light transition-all duration-300'>
