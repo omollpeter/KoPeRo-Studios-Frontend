@@ -6,19 +6,17 @@ whenever and however you need it in just few steps.</h2>
     This is a full-stack booking platform built using React (frontend) and Django (backend), enabling users to easily book services with experienced photographers and videographers. The platform offers a wide range of services and allows clients to connect directly with professionals in a streamlined and user-friendly manner.
   </p>
   <img src="https://github.com/omollpeter/KoPeRo-Studios-Frontend/blob/main/src/assets/cover-photo.png"style="border-radius: 10px; box-shadow: 0 5px 20px rgba(43, 0, 56, 0.559);"/>
-</div>
-
-<!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
-<a id="readme-top"></a>
-
-[![Contributors][contributors-shield]][contributors-url]
+  [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
+</div>
 
+<!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
+<a id="readme-top"></a>
 
 <!-- PROJECT LOGO -->
 <br />
