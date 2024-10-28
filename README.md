@@ -7,3 +7,15 @@ whenever and however you need it in just few steps.</h2>
   </p>
   <img src="https://github.com/omollpeter/KoPeRo-Studios-Frontend/blob/main/src/assets/cover-photo.png"style="border-radius: 10px; box-shadow: 0 5px 20px rgba(43, 0, 56, 0.559);"/>
 </div>
+
+<div>
+<h2>Table of contents</h2>
+  1. Features
+  2. Project Structure
+  3. Installation and Setup
+  4. Running the Project
+  5. API and Backend Integration
+  6. Usage
+  7. Dependencies
+  8. Contributing
+</div>
