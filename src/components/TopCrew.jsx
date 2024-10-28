@@ -1,10 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { crewData } from '../constants/Crews_constants';
+// import { crewData } from '../constants/Crews_constants';
 import StarRating from './StarRating';
+import axios from 'axios';
 
 const TopCrew = () => {
+  const [crewData, setCrewData] = useState([]);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchCrewData = async () => {
+      try {
+        const res = await axios.get('https://mady.tech/api/v1/auth/crews/');
+        setCrewData(res.data.results);
+      } catch (err) {
+        console.error('Error fetching crew Data: ', err);
+      }
+    };
+    fetchCrewData();
+  });
 
   return (
     <div className='flex flex-col gap-5 mb-10'>
@@ -27,12 +41,12 @@ const TopCrew = () => {
             <img
               rel='preload'
               src={crew.image}
-              alt={crew.name}
+              alt={crew.full_name}
               className='w-32 rounded-full relative'
             />
-            <h3 className='text-light mt-4'>{crew.name.toUpperCase()}</h3>
-            <p className='text-slate-400 text-sm'>{crew.cat}</p>
-            <StarRating rating={crew.stars} />
+            <h3 className='text-light mt-4'>{crew.full_name.toUpperCase()}</h3>
+            <p className='text-slate-400 text-sm'>{crew.category}</p>
+            <StarRating rating={crew.average_rating} />
           </div>
         ))}
       </div>

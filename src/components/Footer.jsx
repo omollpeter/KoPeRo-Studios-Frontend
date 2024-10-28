@@ -165,7 +165,7 @@ const Footer = () => {
                   placeholder='Email'
                   name='email'
                   required
-                  className='rounded-sm h-8 w-[280px] text-dark p-2'
+                  className='rounded-sm h-8 w-[200px] text-dark p-2'
                 />
                 <input
                   type='submit'
@@ -187,7 +187,10 @@ const Footer = () => {
         </div>
         <BiSolidMessageSquareDetail
           className='text-pink text-5xl -top-[60px] lg:-top-6 absolute -right-3 lg:-right-14 transtion:transform duration-300 hover:text-blue hover:-translate-y-1 '
-          onClick={() => navigate('/contact')}
+          onClick={() => {
+            navigate('/contact');
+            scrollTo(0, 0);
+          }}
         />
         <div className='container mx-auto flex justify-center items-center'>
           <p className='text-slate-400 text-sm md:text-base'>
