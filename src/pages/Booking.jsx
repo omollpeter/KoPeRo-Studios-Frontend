@@ -174,7 +174,7 @@ const Booking = () => {
     <div>
       <div className='flex flex-col md:flex-row justify-center md:justify-start items-center gap-4'>
         <img
-          src={crewInfo.image}
+          src={crewInfo.image || profile}
           alt={crewInfo.full_name}
           className='rounded-full w-52 hover:-translate-y-1 transition-all duration-300'
         />
