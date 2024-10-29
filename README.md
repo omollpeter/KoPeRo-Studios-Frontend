@@ -172,10 +172,10 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Roy Kibata - [@your_twitter](https://twitter.com/IganzaRoy) - iganzaroy55@example.com
-Peter Omollo - [@your_twitter](https://twitter.com/Peteromollo) - peterOmollo@example.com
+Roy Kibata - [@Iganzaroy](https://twitter.com/IganzaRoy) - iganzaroy55@example.com
+Peter Omollo - [OmolloPeter](https://twitter.com/Peteromollo) - peterOmollo@example.com
 
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
+Project Link: [https://github.com/your_username/repo_name](https://github.com/omollopeter/kopero-studios)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
