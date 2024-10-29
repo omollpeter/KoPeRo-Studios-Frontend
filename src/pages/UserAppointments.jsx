@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../context/AuthContext';
+import { toast } from 'sonner';
 
 const UserAppointments = () => {
   const [crewData, setCrewData] = useState([]);
@@ -9,7 +10,7 @@ const UserAppointments = () => {
   const [showPopup, setShowPopup] = useState(false);
   const [selectedBookingId, setSelectedBookingId] = useState(null);
   const token = localStorage.getItem('accessToken');
-  const [isPaid, setIsPaid] = useState(false);
+  const [isCancelled, setIsCancelled] = useState(false);
 
   const fetchBookingInfo = async () => {
     try {
@@ -19,6 +20,7 @@ const UserAppointments = () => {
         },
       });
       setBookingInfo(res.data.results);
+      console.log(res.data.results);
     } catch (err) {
       console.error('Error fetching booking data: ', err);
     }
@@ -40,6 +42,31 @@ const UserAppointments = () => {
 
   const handlePay = async () => {
     setShowPopup(false);
+  };
+
+  const handleCancel = async (bookingId) => {
+    try {
+      const res = await axios.post(
+        `https://mady.tech/api/v1/booking/${bookingId}/cancel/`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log(res.data);
+
+      setBookingInfo((prevBookings) =>
+        prevBookings.map((booking) =>
+          booking.id === bookingId ? { ...booking, isCancelled: true } : booking
+        )
+      );
+      toast.success('appointment cancelled successfully');
+    } catch (err) {
+      console.error('Error cancelling booking: ', err);
+      toast.error('appointment cancelation failed');
+    }
   };
 
   useEffect(() => {
@@ -105,9 +132,16 @@ const UserAppointments = () => {
                     >
                       Pay Now
                     </button>
-                    <button className='text-base text-slate-400 text-center sm:min-w-44 py-2 border border-slate-500 rounded-lg hover:bg-red-600 hover:text-light transition-all duration-300'>
-                      Cancel Appointment
-                    </button>
+                    {isCancelled ? (
+                      <span>Cancelled</span>
+                    ) : (
+                      <button
+                        onClick={() => handleCancel(booking.id)}
+                        className='text-base text-slate-400 text-center sm:min-w-44 py-2 border border-slate-500 rounded-lg hover:bg-red-600 hover:text-light transition-all duration-300'
+                      >
+                        Cancel Appointment
+                      </button>
+                    )}
                   </div>
                 </div>
               ))}
