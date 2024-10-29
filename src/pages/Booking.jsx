@@ -181,7 +181,7 @@ const Booking = () => {
         <div className='flex flex-col items-center md:items-start justify-center gap-2 md:gap-1'>
           <h1 className='text-2xl font-bold'>{crewInfo.full_name}</h1>
           <p className='text-slate-400 text-xl'>{crewInfo.cat}</p>
-          <StarRating rating={crewInfo.stars} />
+          <StarRating rating={stars} />
           {crewInfo.cat === 'Photographer' ? (
             <p className='text-base text-justify md:max-w-[750px]'>
               A Photographer's role involves taking photographs, processing
