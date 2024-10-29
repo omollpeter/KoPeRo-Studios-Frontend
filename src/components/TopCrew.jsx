@@ -7,6 +7,7 @@ import axios from 'axios';
 const TopCrew = () => {
   const [crewData, setCrewData] = useState([]);
   const navigate = useNavigate();
+  const average_rating = 5;
 
   useEffect(() => {
     const fetchCrewData = async () => {
@@ -50,7 +51,7 @@ const TopCrew = () => {
             />
             <h3 className='text-light mt-4'>{crew.full_name.toUpperCase()}</h3>
             <p className='text-slate-400 text-sm'>{crew.category}</p>
-            <StarRating rating={crew.average_rating} />
+            <StarRating rating={average_rating} />
           </div>
         ))}
       </div>
