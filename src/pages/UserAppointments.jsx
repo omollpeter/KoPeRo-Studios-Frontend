@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../context/AuthContext';
+import profile from '../assets/profileImage.png';
 import { toast } from 'sonner';
 
 const UserAppointments = () => {
@@ -93,8 +94,8 @@ const UserAppointments = () => {
               <div className='grid grid-cols-[1fr_2fr] gap-4 sm:flex sm:gap-6 py-5 justify-center items-center'>
                 <div>
                   <img
-                    className='w-28 md:w-40 rounded-full'
-                    src={crew.image}
+                    className='w-28 md:w-24 rounded-full'
+                    src={crew.image || profile}
                     alt={crew.full_name}
                   />
                 </div>
