@@ -14,6 +14,7 @@ const Crews = () => {
   const [crewData, setCrewData] = useState([]);
   const [filterCrew, setFilteredCrew] = useState(crewData);
   const [isActive, setIsActive] = useState(false);
+  const stars = 5;
 
   useEffect(() => {
     const fetchCrewData = async () => {
@@ -84,7 +85,7 @@ const Crews = () => {
                 {crew.full_name.toUpperCase()}
               </h3>
               <p className='text-slate-400 text-sm'>{crew.cat}</p>
-              <StarRating rating={crew.stars} />
+              <StarRating rating={stars} />
             </div>
           ))}
         </div>
