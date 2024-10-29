@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-// import { crewData } from '../constants/Crews_constants';
 import StarRating from './StarRating';
+import profile from '../assets/profileImage.png';
 import axios from 'axios';
 
 const TopCrew = () => {

@@ -5,6 +5,7 @@ import { FaHandshakeSimple } from 'react-icons/fa6';
 import { IoIosArrowForward } from 'react-icons/io';
 import photographer_1 from '../assets/photographer_1.jpg';
 import { AuthContext } from '../context/AuthContext';
+import party from '../assets/party_1.jpg';
 import partner_1 from '../assets/partner_1.png';
 import partner_2 from '../assets/partner_2.png';
 import partner_3 from '../assets/partner_3.png';
@@ -54,7 +55,7 @@ const Services = () => {
       Title: service.name,
       Tag: service.tag,
       Description: service.description,
-      image: service.image,
+      image: party,
       price: service.rate_per_hour,
     });
     console.log(selectedService);
