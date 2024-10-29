@@ -61,18 +61,12 @@ whenever and however you need it in just few steps.</h2>
 - **Appointment Management:** Both clients and crew members can manage appointments with status tracking, such as booked or completed.
 - **Profile and Image Upload:** Users can update profile pictures directly in the PUT request.
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
 ### Project Structure
 The project is organized into two main directories:
 
 [![React][React.js]][React-url] 
 - **Frontend:** Built with React, using Vite as the bundler.
 - **Backend:** Developed with Django, handling API endpoints, authentication, and data management for bookings and profiles. 
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- GETTING STARTED -->
 ## Getting Started
@@ -156,26 +150,18 @@ Don't forget to give the project a star! Thanks again!
 <img src='https://avatars.githubusercontent.com/u/109495506?v=4 ' style='width: 40px; border-radius: 100%; '/>
 <img src='https://avatars.githubusercontent.com/u/123968710?v=4' style='width: 40px; border-radius: 100%;'/>
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
 <!-- LICENSE -->
 ## License
 
 Distributed under the MIT License. See `LICENSE.txt` for more information.
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
 
 <!-- CONTACT -->
 ## Contact
-<div>
 - Roy Kibata - [@Iganzaroy](https://twitter.com/IganzaRoy) - iganzaroy55@gmail.com
 - Peter Omollo - [OmolloPeter](https://twitter.com/Peteromollo) - peterOmollo21@gmail.com
 - Matthew Koech -  [Matthewk](https://twitter.com/matthewkoech) - matthewkoech55@gmail.com
-</div>
+
 
 
 Project Link: [https://github.com/omollpeter/KoPeRo-studios](https://github.com/omollpeter/kopero-studios)
