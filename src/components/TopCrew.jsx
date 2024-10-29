@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import StarRating from './StarRating';
+import { AuthContext } from '../context/AuthContext';
 import profile from '../assets/profileImage.png';
 import axios from 'axios';
 
 const TopCrew = () => {
   const [crewData, setCrewData] = useState([]);
+  const { currentUser } = useContext(AuthContext);
   const navigate = useNavigate();
   const average_rating = 5;
 
@@ -37,7 +39,9 @@ const TopCrew = () => {
         {crewData.slice(0, 6).map((crew) => (
           <div
             onClick={() => {
-              navigate(`/booking/${crew.id}`);
+              currentUser
+                ? navigate(`/services/${crew.id}`)
+                : navigate('/login');
               scrollTo(0, 0);
             }}
             key={crew.image}
@@ -50,7 +54,7 @@ const TopCrew = () => {
               className='w-32 rounded-full relative'
             />
             <h3 className='text-light mt-4'>{crew.full_name.toUpperCase()}</h3>
-            <p className='text-slate-400 text-sm'>{crew.category}</p>
+            <p className='text-slate-400 text-base mb-2'>{crew.category}</p>
             <StarRating rating={average_rating} />
           </div>
         ))}
