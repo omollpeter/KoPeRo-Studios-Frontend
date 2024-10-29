@@ -171,10 +171,12 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 <!-- CONTACT -->
 ## Contact
+<div>
+- Roy Kibata - [@Iganzaroy](https://twitter.com/IganzaRoy) - iganzaroy55@gmail.com
+- Peter Omollo - [OmolloPeter](https://twitter.com/Peteromollo) - peterOmollo21@gmail.com
+- Matthew Koech -  [Matthewk](https://twitter.com/matthewkoech) - matthewkoech55@gmail.com
+</div>
 
-Roy Kibata - [@Iganzaroy](https://twitter.com/IganzaRoy) - iganzaroy55@gmail.com
-Peter Omollo - [OmolloPeter](https://twitter.com/Peteromollo) - peterOmollo21@gmail.com
-Matthew Koech -  [Matthewk](https://twitter.com/matthewkoech) - matthewkoech55@gmail.com
 
 Project Link: [https://github.com/omollpeter/KoPeRo-studios](https://github.com/omollpeter/kopero-studios)
 
