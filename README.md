@@ -43,7 +43,6 @@ whenever and however you need it in just few steps.</h2>
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -78,7 +77,7 @@ The project is organized into two main directories:
 <!-- GETTING STARTED -->
 ## Getting Started
 
-### Installation and Setup
+## Installation
 Ensure you have Node.js and npm installed for frontend setup, and Python for backend setup. Clone both repositories for a complete setup.
 
 #### 1. Clone the Repositories
@@ -119,7 +118,7 @@ Endpoints:
 - Bookings: /api/v1/bookings/
 For further API details and request examples, refer to the backend documentation in [kopero backend Repo](https://github.com/omollpeter/kopero-studios-server).
 
-### Usage
+## Usage
 1. **Register/Login** as a user or crew member.
 2. **Browse Services:** Users can view the list of services offered by photographers and videographers.
 3. **Book an Appointment:** Select an available crew member, choose a service, and complete the booking process.
