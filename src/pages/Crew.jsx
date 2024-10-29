@@ -27,7 +27,7 @@ const Crews = () => {
       }
     };
     fetchCrewData();
-  });
+  }, []);
 
   const applyFilter = (category) => {
     setFilteredCrew(crewData.filter((crew) => crew.category === category));
@@ -39,7 +39,10 @@ const Crews = () => {
       <div className='bg-blue flex flex-col justify-center items-center py-[20px] md:py-[50px] w-full rounded-lg hover:bg-pink transition-all duration-300'>
         <MdPeopleAlt
           className='text-light text-5xl hover:scale-105 transition-all duration-300 cursor-pointer'
-          onClick={() => setFilteredCrew(crewData)}
+          onClick={() => {
+            setFilteredCrew(crewData);
+            setIsActive(null);
+          }}
         />
         <h1 className='text-light text-4xl font-bold'>Our Crew</h1>
         <p className='text-light text-lg'>
@@ -49,7 +52,7 @@ const Crews = () => {
       <div className='flex flex-col  justify-center items-center md:items-start md:flex-row gap-20'>
         <div>
           <p
-            onClick={() => applyFilter('Photographer')}
+            onClick={() => applyFilter('photographer')}
             className={`cursor-pointer text-lg hover:text-blue ${
               isActive === 'Photographer' ? 'text-blue' : 'text-light'
             }`}
@@ -57,7 +60,7 @@ const Crews = () => {
             Photographers
           </p>
           <p
-            onClick={() => applyFilter('Videographer')}
+            onClick={() => applyFilter('videographer')}
             className={`cursor-pointer text-lg hover:text-blue ${
               isActive === 'Videographer' ? 'text-blue' : 'text-light'
             }`}
@@ -73,7 +76,7 @@ const Crews = () => {
                   ? navigate(`/services/${crew.id}`)
                   : navigate('/login');
               }}
-              key={crew.image}
+              key={crew.id}
               className='flex flex-col justify-center items-center hover:-translate-y-5 transition-all duration-300'
             >
               <img
@@ -84,7 +87,8 @@ const Crews = () => {
               <h3 className='text-light mt-4'>
                 {crew.full_name.toUpperCase()}
               </h3>
-              <p className='text-slate-400 text-sm'>{crew.cat}</p>
+
+              <p className='text-slate-400 text-base mb-2'>{crew.category}</p>
               <StarRating rating={stars} />
             </div>
           ))}
