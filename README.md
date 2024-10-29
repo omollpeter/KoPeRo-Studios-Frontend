@@ -155,6 +155,7 @@ Don't forget to give the project a star! Thanks again!
 ### Top contributors:
 <img src='https://avatars.githubusercontent.com/u/132392673?v=4' style='width: 40px; border-radius: 100%; '/>
 <img src='https://avatars.githubusercontent.com/u/109495506?v=4 ' style='width: 40px; border-radius: 100%; '/>
+<img src='https://avatars.githubusercontent.com/u/123968710?v=4' style='width: 40px; border-radius: 100%;'/>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -172,10 +173,11 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Roy Kibata - [@Iganzaroy](https://twitter.com/IganzaRoy) - iganzaroy55@example.com
-Peter Omollo - [OmolloPeter](https://twitter.com/Peteromollo) - peterOmollo@example.com
+Roy Kibata - [@Iganzaroy](https://twitter.com/IganzaRoy) - iganzaroy55@gmail.com
+Peter Omollo - [OmolloPeter](https://twitter.com/Peteromollo) - peterOmollo21@gmail.com
+Matthew Koech -  [Matthewk](https://twitter.com/matthewkoech) - matthewkoech55@gmail.com
 
-Project Link: [https://github.com/your_username/repo_name](https://github.com/omollopeter/kopero-studios)
+Project Link: [https://github.com/omollpeter/KoPeRo-studios](https://github.com/omollpeter/kopero-studios)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
