@@ -6,11 +6,14 @@ import { MdBookOnline } from 'react-icons/md';
 import { useParams } from 'react-router-dom';
 import { CrewContext } from '../context/CrewContext';
 import axios from 'axios';
+import { toast } from 'sonner';
 
 const CrewAppointments = () => {
   const { crewId } = useParams();
   const [crewBookings, setCrewBookings] = useState([]);
   const { currentUser } = useContext(CrewContext);
+  const [isCancelled, setIscancelled] = useState(false);
+  const [isCompleted, setIsCompleted] = useState(false);
 
   const token = localStorage.getItem('accessToken');
 
@@ -29,6 +32,16 @@ const CrewAppointments = () => {
     } catch (err) {
       console.error('Error fetching booking data: ', err);
     }
+  };
+
+  const handleCancel = () => {
+    setIscancelled(true);
+    toast.success('Appointment cancelled successfully');
+  };
+
+  const handleCompleted = () => {
+    setIsCompleted(true);
+    toast.success('Appointment completed!');
   };
 
   useEffect(() => {
@@ -81,10 +94,16 @@ const CrewAppointments = () => {
                     </p>
                   </div>
                   <div className='flex flex-row gap-2 md:flex-col'>
-                    <button className='text-base text-slate-400 text-center sm:min-w-32 py-2 border border-slate-500 rounded-lg hover:bg-green-600 hover:text-light transition-all duration-300'>
+                    <button
+                      onClick={handleCompleted}
+                      className='text-base text-slate-400 text-center sm:min-w-32 py-2 border border-slate-500 rounded-lg hover:bg-green-600 hover:text-light transition-all duration-300'
+                    >
                       Mark Completed
                     </button>
-                    <button className='text-base text-slate-400 text-center sm:min-w-44 py-2 border border-slate-500 rounded-lg hover:bg-red-600 hover:text-light transition-all duration-300'>
+                    <button
+                      onClick={handleCancel}
+                      className='text-base text-slate-400 text-center sm:min-w-44 py-2 border border-slate-500 rounded-lg hover:bg-red-600 hover:text-light transition-all duration-300'
+                    >
                       Cancel Appointment
                     </button>
                   </div>
