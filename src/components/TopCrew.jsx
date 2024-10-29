@@ -20,6 +20,10 @@ const TopCrew = () => {
     fetchCrewData();
   });
 
+  const handleError = (event) => {
+    event.target.src = profile;
+  };
+
   return (
     <div className='flex flex-col gap-5 mb-10'>
       <div className='flex flex-col gap-3 justify-center items-center'>
@@ -40,7 +44,7 @@ const TopCrew = () => {
           >
             <img
               rel='preload'
-              src={crew.image}
+              src={crew.image || profile}
               alt={crew.full_name}
               className='w-32 rounded-full relative'
             />
