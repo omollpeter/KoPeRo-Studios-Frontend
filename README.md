@@ -77,8 +77,8 @@ Ensure you have Node.js and npm installed for frontend setup, and Python for bac
 #### 1. Clone the Repositories
 Clone this repository and the backend server repository.
 ```sh
-git clone <frontend-repo-url>
-git clone <backend-repo-url>
+git clone <https://github.com/omollpeter/KoPeRo-Studios-Frontend/edit/main/README.md>
+git clone <https://github.com/omollpeter/kopero-studios-server>
 ```
 
 #### 2. Frontend Setup
