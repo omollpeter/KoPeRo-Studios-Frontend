@@ -2,9 +2,9 @@ import { useNavigate, useParams } from 'react-router-dom';
 import StarRating from '../components/StarRating';
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../context/AuthContext';
+import profile from '../assets/profileImage.png';
 import axios from 'axios';
 import { toast } from 'sonner';
-// import { InlineWidget } from 'react-calendly';
 
 const Booking = () => {
   const { crewId, serviceId } = useParams();
@@ -25,6 +25,7 @@ const Booking = () => {
   const [crewSlots, setCrewSlots] = useState([]);
   const [slotIndex, setSlotIndex] = useState(0);
   const [slotTime, setSlotTime] = useState('');
+  const stars = 5;
 
   const { currentUser } = useContext(AuthContext);
 
@@ -120,13 +121,8 @@ const Booking = () => {
 
     try {
       const date = crewSlots[slotIndex][0].dateTime;
-      // let day = date.getDate();
-      // let month = date.getMonth() + 1;
-      // let year = date.getFullYear();
-      // const slotDate = day + '_' + month + '_' + year;
 
       const finalDate = date.toISOString().split('T')[0];
-      // const finalTime = date.toTimeString().split(' ')[0].slice(0, 5);
       const finalTime = slotTime;
       console.log(finalTime);
 
@@ -247,17 +243,6 @@ const Booking = () => {
         </button>
       </div>
 
-      {/*-------- calendly option -------*/}
-      {/* <InlineWidget
-          url='https://calendly.com/iganzaroy55/appointment'
-          pageSettings={{
-            backgroundColor: '#94a3b8',
-            hideEventTypeDetails: false,
-            hideLandingPageDetails: false,
-            primaryColor: '#2563eb',
-            textColor: '#ffff',
-          }}
-        /> */}
       <div className='flex flex-col gap-5 my-10'>
         <div className='flex flex-col gap-3 justify-center items-center'>
           <h1 className='relative font-bold before:absolute before:rounded-md before:-bottom-[0.1px] before:left-0 before:w-full before:h-[13px] before:bg-blue before:-z-20 hover:before:bg-pink transition duration-300 text-white text-4xl'>
@@ -278,15 +263,15 @@ const Booking = () => {
                 className='flex flex-col justify-center items-center hover:-translate-y-5 transition-all duration-300'
               >
                 <img
-                  src={crew.image}
+                  src={crew.image || profile}
                   alt={crew.full_name}
                   className='w-32 rounded-full relative'
                 />
                 <h3 className='text-light mt-4'>
                   {crew.full_name.toUpperCase()}
                 </h3>
-                <p className='text-slate-400 text-sm'>{crew.cat}</p>
-                <StarRating rating={crew.stars} />
+                <p className='text-slate-400 text-base mb-2'>{crew.category}</p>
+                <StarRating rating={stars} />
               </div>
             ))}
         </div>
