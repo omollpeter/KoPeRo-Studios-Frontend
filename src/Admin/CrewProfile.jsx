@@ -17,6 +17,7 @@ const CrewProfile = () => {
   const [imagePreview, setImagePreview] = useState(profileImage);
   const fileInputRef = useRef(null);
   const navigate = useNavigate();
+  const rating = 5;
 
   const fetchUserProfile = async () => {
     const token = localStorage.getItem('accessToken');
@@ -187,7 +188,7 @@ const CrewProfile = () => {
               </p>
             </div>
             <hr className='bg-slate-400 w-[400px]' />
-            <StarRating rating={userData.average_rating} />
+            <StarRating rating={rating} />
             <div className='flex flex-row gap-4 text-light w-[400px]'>
               {isEdit ? (
                 <div className='flex flex-col gap-5 w-full'>
